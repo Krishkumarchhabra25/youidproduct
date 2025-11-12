@@ -1,116 +1,182 @@
-import { Badge } from "@/Components/ui/badge";
-import { Button } from "@/Components/ui/button";
 import { motion, useMotionValue, useSpring, type Variants } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import userMockup from "@/assets/images/youidproductmobilemokup.png";
+import businessMockup from "@/assets/images/dashboardyouid.png";
+import { Button } from "@/Components/ui/button";
+import { ShieldCheck } from "lucide-react"; // security icon from lucide-react
 
 const Home = () => {
   const navigate = useNavigate();
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // 🎯 Use Framer Motion values for smooth movement
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-
-  // 🌀 Apply spring smoothing to the motion
   const smoothX = useSpring(mouseX, { stiffness: 120, damping: 20 });
   const smoothY = useSpring(mouseY, { stiffness: 120, damping: 20 });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX - 125); // Center the circle (half of its size)
+      mouseX.set(e.clientX - 125);
       mouseY.set(e.clientY - 125);
     };
-
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY]);
 
   const fadeUp = (delay = 0): Variants => ({
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { delay, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
+      transition: { delay, duration: 0.7, ease: "easeOut" },
     },
   });
 
+  const popupUp = (delay = 0): Variants => ({
+    hidden: { opacity: 0, y: 120, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { delay, duration: 1, ease: [0.25, 0.1, 0.25, 1] },
+    },
+  });
+
+  const handleUserClick = () => {
+    setIsTransitioning(true);
+    setTimeout(() => navigate("/user"), 700);
+  };
+
   return (
-    <section className="relative h-screen flex items-center justify-center bg-gradient-to-br from-white via-gray-100 to-white text-center overflow-hidden">
-      {/* 🌌 Ambient background glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl opacity-70 animate-pulse" />
-        <div className="absolute bottom-0 right-1/2 transform translate-x-1/2 w-[400px] h-[400px] bg-secondary/30 rounded-full blur-3xl opacity-60 animate-pulse delay-700" />
-      </div>
+    <section className="relative min-h-screen flex items-center justify-center bg-[#f8f7fc] overflow-hidden">
+      <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[90vw] h-[90vw] bg-gradient-radial from-white/70 via-white/10 to-transparent rounded-full blur-3xl pointer-events-none" />
 
-      {/* 💠 Subtle grid overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.03),transparent_80%)] pointer-events-none"></div>
-
-      {/* 🌈 Smooth circular mouse-following glow */}
       <motion.div
-        className="pointer-events-none fixed top-0 left-0 w-[250px] h-[250px] rounded-full blur-3xl opacity-50"
+        className="pointer-events-none fixed top-0 left-0 w-[250px] h-[250px] rounded-full blur-3xl opacity-30"
         style={{
           x: smoothX,
           y: smoothY,
           background:
-            "radial-gradient(circle, rgba(0,0,0,0.15) 0%, rgba(50,50,50,0.1) 60%, transparent 100%)",
+            "radial-gradient(circle, rgba(180,180,255,0.25) 0%, rgba(230,230,255,0.1) 60%, transparent 100%)",
         }}
       />
 
-
-
-      {/* 🪄 Hero Content */}
       <motion.div
-        className="relative z-10 max-w-5xl space-y-8 px-6"
+        initial={{ x: "100%" }}
+        animate={isTransitioning ? { x: 0 } : { x: "100%" }}
+        transition={{ duration: 0.7, ease: "easeInOut" }}
+        className="fixed inset-0 bg-white z-[100]"
+      />
+
+      {/* --- Top header bar --- */}
+      <div className="fixed top-0 left-0 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md shadow-sm z-40 flex justify-center items-center py-3">
+        <div className="flex items-center gap-2 text-gray-900 font-semibold text-xl">
+          <ShieldCheck className="w-6 h-6 text-indigo-500" />
+          <span className="tracking-tight">YouID</span>
+        </div>
+      </div>
+
+      {/* --- Fixed top buttons --- */}
+      <div className="fixed top-16 left-4 z-50">
+        <Button
+          onClick={handleUserClick}
+          size="lg"
+          className="flex items-center gap-3 text-lg px-4 py-3 bg-white text-gray-900 hover:bg-gray-100 rounded-full shadow-sm"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden
+            focusable="false"
+          >
+            <path
+              d="M15 18l-6-6 6-6"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span>I'm a User — Get Started</span>
+        </Button>
+      </div>
+
+      <div className="fixed top-16 right-4 z-50">
+        <Button
+          onClick={() => navigate("/business")}
+          size="lg"
+          variant="outline"
+          className="flex items-center gap-3 text-lg px-4 py-3 border border-gray-300 bg-white hover:bg-gray-50 text-gray-900 rounded-full shadow-sm"
+        >
+          <span>I'm a Business — See Demo</span>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden
+            focusable="false"
+          >
+            <path
+              d="M9 6l6 6-6 6"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </Button>
+      </div>
+
+      {/* --- Main content --- */}
+      <motion.div
         initial="hidden"
         animate="visible"
+        className="relative z-10 max-w-8xl w-full grid grid-cols-1 md:grid-cols-2 gap-0 md:divide-x divide-gray-200 px-8 md:px-16 lg:px-24 mt-19"
       >
-        <motion.div variants={fadeUp(0.2)}>
-          <Badge variant="secondary" className="text-base md:text-lg px-4 py-1.5">
-            One Platform • For Users & Businesses
-          </Badge>
+        {/* Left - User section */}
+        <motion.div
+          variants={fadeUp(0.2)}
+          className="flex flex-col justify-start items-start py-12 md:py-11 pr-0 md:pr-16 relative min-h-[600px] md:min-h-[700px]"
+        >
+          <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight mt-10 text-left md:text-left">
+            Digital Freedom, Simplified.
+          </h1>
+          <p className="text-lg md:text-xl text-gray-600 max-w-md mt-6">
+            Manage your identity securely — one app, one ID, fully private and universally trusted.
+          </p>
+
+          <motion.img
+            variants={popupUp(0.6)}
+            src={userMockup}
+            alt="User App Mockup"
+            className="absolute bottom-[-4rem] md:bottom-[-6rem] right-1/2 md:right-auto md:right-0 transform -translate-x-1/2 md:translate-x-0 w-72 md:w-[20rem] lg:w-[24rem] drop-shadow-2xl"
+          />
         </motion.div>
 
-        <motion.h1
-          variants={fadeUp(0.4)}
-          className="text-5xl md:text-7xl font-extrabold leading-tight text-black tracking-tight"
-        >
-          Verify Identities Instantly. <br />
-          <span className="bg-gradient-to-r from-black via-gray-700 to-black bg-clip-text text-transparent">
-            Protect Privacy Completely.
-          </span>
-        </motion.h1>
-
-<motion.p
-  variants={fadeUp(0.6)}
-  className="text-xl md:text-2xl text-black/80 max-w-3xl mx-auto leading-relaxed"
->
-  For users, youID is digital freedom a single identity that’s private, fast, and universally trusted.
-  <br />
-  For businesses, it’s a smarter, safer way to verify customers and build instant trust.
-</motion.p>
-
-
-
+        {/* Right - Business section */}
         <motion.div
-          variants={fadeUp(0.8)}
-          className="flex flex-col sm:flex-row gap-4 justify-center mt-8"
+          variants={fadeUp(0.4)}
+          className="flex flex-col justify-start items-start md:items-end py-12 md:py-20 pl-0 md:pl-15 relative min-h-[600px] md:min-h-[700px] mt-96 md:mt-0"
         >
-          <Button
-            onClick={() => navigate("/user")}
-            size="lg"
-            variant="secondary"
-            className="text-lg px-10 py-6 shadow-sm hover:shadow-md transition-all hover:scale-105"
-          >
-            I’m a User  Get the App
-          </Button>
-          <Button
-            onClick={() => navigate("/business")}
-            size="lg"
-            variant="outline"
-            className="text-lg px-10 py-6 bg-black/10 text-black border-black/20 hover:bg-black/20 hover:scale-105 transition-all"
-          >
-            I’m a Business  Learn More
-          </Button>
+          <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight mt-6 text-left md:text-right">
+            Build Trust Instantly.
+          </h1>
+          <p className="text-lg md:text-xl text-gray-600 max-w-md md:ml-auto text-left md:text-right mt-6">
+            Verify customers faster and smarter — secure identity checks without compromising privacy.
+          </p>
+
+          <motion.img
+            variants={popupUp(0.8)}
+            src={businessMockup}
+            alt="Business Dashboard Mockup"
+            className="absolute bottom-20 md:bottom-0 left-1/2 md:left-auto md:right-0 transform -translate-x-1/2 md:translate-x-0 w-72 md:w-[30rem] lg:w-[36rem] drop-shadow-2xl"
+          />
         </motion.div>
       </motion.div>
     </section>

@@ -17,32 +17,69 @@ const Navigation = () => {
     if (isBusiness) {
       return [
         { path: "/business", label: "Home" },
-
-           { path: "/about", label: "About" },
-        { path: "/how-it-works", label: "How It Works" },
-        { path: "/usecases", label: "Use Cases" },
-        { path: "/benefits", label: "Benefits" },
+        { path: "/business/about", label: "About" },
+        { path: "/business/how-it-works", label: "How It Works" },
+        { path: "/business/usecases", label: "Use Cases" },
+        { path: "/business/benefits", label: "Benefits" },
       ];
     } else if (isUser) {
       return [
         { path: "/user", label: "Home" },
-           { path: "/about", label: "About" },
-        { path: "/how-it-works", label: "How It Works" },
-  { path: "/user/benefits", label: "Benefits" },
+        { path: "/user/about", label: "About" },
+        { path: "/user/how-it-works", label: "How It Works" },
         { path: "/user/usecases", label: "Use Cases" },
-       
+        { path: "/user/benefits", label: "Benefits" },
       ];
     } else {
       // Default navigation (homepage / marketing)
       return [
         { path: "/", label: "Home" },
-     
         { path: "/pricing", label: "Pricing" },
+        { path: "/about", label: "About" },
+        { path: "/how-it-works", label: "How It Works" },
       ];
     }
   }, [isBusiness, isUser]);
 
-  const isActive = (path:any) => location.pathname === path;
+  // Mark active if the current path starts with the link path (so parent routes stay active)
+  const isActive = (path: string) => {
+    // exact root match special-case
+    if (path === "/") return location.pathname === "/";
+    return location.pathname === path || location.pathname.startsWith(path + "/") || location.pathname === path;
+  };
+
+  // Desktop CTA logic:
+  // - On business routes -> show "For Users" (navigate to /user)
+  // - On user routes -> show "For Businesses" (navigate to /business)
+  // - Else (marketing) -> show Download App (navigate to /user)
+  const renderDesktopCTA = () => {
+    if (isBusiness) {
+      return (
+        <Button size="sm" onClick={() => navigate("/user")}>
+          For Users
+        </Button>
+      );
+    }
+
+    if (isUser) {
+      return (
+        <Button size="sm" onClick={() => navigate("/business")}>
+          For Businesses
+        </Button>
+      );
+    }
+
+    // default / marketing
+    return (
+      <>
+        <Button size="sm" onClick={() => navigate("/user")}>
+          Download App
+        </Button>
+        {/* optionally: uncomment to show For Businesses on desktop marketing */}
+        {/* <Button variant="ghost" size="sm" onClick={() => navigate("/business")}>For Businesses</Button> */}
+      </>
+    );
+  };
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -73,16 +110,15 @@ const Navigation = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex md:items-center md:space-x-2">
-         
-            <Button size="sm" onClick={() => navigate("/user")}>
-              Download App
-            </Button>
+            {renderDesktopCTA()}
           </div>
 
           {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2 text-foreground"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-expanded={mobileMenuOpen}
+            aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -107,6 +143,7 @@ const Navigation = () => {
             ))}
 
             <div className="pt-4 space-y-2">
+              {/* Mobile keeps both quick CTAs */}
               <Button
                 variant="ghost"
                 className="w-full"
