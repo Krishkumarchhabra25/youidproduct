@@ -2,7 +2,7 @@ import { motion, useMotionValue, useSpring, type Variants } from "framer-motion"
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import userMockup from "@/assets/images/youidproductmobilemokup.png";
-import businessMockup from "@/assets/images/dashboardyouid.png";
+import businessMockup from "@/assets/images/finalonedash.png";
 import { Button } from "@/Components/ui/button";
 import { ShieldCheck } from "lucide-react"; // security icon from lucide-react
 
@@ -144,31 +144,31 @@ const Home = () => {
           variants={fadeUp(0.2)}
           className="flex flex-col justify-start items-start py-12 md:py-11 pr-0 md:pr-16 relative min-h-[600px] md:min-h-[700px]"
         >
-          <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight mt-10 text-left md:text-left">
-            Digital Freedom, Simplified.
+          <h1 className="text-4xl md:text-4xl font-extrabold text-gray-900 leading-tight mt-14 text-left md:text-left">
+            Verify Your Identity Without Surrendering Control.
           </h1>
           <p className="text-lg md:text-xl text-gray-600 max-w-md mt-6">
-            Manage your identity securely — one app, one ID, fully private and universally trusted.
+           Empowering users to verify their identity without uploading or sharing their Identity documents.
           </p>
 
           <motion.img
             variants={popupUp(0.6)}
             src={userMockup}
             alt="User App Mockup"
-            className="absolute bottom-[-4rem] md:bottom-[-6rem] right-1/2 md:right-auto md:right-0 transform -translate-x-1/2 md:translate-x-0 w-72 md:w-[20rem] lg:w-[24rem] drop-shadow-2xl"
+            className="absolute bottom-[-4rem] md:bottom-[-4rem] right-1/2 md:right-auto md:right-0 transform -translate-x-1/2 md:translate-x-0 w-72 md:w-[20rem] lg:w-[23rem] drop-shadow-2xl"
           />
         </motion.div>
 
         {/* Right - Business section */}
         <motion.div
           variants={fadeUp(0.4)}
-          className="flex flex-col justify-start items-start md:items-end py-12 md:py-20 pl-0 md:pl-15 relative min-h-[600px] md:min-h-[700px] mt-96 md:mt-0"
+          className="flex flex-col justify-start items-start md:items-end py-12 md:py-20 pl-0 md:pl-20 relative min-h-[600px] md:min-h-[700px] mt-96 md:mt-0"
         >
-          <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight mt-6 text-left md:text-right">
-            Build Trust Instantly.
+          <h1 className="text-5xl md:text-4xl font-extrabold text-gray-900 leading-tight mt-6 text-left md:text-right">
+            Identity Verification without the risks and overheads.
           </h1>
           <p className="text-lg md:text-xl text-gray-600 max-w-md md:ml-auto text-left md:text-right mt-6">
-            Verify customers faster and smarter — secure identity checks without compromising privacy.
+            Empowering businesses to verify users securely without storing personal data reducing risk and ensuring compliance.
           </p>
 
           <motion.img
