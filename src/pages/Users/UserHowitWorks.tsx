@@ -1,95 +1,87 @@
 import Navigation from "@/Components/Navigation";
 import Footer from "@/Components/Footer";
-import { Smartphone } from "lucide-react";
-import { Card, CardContent } from "@/Components/ui/card";
+
+import step1Img from "../../assets/images/Image (1).jpg";
+import step2Img from "../../assets/images/Image (2).jpg";
+import step3Img from "../../assets/images/Image (3).jpg";
+import step4Img from "../../assets/images/Image (4).jpg";
+import step5Img from "../../assets/images/Image (5).jpg";
+import step6Img from "../../assets/images/Image (6).jpg";
 
 const steps = [
-  {
-    id: 1,
-    title: "Download the App",
-    desc: "Visit Google Play Store, search for “youID”, and download the app. It’s free forever.",
-  },
-  {
-    id: 2,
-    title: "Register Your Account",
-    desc: "Enter your mobile number, verify it with OTP, and get your unique youID (e.g., YUID-1234-5678).",
-  },
-  {
-    id: 3,
-    title: "Setup Biometric",
-    desc: "Enable fingerprint or face unlock for secure approvals. No one can approve without you.",
-  },
-  {
-    id: 4,
-    title: "Add Your Documents",
-    desc: "Scan passport or license, auto-extract details (OCR), and store securely on your phone.",
-  },
-  {
-    id: 5,
-    title: "Use Anywhere",
-    desc: "Verify your identity instantly with one tap while keeping control of your data.",
-  },
-  {
-    id: 6,
-    title: "Stay in Control",
-    desc: "View history, revoke access anytime, and manage your digital identity securely.",
-  },
+  { id: 1, title: "Download the App", desc: "Get youID from Play Store or App Store.", image: step1Img },
+  { id: 2, title: "Sign In / Create Account", desc: "Log in or create an account instantly.", image: step2Img },
+  { id: 3, title: "Documents Dashboard", desc: "View verified, rejected & pending docs.", image: step3Img },
+  { id: 4, title: "Upload Document", desc: "Choose a document & upload it for verification.", image: step4Img },
+  { id: 5, title: "Profile & Security", desc: "Manage security, biometrics & history.", image: step5Img },
+  { id: 6, title: "Verification Complete", desc: "Approve quickly with biometric verification.", image: step6Img },
 ];
+
+const Arrow = () => (
+  <svg width="90" height="30" viewBox="0 0 120 40">
+    <path d="M0 20 H110" stroke="#60A5FA" strokeWidth="3" strokeDasharray="6 6" />
+    <path d="M110 20 L100 10 M110 20 L100 30" stroke="#3B82F6" strokeWidth="3" />
+  </svg>
+);
 
 const UserHowitWorks = () => {
   return (
     <>
       <Navigation />
 
-      <section className="relative py-24 px-6 md:px-20 bg-gradient-to-b from-white to-gray-50">
-        <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-16">
-          How it Works for <span className="text-blue-600">Users</span>
-        </h2>
+      <section className="py-24 px-6 md:px-20 bg-gradient-to-b from-white via-gray-50 to-gray-100 overflow-hidden">
+        <div className="max-w-7xl mx-auto">
 
-        <div className="relative">
-          {/* Center line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gray-200 transform -translate-x-1/2"></div>
+          {/* TITLE */}
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-6">How it Works</h2>
+          <p className="text-center text-gray-600 mb-16 max-w-3xl mx-auto text-lg">
+            Your complete journey through the youID app — from installation to verification.
+          </p>
 
-          <div className="flex flex-col gap-20 relative">
-            {steps.map((step, index) => {
-              const isEven = index % 2 === 0;
-              return (
-                <div key={step.id} className="relative flex flex-col md:flex-row items-center">
-                  {/* Number circle */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2 bg-blue-600 text-white font-semibold w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-10">
-                    {step.id}
-                  </div>
-
-                  <div
-                    className={`flex flex-col md:flex-row items-center w-full md:justify-between mt-10 md:mt-0 ${
-                      isEven ? "md:flex-row" : "md:flex-row-reverse"
-                    }`}
-                  >
-                    {/* Phone Image Placeholder */}
-                    <div className="flex-1 flex justify-center">
-                      <div className="w-48 h-96 bg-gray-100 rounded-3xl shadow-inner flex items-center justify-center">
-                        <Smartphone className="w-12 h-12 text-gray-400" />
-                      </div>
-                    </div>
-
-                    {/* Step content */}
-                    <div className="flex-1 mt-10 md:mt-0">
-                      <Card className="shadow-md border border-gray-200 rounded-2xl p-4 md:p-6 max-w-md mx-auto">
-                        <CardContent className="p-0">
-                          <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                            {step.title}
-                          </h3>
-                          <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-                            {step.desc}
-                          </p>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </div>
+          {/* ROW 1 */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+            {steps.slice(0, 3).map((step, index) => (
+              <div key={step.id} className="flex flex-col items-center">
+                <div className="w-56 md:w-60 h-[450px] md:h-[480px] rounded-3xl shadow-2xl overflow-hidden border bg-white">
+                  <img src={step.image} className="w-full h-full object-cover" />
                 </div>
-              );
-            })}
+
+                <h3 className="mt-5 font-semibold text-gray-900 text-lg text-center">{step.title}</h3>
+                <p className="text-gray-600 text-center mt-2 max-w-xs">{step.desc}</p>
+
+                {/* Arrow INSIDE grid cell */}
+                {index < 2 && (
+                  <div className="flex justify-center w-full mt-6 hidden md:block">
+                    <Arrow />
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
+
+          {/* SPACING */}
+          <div className="my-20"></div>
+
+          {/* ROW 2 */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+            {steps.slice(3, 6).map((step, index) => (
+              <div key={step.id} className="flex flex-col items-center">
+                <div className="w-56 md:w-60 h-[450px] md:h-[480px] rounded-3xl shadow-2xl overflow-hidden border bg-white">
+                  <img src={step.image} className="w-full h-full object-cover" />
+                </div>
+
+                <h3 className="mt-5 font-semibold text-gray-900 text-lg text-center">{step.title}</h3>
+                <p className="text-gray-600 text-center mt-2 max-w-xs">{step.desc}</p>
+
+                {index < 2 && (
+                  <div className="flex justify-center w-full mt-6 hidden md:block">
+                    <Arrow />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
 
