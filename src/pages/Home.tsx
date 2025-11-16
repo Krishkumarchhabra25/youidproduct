@@ -56,98 +56,95 @@ const Home = () => {
         </div>
       </div>
 
-{/* TOP BUTTONS — FIXED PROPERLY LEFT & RIGHT */}
-<div
-  className="
-    hidden md:flex 
-    fixed top-[70px] left-0 w-full 
-    z-30 
-    justify-between items-center
-    px-6
-    md:translate-y-[-10px]
-  "
->
-  <Button
-    onClick={() => navigate("/user")}
-    size="lg"
-    className="rounded-full px-6 py-3 text-lg shadow-sm bg-white text-gray-900 hover:bg-gray-100"
-  >
-    I’m a User — Get Started
-  </Button>
+      {/* TOP BUTTONS — FIXED PROPERLY LEFT & RIGHT */}
+      <div
+        className="
+          hidden md:flex 
+          fixed top-[70px] left-0 w-full 
+          z-30 
+          justify-between items-center
+          px-6
+          md:translate-y-[-10px]
+        "
+      >
+        <Button
+          onClick={() => navigate("/user")}
+          size="lg"
+          className="rounded-full px-6 py-3 text-lg shadow-sm bg-white text-gray-900 hover:bg-gray-100"
+        >
+          I'm a User — Get Started
+        </Button>
 
-  <Button
-    onClick={() => navigate("/business")}
-    size="lg"
-    variant="outline"
-    className="rounded-full px-6 py-3 text-lg shadow-sm"
-  >
-    I’m a Business — See Demo
-  </Button>
-</div>
-
+        <Button
+          onClick={() => navigate("/business")}
+          size="lg"
+          variant="outline"
+          className="rounded-full px-6 py-3 text-lg shadow-sm"
+        >
+          I'm a Business — See Demo
+        </Button>
+      </div>
 
       {/* CONTENT */}
       <div
         className="
         mt-24 
-        px-6 md:px-16 lg:px-24 
-        max-w-7xl mx-auto w-full 
+        px-6 md:px-0
+        w-full 
         md:h-screen md:flex md:items-center
       "
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-24 md:gap-0">
-{/* USER SECTION */}
-<motion.div
-  variants={fadeUp(0.2)}
-  initial="hidden"
-  animate="visible"
-  className="
-    flex flex-col 
-    items-center md:items-start
-    text-center md:text-left
-    md:pl-0 md:ml-0
-  "
->
-  <div className="md:hidden mb-6">
-    <Button
-      onClick={() => navigate("/user")}
-      className="rounded-full px-5 py-3 text-base shadow-sm"
-    >
-      I’m a User — Get Started
-    </Button>
-  </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-24 md:gap-8 lg:gap-12 xl:gap-16 w-full">
+          {/* USER SECTION */}
+          <motion.div
+            variants={fadeUp(0.2)}
+            initial="hidden"
+            animate="visible"
+            className="
+              flex flex-col 
+              items-center md:items-start
+              text-center md:text-left
+              md:pl-8 lg:pl-16 xl:pl-24 2xl:pl-32
+              md:mb-20
+            "
+          >
+            <div className="md:hidden mb-6">
+              <Button
+                onClick={() => navigate("/user")}
+                className="rounded-full px-5 py-3 text-base shadow-sm"
+              >
+                I'm a User — Get Started
+              </Button>
+            </div>
 
-  <h1 className="text-4xl font-extrabold text-gray-900 leading-tight w-full md:pl-0 md:self-start">
-    Verify Your Identity <br />
-    Without Surrendering Control.
-  </h1>
+            <h1 className="text-4xl font-extrabold text-gray-900 leading-tight w-full md:mt-10 lg:mt-10 md:pl-0 md:self-start md:max-w-[500px] xl:max-w-[550px] 2xl:max-w-[600px]">
+              Verify Your Identity <br />
+              Without Surrendering Control.
+            </h1>
 
-  <p className="text-lg text-gray-600 max-w-md mt-4 md:pl-0 md:self-start">
-    Empowering users to verify their identity without uploading or sharing their Identity documents.
-  </p>
+            <p className="text-lg text-gray-600 max-w-md mt-4 md:pl-0 md:self-start md:max-w-[450px] xl:max-w-[480px] 2xl:max-w-[500px]">
+              Empowering users to verify their identity without uploading or sharing their Identity documents.
+            </p>
 
-  <motion.img
-    variants={popupUp(0.6)}
-    src={userMockup}
-    alt="User App"
-    className="
-      mt-10 
-      w-[70%] max-w-[260px]
-      md:w-[55%] md:max-w-[360px]
-      mx-auto
-    "
-  />
-</motion.div>
-
-
-
+            <motion.img
+              variants={popupUp(0.6)}
+              src={userMockup}
+              alt="User App"
+              className="
+                mt-10 
+                w-[70%] max-w-[300px] 
+                md:w-[60%] md:max-w-[320px] lg:max-w-[320px] md:mt-0 lg:mt-0
+                mx-auto
+              "
+            />
+          </motion.div>
 
           {/* BUSINESS SECTION */}
           <motion.div
             variants={fadeUp(0.3)}
             initial="hidden"
             animate="visible"
-            className="flex flex-col items-center md:items-end text-center md:text-right lg:ml-20"
+            className="flex flex-col items-center md:items-end text-center md:text-right md:pr-8 lg:pr-16 xl:pr-24 2xl:pr-32"
           >
             <div className="md:hidden mb-6">
               <Button
@@ -155,15 +152,15 @@ const Home = () => {
                 variant="outline"
                 className="rounded-full px-5 py-3 text-base shadow-sm"
               >
-                I’m a Business — See Demo
+                I'm a Business — See Demo
               </Button>
             </div>
 
-            <h1 className="text-4xl font-extrabold text-gray-900 leading-tight ">
-              Identity Verification   without the risks and overheads.
-            </h1>
+            <h1 className="text-4xl font-extrabold text-gray-900 leading-tight md:mt-10 lg:mt-10 md:max-w-[500px] xl:max-w-[550px] 2xl:max-w-[600px]">
+              Identity Verification without the risks and overheads.
+            </h1> 
 
-            <p className="text-lg text-gray-600 max-w-md mt-4 md:ml-auto">
+            <p className="text-lg text-gray-600 mt-4 md:max-w-[450px] xl:max-w-[480px] 2xl:max-w-[500px]">
               Empowering businesses to verify users securely without storing personal data, reducing risk and ensuring compliance.
             </p>
 
@@ -172,9 +169,9 @@ const Home = () => {
               src={businessMockup}
               alt="Business Dashboard"
               className="
-                mt-10 
-                w-[80%] max-w-[320px]
-                md:w-[30rem] lg:w-[36rem]
+                mt-10
+                w-full 
+                max-w-[420px] md:max-w-[480px] lg:max-w-[520px]
                 mx-auto
               "
             />
