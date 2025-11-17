@@ -1,7 +1,9 @@
 import { motion, useMotionValue, type Variants } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import userMockup from "@/assets/images/youidproductmobilemokup.png";
+import userMockup from "@/assets/images/usermokup1.png";
+import userMockup2 from "@/assets/images/usermodkup2.png";
+
 import businessMockup from "@/assets/images/finalonedash.png";
 import { Button } from "@/Components/ui/button";
 import { ShieldCheck } from "lucide-react";
@@ -11,7 +13,7 @@ const Home = () => {
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
- 
+
   useEffect(() => {
     const move = (e: MouseEvent) => {
       mouseX.set(e.clientX - 125);
@@ -39,14 +41,14 @@ const Home = () => {
   return (
     <section
       className="
-    relative 
-    min-h-screen 
-    bg-[#f8f7fc] 
-    flex flex-col 
-    overflow-visible
-    md:h-screen
-    md:overflow-hidden
-  "
+        relative 
+        min-h-screen 
+        bg-[#f8f7fc] 
+        flex flex-col 
+        overflow-visible
+        md:h-screen
+        md:overflow-hidden
+      "
     >
       {/* HEADER */}
       <div className="fixed top-0 left-0 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md shadow-sm z-40 flex justify-center items-center py-3">
@@ -56,7 +58,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* TOP BUTTONS — FIXED PROPERLY LEFT & RIGHT */}
+      {/* TOP BUTTONS */}
       <div
         className="
           hidden md:flex 
@@ -88,13 +90,14 @@ const Home = () => {
       {/* CONTENT */}
       <div
         className="
-        mt-24 
-        px-6 md:px-0
-        w-full 
-        md:h-screen md:flex md:items-center
-      "
+          mt-24 
+          px-6 md:px-0
+          w-full 
+          md:h-screen md:flex md:items-center
+        "
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-24 md:gap-8 lg:gap-12 xl:gap-16 w-full">
+
           {/* USER SECTION */}
           <motion.div
             variants={fadeUp(0.2)}
@@ -123,20 +126,40 @@ const Home = () => {
             </h1>
 
             <p className="text-lg text-gray-600 max-w-md mt-4 md:pl-0 md:self-start md:max-w-[450px] xl:max-w-[480px] 2xl:max-w-[500px]">
-              Empowering users to verify their identity without uploading or sharing their Identity documents.
+              Empowering users to verify their identity without uploading or sharing their identity documents.
             </p>
 
-            <motion.img
-              variants={popupUp(0.6)}
-              src={userMockup}
-              alt="User App"
-              className="
-                mt-10 
-                w-[70%] max-w-[300px] 
-                md:w-[60%] md:max-w-[320px] lg:max-w-[320px] md:mt-0 lg:mt-0
-                mx-auto
-              "
-            />
+            {/* UPDATED CENTERED MOCKUPS */}
+            <div className="relative w-full flex items-center justify-center mt-12 md:mt-10 
+              md:-translate-x-6 lg:-translate-x-8">
+
+              {/* Glow */}
+              <div
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] h-[65px]
+                  rounded-full bg-[radial-gradient(circle,rgba(0,0,0,0.25),rgba(0,0,0,0))]
+                  blur-xl z-0"
+              />
+
+              {/* LEFT tilted phone */}
+              <div className="relative z-10 -rotate-[15deg] -translate-y-4 md:-translate-y-6 -mr-10 scale-[1.03]">
+                <img
+                  src={userMockup2}
+                  alt="User Mockup Left"
+                  className="w-[180px] sm:w-[180px] md:w-[250px] lg:w-[250px] drop-shadow-2xl"
+                />
+              </div>
+
+              {/* RIGHT tilted phone */}
+              <div className="relative z-20 rotate-[15deg] -translate-y-4 md:-translate-y-8">
+                <img
+                  src={userMockup}
+                  alt="User Mockup Right"
+                  className="w-[170px] sm:w-[180px] md:w-[260px] lg:w-[260px] drop-shadow-2xl"
+                />
+              </div>
+
+            </div>
+
           </motion.div>
 
           {/* BUSINESS SECTION */}
@@ -158,7 +181,7 @@ const Home = () => {
 
             <h1 className="text-4xl font-extrabold text-gray-900 leading-tight md:mt-10 lg:mt-10 md:max-w-[500px] xl:max-w-[550px] 2xl:max-w-[600px]">
               Identity Verification without the risks and overheads.
-            </h1> 
+            </h1>
 
             <p className="text-lg text-gray-600 mt-4 md:max-w-[450px] xl:max-w-[480px] 2xl:max-w-[500px]">
               Empowering businesses to verify users securely without storing personal data, reducing risk and ensuring compliance.
