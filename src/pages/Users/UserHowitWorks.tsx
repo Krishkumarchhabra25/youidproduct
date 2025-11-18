@@ -7,8 +7,6 @@ import Footer from "@/Components/Footer";
 import step1Img from "../../assets/images/Image (1).jpg";
 import step2Img from "../../assets/images/Image (2).jpg";
 import step3Img from "../../assets/images/Image (3).jpg";
-import step4Img from "../../assets/images/Image (4).jpg";
-import step5Img from "../../assets/images/Image (5).jpg";
 import step6Img from "../../assets/images/Image (6).jpg";
 
 type Step = { id: number; title: string; desc: string; image: string };
@@ -47,9 +45,7 @@ const UserHowitWorks: React.FC = () => {
     { id: "doc-3", name: "Passport.png", status: "rejected", uploadedAt: formatNow(), history: [{ at: formatNow(), action: "Uploaded" }, { at: formatNow(), action: "Rejected - blur detected" }] },
   ]);
 
-  const [historyOpenFor, setHistoryOpenFor] = useState<string | null>(null);
   const replacementInputRef = useRef<HTMLInputElement | null>(null);
-  const generalInputRef = useRef<HTMLInputElement | null>(null);
   const replacementTargetRef = useRef<string | null>(null);
 
   useEffect(() => {
@@ -118,25 +114,6 @@ const UserHowitWorks: React.FC = () => {
     el.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
-  const handleGeneralFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    const newDoc: DocumentItem = {
-      id: `doc-${Date.now()}`,
-      name: file.name,
-      status: "pending",
-      uploadedAt: formatNow(),
-      history: [{ at: formatNow(), action: "Uploaded" }],
-    };
-
-    setDocuments((d) => [newDoc, ...d]);
-    if (generalInputRef.current) generalInputRef.current.value = "";
-
-    const verifyIndex = steps.findIndex((s) => s.id === 3);
-    if (verifyIndex >= 0) scrollToStep(verifyIndex);
-  };
-
   const openReplacementUpload = (targetId: string) => {
     replacementTargetRef.current = targetId;
     replacementInputRef.current?.click();
@@ -183,21 +160,21 @@ const UserHowitWorks: React.FC = () => {
           <div
             ref={containerRef}
             onWheel={onWheel}
-            className="flex flex-col space-y-10 pr-6 pb-10 md:max-h-[80vh] md:overflow-y-auto no-scrollbar"
+            className="flex flex-col space-y-10 items-center md:items-start pb-10 pr-0 md:pr-6 md:max-h-[80vh] md:overflow-y-auto no-scrollbar"
           >
             {steps.map((step, idx) => (
               <div key={step.id}>
-                
-                {/* CONTENT CARD */}
+
                 <div
-                  ref={(el) => (stepRefs.current[idx] = el)}
+                  ref={(el) => {
+                    stepRefs.current[idx] = el;
+                  }}
                   className={`p-6 rounded-2xl transition-all duration-300 ${
                     safeActive === idx ? "bg-white shadow-xl" : "bg-white/70"
                   }`}
                 >
                   <div className="flex items-start gap-4">
 
-                    {/* Step # Button */}
                     <button
                       type="button"
                       onClick={() => scrollToStep(idx)}
@@ -209,30 +186,13 @@ const UserHowitWorks: React.FC = () => {
                     </button>
 
                     <div className="flex-1">
-                      {/* Mobile Title/Desc */}
-                      <div className="md:hidden mb-2">
+                      <div className="md:hidden mb-2 text-center">
                         <div className="text-sm font-semibold text-gray-900">{step.title}</div>
                         <div className="text-xs text-gray-600">{step.desc}</div>
                       </div>
 
-                      {/* Desktop Title */}
                       <h3 className="hidden md:block text-xl font-semibold text-black">{step.title}</h3>
                       <p className="hidden md:block text-sm text-gray-600 mt-1">{step.desc}</p>
-
-                      {/* Upload Section */}
-                      {step.id === 1 && (
-                        <div className="mt-4 space-y-3">
-                          <div className="text-sm">
-                            Upload JPG/PNG/PDF. Supported documents: ID, Passport, Driver's License, Address Proof.
-                          </div>
-
-                         
-
-                          <div className="text-xs text-gray-500">
-                            Uploaded documents will appear in the Verify Documents section.
-                          </div>
-                        </div>
-                      )}
 
                       {step.id === 3 && (
                         <div className="mt-4 space-y-4">
@@ -255,7 +215,6 @@ const UserHowitWorks: React.FC = () => {
                         </div>
                       )}
 
-                      {/* Verification Complete */}
                       {step.id === 4 && (
                         <div className="mt-4">
                           <button className="px-4 py-2 rounded-md bg-green-600 text-white text-sm">
@@ -267,8 +226,8 @@ const UserHowitWorks: React.FC = () => {
                   </div>
                 </div>
 
-                {/* MOBILE IMAGE — OUTSIDE CARD */}
-                <div className="md:hidden mt-4 w-full">
+                {/* MOBILE IMAGE */}
+                <div className="md:hidden mt-4 w-full flex justify-center">
                   <img
                     src={step.image}
                     alt={step.title}
@@ -282,7 +241,7 @@ const UserHowitWorks: React.FC = () => {
             <input ref={replacementInputRef} type="file" onChange={handleReplacementFileChange} className="sr-only" />
           </div>
 
-          {/* RIGHT COLUMN PHONE MOCKUP */}
+          {/* PHONE MOCKUP */}
           <div className="hidden md:flex justify-center">
             <div className="sticky top-24 w-[280px] md:w-[270px] md:h-[550px] aspect-[9/16]
                          rounded-[40px] border-[6px] border-[#e5e5e5]
@@ -308,7 +267,6 @@ const UserHowitWorks: React.FC = () => {
                 </motion.div>
               </AnimatePresence>
 
-             
             </div>
           </div>
 
