@@ -1,279 +1,260 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-import Navigation from "@/Components/Navigation";
-import Footer from "@/Components/Footer";
+import { ArrowDown } from "lucide-react";
 
 import step1Img from "../../assets/images/Image (1).jpg";
-import step2Img from "../../assets/images/Image (2).jpg";
+import step2Img from "../../assets/images/documentunder.png";
 import step3Img from "../../assets/images/Image (3).jpg";
-import step6Img from "../../assets/images/Image (6).jpg";
+import step6Img from "../../assets/images/verifieddocumetsss.png";
 
-type Step = { id: number; title: string; desc: string; image: string };
-type DocStatus = "verified" | "pending" | "rejected" | "expired";
+import Footer from "@/Components/Footer";
+import Navigation from "@/Components/Navigation";
 
-type DocumentItem = {
-  id: string;
-  name: string;
-  status: DocStatus;
-  uploadedAt: string;
-  history: { at: string; action: string }[];
+type Step = {
+  id: number;
+  title: string;
+  desc: string;
+  image: string;
+  points: string[];
 };
 
 const steps: Step[] = [
-  { id: 2, title: "Sign Up / Sign In", desc: "Create an account or sign in to manage your documents.", image: step1Img },
-  { id: 1, title: "Upload Documents", desc: "Choose documents to upload for verification.", image: step3Img },
+  {
+    id: 1,
+    title: "Sign Up / Sign In",
+    desc: "Create an account or sign in to manage your documents.",
+    image: step1Img,
+    points: [
+      "Enter your mobile number or email to get started.",
+      "Create a secure password for your account.",
+      "Verify your identity using OTP.",
+      "Set up your basic profile details.",
+      "Access your dashboard and start uploading documents.",
+    ],
+  },
+  {
+    id: 2,
+    title: "Upload Documents",
+    desc: "Choose documents to upload for verification.",
+    image: step3Img,
+    points: [
+      "Select the type of document you want to upload.",
+      "Use camera or gallery to upload images or PDF.",
+      "Ensure the document photo is clear and readable.",
+      "Submit the document for admin review.",
+      "Track upload progress in real time.",
+    ],
+  },
   {
     id: 3,
     title: "Verify Documents",
-    desc: "See which documents are pending, verified, rejected or expired. Upload replacements or view details.",
+    desc: "See pending, verified, rejected, or expired documents.",
     image: step2Img,
+    points: [
+      "Documents enter the 'Pending' stage after upload.",
+      "Admins review your submitted documents.",
+      "Rejected documents show reason and require re-upload.",
+      "Expired documents must be updated for continued use.",
+      "Get notified instantly when document status changes.",
+    ],
   },
-  { id: 4, title: "Ready for Verification", desc: "All required documents verified", image: step6Img },
+  {
+    id: 4,
+    title: "Ready for Verification",
+    desc: "All required documents verified.",
+    image: step6Img,
+    points: [
+      "All your documents have been successfully validated.",
+      "Your profile is now fully verified.",
+      "You can now access all youID features without limitations.",
+      "Easily share your verified identity anytime.",
+      "Stay updated and renew documents before they expire.",
+    ],
+  },
 ];
 
-const formatNow = () => new Date().toLocaleString();
+const UserHowitWorks = () => {
+  const [visibleSteps, setVisibleSteps] = useState<number[]>([0]);
+  const [activeStep, setActiveStep] = useState(0);
 
-const UserHowitWorks: React.FC = () => {
-  const [active, setActive] = useState<number>(0);
-  const stepRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const isAutoPlaying = useRef(true);
 
-  const [documents, setDocuments] = useState<DocumentItem[]>([
-    { id: "doc-1", name: "ID Card.pdf", status: "verified", uploadedAt: formatNow(), history: [{ at: formatNow(), action: "Uploaded" }] },
-    { id: "doc-2", name: "Address Proof.jpg", status: "pending", uploadedAt: formatNow(), history: [{ at: formatNow(), action: "Uploaded" }] },
-    { id: "doc-3", name: "Passport.png", status: "rejected", uploadedAt: formatNow(), history: [{ at: formatNow(), action: "Uploaded" }, { at: formatNow(), action: "Rejected - blur detected" }] },
-  ]);
+  const totalSteps = steps.length;
 
-  const replacementInputRef = useRef<HTMLInputElement | null>(null);
-  const replacementTargetRef = useRef<string | null>(null);
+  const scrollToStep = (i: number) => {
+    isAutoPlaying.current = false;
+    const container = containerRef.current;
+    const target = stepRefs.current[i];
+
+    if (container && target) {
+      container.scrollTo({
+        top: target.offsetTop - 20,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const handleNextStep = () => {
+    if (activeStep < totalSteps - 1) scrollToStep(activeStep + 1);
+  };
 
   useEffect(() => {
-    stepRefs.current = stepRefs.current.slice(0, steps.length);
-  }, []);
+    if (visibleSteps.length >= steps.length) return;
 
-  useEffect(() => setActive(0), []);
+    const timer = setTimeout(() => {
+      setVisibleSteps((prev) => [...prev, prev.length]);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [visibleSteps]);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
-    const calcMostVisible = () => {
-      const containerRect = container.getBoundingClientRect();
-      let bestIndex = 0;
-      let bestRatio = 0;
+    const handleScroll = () => {
+      isAutoPlaying.current = false;
 
-      stepRefs.current.forEach((el, idx) => {
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        const top = Math.max(rect.top, containerRect.top);
-        const bottom = Math.min(rect.bottom, containerRect.bottom);
-        const visible = Math.max(0, bottom - top);
-        const ratio = rect.height > 0 ? visible / rect.height : 0;
+      const containerTop = container.getBoundingClientRect().top;
 
-        if (ratio > bestRatio) {
-          bestRatio = ratio;
-          bestIndex = idx;
+      let nearest = 0;
+      let minDist = Infinity;
+
+      stepRefs.current.forEach((ref, idx) => {
+        if (ref && visibleSteps.includes(idx)) {
+          const rect = ref.getBoundingClientRect();
+          const dist = Math.abs(rect.top - containerTop);
+
+          if (dist < minDist) {
+            nearest = idx;
+            minDist = dist;
+          }
         }
       });
 
-      if (bestRatio > 0.05 && bestIndex !== active) {
-        setActive(bestIndex);
-      }
+      setActiveStep(nearest);
     };
 
-    calcMostVisible();
-    container.addEventListener("scroll", calcMostVisible, { passive: true });
-    window.addEventListener("resize", calcMostVisible);
-
-    return () => {
-      container.removeEventListener("scroll", calcMostVisible);
-      window.removeEventListener("resize", calcMostVisible);
-    };
-  }, [active]);
-
-  const safeActive = Math.max(0, Math.min(active, steps.length - 1));
-
-  const onWheel = (e: React.WheelEvent) => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const delta = e.deltaY;
-    const atTop = el.scrollTop === 0;
-    const atBottom = Math.abs(el.scrollHeight - el.clientHeight - el.scrollTop) < 1;
-
-    if (!((delta < 0 && atTop) || (delta > 0 && atBottom))) {
-      e.stopPropagation();
-    }
-  };
-
-  const scrollToStep = (index: number) => {
-    const el = stepRefs.current[index];
-    const container = containerRef.current;
-    if (!el || !container) return;
-    el.scrollIntoView({ behavior: "smooth", block: "center" });
-  };
-
-  const openReplacementUpload = (targetId: string) => {
-    replacementTargetRef.current = targetId;
-    replacementInputRef.current?.click();
-  };
-
-  const handleReplacementFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    const targetId = replacementTargetRef.current;
-    if (!file || !targetId) return;
-
-    setDocuments((prev) =>
-      prev.map((doc) =>
-        doc.id === targetId
-          ? {
-              ...doc,
-              name: file.name,
-              status: "pending",
-              uploadedAt: formatNow(),
-              history: [...doc.history, { at: formatNow(), action: "Replacement uploaded" }],
-            }
-          : doc
-      )
-    );
-
-    replacementTargetRef.current = null;
-    if (replacementInputRef.current) replacementInputRef.current.value = "";
-  };
+    container.addEventListener("scroll", handleScroll);
+    return () => container.removeEventListener("scroll", handleScroll);
+  }, [visibleSteps]);
 
   return (
-    <div className="min-h-screen w-full bg-[linear-gradient(to_bottom_right,#eee6ff,#ffffff,#ffe9d6)]">
+    <div>
       <Navigation />
+      <div className="min-h-screen w-full bg-gradient-to-br from-purple-50 via-white to-orange-50">
+        <section className="relative w-full px-6 md:px-10 pt-20 pb-20">
+          <div className="text-center mb-12">
+            <h2 className="text-black text-3xl md:text-4xl font-bold">How It Works</h2>
+            <p className="text-black/70 text-lg max-w-2xl mx-auto mt-3">
+              Your complete journey through the youID app — from document upload to verified status.
+            </p>
+          </div>
 
-      <section className="relative w-full px-6 md:px-10 pt-20 pb-20">
-        <div className="text-center mb-12">
-          <h2 className="text-black text-3xl md:text-4xl font-bold">How It Works</h2>
-          <p className="text-black/70 text-lg max-w-2xl mx-auto mt-3">
-            Your complete journey through the youID app — from document upload to verified status.
-          </p>
-        </div>
+          <div className="relative max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
 
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
+            {/* Scroll Button */}
+            <button
+              onClick={handleNextStep}
+              className="fixed bottom-10 left-1/2 -translate-x-1/2 z-30 bg-white p-3 rounded-full shadow-xl hover:bg-blue-600 hover:text-white transition-all animate-bounce"
+            >
+              <ArrowDown className="w-7 h-7" />
+            </button>
 
-          {/* LEFT COLUMN */}
-          <div
-            ref={containerRef}
-            onWheel={onWheel}
-            className="flex flex-col space-y-10 items-center md:items-start pb-10 pr-0 md:pr-6 md:max-h-[80vh] md:overflow-y-auto no-scrollbar"
-          >
-            {steps.map((step, idx) => (
-              <div key={step.id}>
+            {/* LEFT SIDE CONTENT */}
+            <div
+              ref={containerRef}
+              className="flex flex-col space-y-12 items-center md:items-start pb-40 pr-0 md:pr-6 
+                       md:max-h-[80vh] md:overflow-y-auto scrollbar-hide"
+            >
+              <AnimatePresence>
+                {steps.map((step, idx) =>
+                  visibleSteps.includes(idx) ? (
+                    <motion.div
+                      key={step.id}
+                      initial={{ opacity: 0, y: 40 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
 
-                <div
-                  ref={(el) => {
-                    stepRefs.current[idx] = el;
-                  }}
-                  className={`p-6 rounded-2xl transition-all duration-300 ${
-                    safeActive === idx ? "bg-white shadow-xl" : "bg-white/70"
-                  }`}
-                >
-                  <div className="flex items-start gap-4">
+                      // FIXED: TS ref return type
+                      ref={(el) => {
+                        stepRefs.current[idx] = el;
+                      }}
 
-                    <button
-                      type="button"
-                      onClick={() => scrollToStep(idx)}
-                      className={`hidden md:flex w-12 h-12 rounded-full items-center justify-center text-lg font-semibold ${
-                        safeActive === idx ? "bg-blue-600 text-white" : "bg-white border border-gray-300 text-gray-700"
+                      className={`w-full p-6 rounded-2xl transition-all duration-300 ${
+                        activeStep === idx
+                          ? "bg-white shadow-xl scale-[1.02]"
+                          : "bg-white/70"
                       }`}
                     >
-                      {String(idx + 1).padStart(2, "0")}
-                    </button>
+                      <div className="flex items-start gap-4">
+                        <div
+                          className={`hidden md:flex w-12 h-12 rounded-full items-center justify-center text-lg font-semibold ${
+                            activeStep === idx
+                              ? "bg-blue-600 text-white"
+                              : "bg-white border border-gray-300 text-gray-700"
+                          }`}
+                        >
+                          {String(idx + 1).padStart(2, "0")}
+                        </div>
 
-                    <div className="flex-1">
-                      <div className="md:hidden mb-2 text-center">
-                        <div className="text-sm font-semibold text-gray-900">{step.title}</div>
-                        <div className="text-xs text-gray-600">{step.desc}</div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-semibold text-black">{step.title}</h3>
+                          <p className="text-sm text-gray-600 mt-1">{step.desc}</p>
+
+                          <ul className="mt-3 list-disc text-gray-700 text-sm pl-5 space-y-1">
+                            {step.points.map((p, i) => (
+                              <li key={i}>{p}</li>
+                            ))}
+                          </ul>
+
+                          {/* MOBILE IMAGE */}
+                          <div className="block md:hidden mt-4">
+                            <img
+                              src={step.image}
+                              alt={step.title}
+                              className="w-full h-auto rounded-xl"
+                            />
+                          </div>
+                        </div>
                       </div>
-
-                      <h3 className="hidden md:block text-xl font-semibold text-black">{step.title}</h3>
-                      <p className="hidden md:block text-sm text-gray-600 mt-1">{step.desc}</p>
-
-                      {step.id === 3 && (
-                        <div className="mt-4 space-y-4">
-                          {documents.map((doc) => (
-                            <div key={doc.id} className="p-3 bg-gray-50 border rounded-lg flex items-center justify-between">
-                              <div>
-                                <div className="text-sm font-medium">{doc.name}</div>
-                                <div className="text-xs text-gray-500">
-                                  {doc.status} • {doc.uploadedAt}
-                                </div>
-                              </div>
-                              <button
-                                onClick={() => openReplacementUpload(doc.id)}
-                                className="px-3 py-1.5 rounded-md border text-sm"
-                              >
-                                Upload replacement
-                              </button>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {step.id === 4 && (
-                        <div className="mt-4">
-                          <button className="px-4 py-2 rounded-md bg-green-600 text-white text-sm">
-                            Verification done
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* MOBILE IMAGE */}
-                <div className="md:hidden mt-4 w-full flex justify-center">
-                  <img
-                    src={step.image}
-                    alt={step.title}
-                    className="w-full rounded-xl object-cover"
-                  />
-                </div>
-
-              </div>
-            ))}
-
-            <input ref={replacementInputRef} type="file" onChange={handleReplacementFileChange} className="sr-only" />
-          </div>
-
-          {/* PHONE MOCKUP */}
-          <div className="hidden md:flex justify-center">
-            <div className="sticky top-24 w-[280px] md:w-[270px] md:h-[550px] aspect-[9/16]
-                         rounded-[40px] border-[6px] border-[#e5e5e5]
-                         shadow-2xl overflow-hidden bg-black/90
-                         relative flex items-center justify-center"
-            >
-              <div className="absolute top-3 left-1/2 -translate-x-1/2 w-24 h-4 bg-black/40 rounded-full" />
-
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={steps[safeActive].id}
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1.02 }}
-                  transition={{ duration: 0.4 }}
-                  className="w-full h-full"
-                >
-                  <img
-                    src={steps[safeActive].image}
-                    alt={steps[safeActive].title}
-                    className="w-full h-full object-cover rounded-[34px]"
-                  />
-                </motion.div>
+                    </motion.div>
+                  ) : null
+                )}
               </AnimatePresence>
+            </div>
 
+            {/* RIGHT SIDE PHONE MOCKUP */}
+            <div className="hidden md:flex justify-center">
+              <div className="sticky top-24 w-[280px] h-[550px] rounded-[40px] border-[6px] border-gray-300 shadow-2xl overflow-hidden bg-black relative">
+                <div className="absolute top-3 left-1/2 -translate-x-1/2 w-24 h-4 bg-black/40 rounded-full" />
+
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={steps[activeStep].id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.35 }}
+                    className="w-full h-full"
+                  >
+                    <img
+                      src={steps[activeStep].image}
+                      alt={steps[activeStep].title}
+                      className="w-full h-full object-cover rounded-[34px]"
+                    />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </div>
           </div>
+        </section>
 
-        </div>
-      </section>
-
-      <Footer />
+        <Footer />
+      </div>
     </div>
   );
 };
