@@ -79,18 +79,16 @@ const UserHowitWorks = () => {
 
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const isAutoPlaying = useRef(true);
 
   const totalSteps = steps.length;
 
   const scrollToStep = (i: number) => {
-    isAutoPlaying.current = false;
     const container = containerRef.current;
     const target = stepRefs.current[i];
 
     if (container && target) {
       container.scrollTo({
-        top: target.offsetTop - 20,
+        top: target.offsetTop - 40,
         behavior: "smooth",
       });
     }
@@ -115,9 +113,8 @@ const UserHowitWorks = () => {
     if (!container) return;
 
     const handleScroll = () => {
-      isAutoPlaying.current = false;
-
-      const containerTop = container.getBoundingClientRect().top;
+      const containerRect = container.getBoundingClientRect();
+      const containerMiddle = containerRect.top + containerRect.height / 2;
 
       let nearest = 0;
       let minDist = Infinity;
@@ -125,8 +122,9 @@ const UserHowitWorks = () => {
       stepRefs.current.forEach((ref, idx) => {
         if (ref && visibleSteps.includes(idx)) {
           const rect = ref.getBoundingClientRect();
-          const dist = Math.abs(rect.top - containerTop);
+          const elementMiddle = rect.top + rect.height / 2;
 
+          const dist = Math.abs(elementMiddle - containerMiddle);
           if (dist < minDist) {
             nearest = idx;
             minDist = dist;
@@ -164,11 +162,14 @@ const UserHowitWorks = () => {
             </button>
 
             {/* LEFT SIDE CONTENT */}
-            <div
-              ref={containerRef}
-              className="flex flex-col space-y-12 items-center md:items-start pb-40 pr-0 md:pr-6 
-                       md:max-h-[80vh] md:overflow-y-auto scrollbar-hide"
-            >
+     <div
+  ref={containerRef}
+  className="flex flex-col space-y-12 items-center md:items-start 
+             pt-0 pb-0 md:pt-40 md:pb-80 
+             pr-0 md:pr-6 
+             md:max-h-[80vh] md:overflow-y-auto scrollbar-hide"
+>
+
               <AnimatePresence>
                 {steps.map((step, idx) =>
                   visibleSteps.includes(idx) ? (
@@ -178,12 +179,9 @@ const UserHowitWorks = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.5 }}
-
-                      // FIXED: TS ref return type
                       ref={(el) => {
                         stepRefs.current[idx] = el;
                       }}
-
                       className={`w-full p-6 rounded-2xl transition-all duration-300 ${
                         activeStep === idx
                           ? "bg-white shadow-xl scale-[1.02]"
