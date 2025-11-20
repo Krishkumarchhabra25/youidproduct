@@ -7,13 +7,18 @@ import { Badge } from "../Components/ui/badge";
 import { Card, CardContent } from "../Components/ui/card";
 import Footer from "../Components/Footer";
 import { Button } from "../Components/ui/button";
-
+import businessdahsboard from "../assets/images/dahsboardimage.png"
+import challeneges from "../assets/images/challenge-1.png"
 const BusinessLanding = () => {
-  const stats = [
-    { value: "50%", label: "Reduced KYC Cost" },
-    { value: "<1 hr", label: "Integration Time" },
-    { value: "99.9%", label: "Uptime & Reliability" },
-  ];
+const companies = [
+  { name: "Company A", logo: "/logos/company1.png" },
+  { name: "Company B", logo: "/logos/company2.png" },
+  { name: "Company C", logo: "/logos/company3.png" },
+  { name: "Company D", logo: "/logos/company4.png" },
+  { name: "Company E", logo: "/logos/company5.png" },
+  { name: "Company F", logo: "/logos/company6.png" },
+];
+
 
   const problems = [
     {
@@ -96,108 +101,230 @@ const BusinessLanding = () => {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative bg-gradient-hero py-20 md:py-32">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center space-y-8">
-              <Badge variant="secondary" className="mb-4">
-                Built for Modern Businesses
-              </Badge>
-              <h1 className="text-4xl md:text-6xl font-bold text-black">
-                Verify Customers Instantly. <br /> Stay Compliant Effortlessly.
-              </h1>
-              <p className="text-xl text-black/90 max-w-2xl mx-auto">
-                youID helps organizations onboard verified users in seconds —
-                without collecting or storing personal documents. Reduce costs,
-                remove liability, and build trust with every verification.
-              </p>
-              <div className="flex justify-center">
-                <Button size="lg" variant="secondary">
-                  Request Demo
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
+<section className="relative bg-gradient-to-b from-[#dbeafe] via-white to-white pt-20 pb-20 md:pt-10 md:pb-28 overflow-hidden">
 
-        {/* Stats Section */}
-        <section className="py-12 bg-secondary/30 border-y border-border">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-8 text-center">
-              {stats.map((stat, index) => (
-                <div key={index}>
-                  <div className="text-3xl md:text-4xl font-bold text-primary">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-muted-foreground mt-1">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+  {/* Decorative dots (optional) */}
+  <div className="absolute inset-0 pointer-events-none opacity-40">
+    <div className="absolute top-10 left-1/4 w-3 h-3 bg-blue-200 rounded-full" />
+    <div className="absolute top-40 right-1/4 w-2 h-2 bg-blue-300 rounded-full" />
+    <div className="absolute bottom-32 left-10 w-4 h-4 bg-blue-100 rounded-full" />
+  </div>
 
-        {/* Problems Section */}
-        <section className="py-20">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                The Challenges Businesses Face
-              </h2>
-            </div>
-            <div className="grid md:grid-cols-3 gap-8">
-              {problems.map((p, index) => (
-                <Card key={index} className="border-border">
-                  <CardContent className="p-6 space-y-4">
-                    <div className="h-12 w-12 rounded-lg bg-destructive/10 flex items-center justify-center">
-                      <p.icon className="h-6 w-6 text-destructive" />
-                    </div>
-                    <h3 className="text-xl font-semibold text-foreground">
-                      {p.title}
-                    </h3>
-                    <p className="text-muted-foreground">{p.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
+  <div className="container mx-auto px-4 relative z-10">
+    
+    <div className="max-w-4xl mx-auto text-center space-y-6">
+      <Badge variant="secondary" className="mb-4">
+        Built for Modern Businesses
+      </Badge>
 
-        {/* Features Section */}
-        <section className="py-20 bg-secondary/30">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Why Businesses Choose youID
-              </h2>
+      <h1 className="text-4xl md:text-6xl font-bold text-black leading-tight">
+        Verify Customers Instantly. <br />
+        Stay Compliant Effortlessly.
+      </h1>
+
+      <p className="text-lg md:text-xl text-black/80 max-w-2xl mx-auto">
+        youID helps organizations onboard verified users in seconds — 
+        without collecting or storing personal documents. Reduce costs,
+        remove liability, and build trust with every verification.
+      </p>
+
+      <Button size="lg" variant="secondary" className="mt-4">
+        Request Demo
+      </Button>
+    </div>
+
+    {/* Dashboard Image */}
+    <div className="relative flex justify-center mt-10 md:mt-12">
+      <div className="w-full max-w-5xl">
+        <img
+          src={businessdahsboard}
+          alt="Dashboard Preview"
+          className="
+            w-full 
+            rounded-2xl 
+            shadow-2xl 
+            border border-gray-200 
+            transform 
+            md:scale-110 
+            hover:scale-105 
+            transition-all 
+            duration-700 
+            ease-out
+          "
+        />
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+{/* Trusted Companies Section */}
+<section className="py-6 bg-secondary/20 border-y border-border">
+  <div className="container mx-auto px-4">
+
+    <h2 className="text-center text-xl md:text-2xl font-semibold text-foreground mb-8">
+      Trusted by fast-growing companies
+    </h2>
+
+    {/* Horizontal Scroll Wrapper */}
+    <div className="relative overflow-hidden">
+      <div
+        className="
+          flex items-center gap-16 animate-scroll
+          hover:pause-scroll
+        "
+      >
+        {/* Duplicate logos for seamless infinite scrolling */}
+        {[...companies, ...companies].map((c, i) => (
+          <div
+            key={i}
+            className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300"
+          >
+            <img
+              src={c.logo}
+              alt={c.name}
+              className="
+                h-12 w-auto opacity-70
+                hover:opacity-100
+                transition-all duration-300
+              "
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{/* Problems Section – Updated & Balanced */}
+<section className="py-24 px-6 md:px-12 lg:px-20">
+  <div className="grid md:grid-cols-2 gap-16 items-center">
+
+    {/* LEFT SIDE TEXT */}
+    <div>
+      <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+        The Challenges Businesses Face
+      </h2>
+
+      <p className="text-muted-foreground mb-10 max-w-md">
+        Businesses struggle with manual verification, compliance risks, slow onboarding,
+        and rising KYC costs. youID solves these challenges by enabling instant,
+        document-free, and secure verification.
+      </p>
+
+      <div className="space-y-8">
+        {problems.map((p, index) => (
+          <div key={index} className="flex items-start gap-4">
+            <div className="h-12 w-12 rounded-xl bg-destructive/10 flex items-center justify-center">
+              <p.icon className="h-6 w-6 text-destructive" />
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {features.map((f, index) => (
-                <Card key={index} className="border-border">
-                  <CardContent className="p-6 space-y-4">
-                    <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <f.icon className="h-6 w-6 text-primary" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-foreground">
-                      {f.title}
-                    </h3>
-                    <ul className="space-y-2">
-                      {f.points.map((point, i) => (
-                        <li
-                          key={i}
-                          className="text-sm text-muted-foreground flex items-start"
-                        >
-                          <CheckCircle className="h-4 w-4 text-success mr-2 mt-0.5 flex-shrink-0" />
-                          <span>{point}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-              ))}
+            <div>
+              <h3 className="text-lg font-semibold text-foreground">{p.title}</h3>
+              <p className="text-muted-foreground text-sm">{p.description}</p>
             </div>
           </div>
-        </section>
+        ))}
+      </div>
+    </div>
+
+    {/* RIGHT SIDE – Image + Floating Cards */}
+    <div className="relative flex justify-center">
+      <img
+        src={challeneges}
+        alt="Challenges Illustration"
+        className="w-full max-w-lg rounded-3xl shadow-xl"
+      />
+
+      {/* Floating card 1 */}
+      <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-white shadow-lg rounded-xl px-5 py-3 flex items-center gap-3 border">
+        <Lock className="text-destructive h-5 w-5" />
+        <p className="text-sm font-medium">Manual KYC is Expensive</p>
+      </div>
+
+      {/* Floating card 2 */}
+      <div className="absolute top-32 -right-6 bg-white shadow-lg rounded-xl px-5 py-3 flex items-center gap-3 border">
+        <Upload className="text-primary h-5 w-5" />
+        <p className="text-sm font-medium">Document Storage Risks</p>
+      </div>
+
+      {/* Floating card 3 */}
+      <div className="absolute bottom-6 -left-6 bg-white shadow-lg rounded-xl px-5 py-3 flex items-center gap-3 border">
+        <Clock className="text-success h-5 w-5" />
+        <p className="text-sm font-medium">Slow Onboarding Experience</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+    {/* Features Section – EXACT layout like your reference */}
+<section className="py-24 bg-secondary/30">
+  <div className="container mx-auto px-4">
+
+    {/* Top Title */}
+    <div className="text-center mb-16">
+      <span className="px-4 py-1 text-xs rounded-full bg-primary/10 text-primary">
+        Why youID?
+      </span>
+      <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-4">
+        Why Businesses Choose youID
+      </h2>
+      <p className="text-muted-foreground mt-3">
+        Fast, secure, automated identity verification for modern businesses.
+      </p>
+    </div>
+
+    {/* LEFT IMAGE + RIGHT CARDS */}
+    <div className="grid md:grid-cols-2 gap-12 items-center">
+
+      {/* LEFT SIDE IMAGE */}
+      <div className="flex justify-center">
+        <img
+          src={businessdahsboard}   // put your left side image here
+          alt="youID Features"
+          className="rounded-3xl w-full max-w-lg shadow-lg"
+        />
+      </div>
+
+      {/* RIGHT SIDE – 2×2 FEATURES GRID */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+        {features.map((f, index) => (
+          <div
+            key={index}
+            className="p-6 rounded-2xl bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border
+                       flex flex-col gap-3"
+          >
+            {/* Icon */}
+            <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+              <f.icon className="h-5 w-5 text-primary" />
+            </div>
+
+            {/* Title */}
+            <h3 className="text-base font-semibold text-foreground">
+              {f.title}
+            </h3>
+
+            {/* Points */}
+            <ul className="space-y-2">
+              {f.points.map((point, i) => (
+                <li key={i} className="flex items-start text-sm text-muted-foreground">
+                  <CheckCircle className="h-4 w-4 text-success mt-0.5 mr-2" />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+
+          </div>
+        ))}
+
+      </div>
+    </div>
+  </div>
+</section>
+
 
         {/* Testimonials Section */}
         <section className="py-20">

@@ -80,16 +80,18 @@ const UserHowitWorks = () => {
 
   const totalSteps = steps.length;
 
-  // ⭐ Auto scroll (desktop only)
-  useEffect(() => {
-    if (window.innerWidth < 768) return; // mobile → no auto scroll
+// ⭐ Auto scroll (desktop only)
+useEffect(() => {
+  if (window.innerWidth < 768) return; // mobile → no auto scroll
 
-    const t = setTimeout(() => {
-      if (activeStep < totalSteps - 1) scrollToStep(activeStep + 1);
-    }, 2000);
+  const t = setTimeout(() => {
+    const nextStep = (activeStep + 1) % totalSteps; // ⭐ Infinite looping
+    scrollToStep(nextStep);
+  }, 2000);
 
-    return () => clearTimeout(t);
-  }, [activeStep]);
+  return () => clearTimeout(t);
+}, [activeStep]);
+
 
   // ⭐ Scroll to center (desktop only)
 const scrollToStep = (i: number) => {
@@ -175,20 +177,21 @@ const scrollToStep = (i: number) => {
             </p>
           </div>
 
-          <div className="relative max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
+<div className="relative max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
          
             {/* LEFT SIDE — MOBILE NORMAL LIST, DESKTOP SCROLL BOX */}
-            <div
-              ref={containerRef}
-              className="
-                w-full 
-                bg-white rounded-2xl shadow-xl p-8 
-                flex flex-col space-y-24
+         <div
+  ref={containerRef}
+  className="
+    w-full md:w-[85%] md:mx-auto
+    bg-white rounded-2xl shadow-xl p-8
+    flex flex-col space-y-24
+    md:h-[320px] md:overflow-y-auto
+    md:self-center md:-translate-y-6 md:transform
+  "
+>
 
-                md:h-[320px] md:overflow-y-auto   /* desktop only */
-              "
-            >
               {steps.map((step, idx) => (
                 <div key={step.id} className="w-full">
 
