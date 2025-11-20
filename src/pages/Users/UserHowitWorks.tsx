@@ -92,19 +92,39 @@ const UserHowitWorks = () => {
   }, [activeStep]);
 
   // ⭐ Scroll to center (desktop only)
-  const scrollToStep = (i: number) => {
-    if (window.innerWidth < 768) return; // mobile → disabled
+const scrollToStep = (i: number) => {
+  if (window.innerWidth < 768) return;
 
-    const container = containerRef.current;
-    const el = stepRefs.current[i];
-    if (!container || !el) return;
+  const container = containerRef.current;
+  const el = stepRefs.current[i];
+  if (!container || !el) return;
 
-    const containerHeight = container.clientHeight;
-    const elHeight = el.clientHeight;
+  const containerHeight = container.clientHeight;
+  const elHeight = el.clientHeight;
+  const targetScroll = el.offsetTop - (containerHeight / 2 - elHeight / 2);
 
-    const scrollY = el.offsetTop - (containerHeight / 2 - elHeight / 2);
-    container.scrollTo({ top: scrollY, behavior: "smooth" });
+  // Custom slow scrolling
+  const start = container.scrollTop;
+  const distance = targetScroll - start;
+  const duration = 1200; // ⏳ 1.2 seconds → slow motion
+  let startTime: number | null = null;
+
+  const easeInOutQuad = (t: number) =>
+    t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+  const animate = (currentTime: number) => {
+    if (!startTime) startTime = currentTime;
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+
+    container.scrollTop = start + distance * easeInOutQuad(progress);
+
+    if (elapsed < duration) requestAnimationFrame(animate);
   };
+
+  requestAnimationFrame(animate);
+};
+
 
   // ⭐ Scroll detection (desktop only)
   useEffect(() => {
