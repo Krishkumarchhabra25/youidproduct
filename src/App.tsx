@@ -7,6 +7,8 @@ import UserUseCases from "./pages/Users/UserUseCases";
 import UserBenefits from "./pages/Users/UserBenefits";
 import UserAbout from "./pages/Users/UserAbout";
 import UserHowitWorks from "./pages/Users/UserHowitWorks";
+import BusinessUseCases from "./pages/business/BusinessUseCases";
+import BusinessBenefits from "./pages/business/BusinessBenefits";
 
 
 
@@ -27,8 +29,8 @@ const App = () => (
 
       {/* Business Pages */}
       <Route path="/business" element={<BusinessLanding />} />
-      {/* <Route path="/business/usecases" element={<BusinessUseCases />} />
-      <Route path="/business/benefits" element={<BusinessBenefits />} /> */}
+       <Route path="/business/usecases" element={<BusinessUseCases />} />
+     { <Route path="/business/benefits" element={<BusinessBenefits />} /> } 
     </Routes>
   </BrowserRouter>
 );
