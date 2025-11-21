@@ -9,6 +9,7 @@ import UserAbout from "./pages/Users/UserAbout";
 import UserHowitWorks from "./pages/Users/UserHowitWorks";
 import BusinessUseCases from "./pages/business/BusinessUseCases";
 import BusinessBenefits from "./pages/business/BusinessBenefits";
+import BusinessAbout from "./pages/business/BusinessAbout";
 
 
 
@@ -30,7 +31,9 @@ const App = () => (
       {/* Business Pages */}
       <Route path="/business" element={<BusinessLanding />} />
        <Route path="/business/usecases" element={<BusinessUseCases />} />
-     { <Route path="/business/benefits" element={<BusinessBenefits />} /> } 
+      <Route path="/business/benefits" element={<BusinessBenefits />} /> 
+       <Route path="/business/about" element={<BusinessAbout />} /> 
+      BusinessAbout
     </Routes>
   </BrowserRouter>
 );

@@ -134,7 +134,7 @@ const companies = [
     </div>
 
     {/* Dashboard Image */}
-    <div className="relative flex justify-center mt-10 md:mt-12">
+    {/* <div className="relative flex justify-center mt-10 md:mt-12">
       <div className="w-full max-w-5xl">
         <img
           src={businessdahsboard}
@@ -153,7 +153,7 @@ const companies = [
           "
         />
       </div>
-    </div>
+    </div> */}
 
   </div>
 </section>
