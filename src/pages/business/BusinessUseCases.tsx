@@ -1,74 +1,61 @@
 import Footer from "@/Components/Footer";
 import Navigation from "@/Components/Navigation";
 import { Badge } from "@/Components/ui/badge";
-import bankingImg from "../../assets/images/banking.png";
-import ecommerceImg from "../../assets/images/ecommerce.png";
-import healthcareImg from "../../assets/images/healthcare.jpg";
-import travelImg from "../../assets/images/travel.jpg";
+
+import adultImg from "../../assets/images/banking.png"; 
+import datingImg from "../../assets/images/ecommerce.png";
+import socialImg from "../../assets/images/healthcare.jpg";
 
 const BusinessUseCases = () => {
-const useCases = [
-  {
-    id: 1,
-    badge: "Banking & Finance",
-    title: "Instant KYC & Fraud-Free Onboarding",
-    description:
-      "Verify customers in seconds with biometric-backed approval — no documents, no uploads, no friction.",
-    points: [
-      "Instant digital KYC",
-      "Loan approvals in minutes, not days",
-      "Eliminate document fraud completely",
-      "100% paperless onboarding",
-    ],
-    image: bankingImg,
-    reverse: false,
-  },
-  {
-    id: 2,
-    badge: "E-commerce",
-    title: "Smarter Verification for Online Shopping",
-    description:
-      "Authenticate buyers and sellers instantly to reduce fraud and increase order success rates.",
-    points: [
-      "1-tap age & identity verification",
-      "Reduce cart abandonment from 50% → under 5%",
-      "Secure high-value orders",
-      "Verified sellers & safer marketplaces",
-    ],
-    image: ecommerceImg,
-    reverse: true,
-  },
-  {
-    id: 3,
-    badge: "Healthcare",
-    title: "Trusted Patient Identity for Healthcare",
-    description:
-      "Secure identity approvals for clinics, pharmacies, insurance, and telemedicine — without storing any sensitive data.",
-    points: [
-      "Instant patient verification",
-      "Full privacy-compliant workflow",
-      "Prevent prescription fraud",
-      "Accelerate claim approvals",
-    ],
-    image: healthcareImg,
-    reverse: false,
-  },
-  {
-    id: 4,
-    badge: "Travel & Hospitality",
-    title: "Frictionless Check-In for Travel & Stays",
-    description:
-      "Upgrade guest experience with fast, contactless identity verification for hotels, rentals, and airports.",
-    points: [
-      "Check-in completed in under 2 minutes",
-      "Instant ID/license verification",
-      "Verified guests for stays & rentals",
-      "Privacy-first, no document storage",
-    ],
-    image: travelImg,
-    reverse: true,
-  },
-];
+  const useCases = [
+    {
+      id: 1,
+      badge: "Adult Sites",
+      title: "Anonymous Age Verification",
+      description:
+        "Users verify their age instantly without disclosing their actual identity or uploading any documents.",
+      points: [
+        "Zero document uploads required",
+        "Anonymous age confirmation",
+        "Prevents minors from accessing adult content",
+        "Fully privacy-first & compliant",
+      ],
+      image: adultImg,
+      reverse: false,
+    },
+
+    {
+      id: 2,
+      badge: "Dating Platforms",
+      title: "Proof of Identity Without Uploads",
+      description:
+        "Authenticate users without collecting passports, IDs or any sensitive documents.",
+      points: [
+        "Instant identity verification",
+        "No driving license or passport required",
+        "Reduce fake profiles & catfishing",
+        "Boost trust and user safety",
+      ],
+      image: datingImg,
+      reverse: true,
+    },
+
+    {
+      id: 3,
+      badge: "Social Media",
+      title: "Frictionless Profile Verification",
+      description:
+        "Protect your community by ensuring authentic users without compromising their privacy.",
+      points: [
+        "Verify users without storing documents",
+        "Stop impersonation & fake accounts",
+        "Improve platform trust & credibility",
+        "Simple API that works globally",
+      ],
+      image: socialImg,
+      reverse: false,
+    },
+  ];
 
   return (
     <div className="min-h-screen flex flex-col bg-[linear-gradient(to_bottom_right,#eee6ff,#ffffff,#ffe9d6)]">
@@ -85,7 +72,7 @@ const useCases = [
         </h1>
 
         <p className="text-lg text-black/75 max-w-2xl mx-auto">
-          From banks to hotels — youID works everywhere identity is required.
+          Identity, Age, and Address Verification — suited for modern digital platforms.
         </p>
       </section>
 
@@ -93,7 +80,9 @@ const useCases = [
       {useCases.map((useCase) => (
         <section
           key={useCase.id}
-          className={`flex flex-col md:flex-row items-center justify-between py-20 px-6 md:px-16 gap-12 ${useCase.reverse ? "md:flex-row-reverse" : ""}`}
+          className={`flex flex-col md:flex-row items-center justify-between py-20 px-6 md:px-16 gap-12 ${
+            useCase.reverse ? "md:flex-row-reverse" : ""
+          }`}
         >
           {/* Text */}
           <div className="md:w-1/2 space-y-6">

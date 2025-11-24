@@ -103,3 +103,20 @@
 .hover\:pause-scroll:hover {
   animation-play-state: paused;
 }
+
+
+html, body {
+  scroll-behavior: auto !important;
+}
+
+/* helper to expand the reveal area for progress-based animation */
+.reveal-track {
+  /* controls how long the reveal takes while scrolling */
+  min-height: 160vh; /* tweak this value to control reveal length */
+}
+
+/* optional: smooth the motion a bit in browsers */
+.motion-preserve {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

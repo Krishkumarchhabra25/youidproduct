@@ -1,7 +1,15 @@
 import Footer from "@/Components/Footer";
 import Navigation from "@/Components/Navigation";
 import { Card, CardContent } from "@/Components/ui/card";
-import { Lock, Smile, Zap, CheckCircle, Eye, Shield } from "lucide-react";
+import { 
+  ShieldCheck,
+  Lock,
+  TrendingDown,
+  Zap,
+  HeartHandshake,
+  Globe,
+  TrendingUp
+} from "lucide-react";
 
 const BusinessBenefits = () => {
   return (
@@ -15,93 +23,113 @@ const BusinessBenefits = () => {
           </h1>
 
           <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-12">
-            youID gives businesses a faster, safer, and fully compliant way to
-            verify customers — without storing documents or taking security risks.
+            youID gives businesses a safe, compliant, and document-free identity verification
+            flow that strengthens security, reduces operational burden, and increases customer trust.
           </p>
 
           {/* GRID */}
           <div className="grid gap-6 max-w-6xl mx-auto grid-cols-1 sm:grid-cols-2 lg:grid-cols-12">
 
-            {/* Tall Card */}
-            <div className="lg:col-span-4 lg:row-span-2 flex">
+            {/* 1. Reduced Compliance Risk */}
+            <div className="lg:col-span-4 flex">
               <Card className="rounded-3xl bg-[#EDEAFF] shadow-md border-none flex-1">
                 <CardContent className="p-7 space-y-3 text-left">
-                  <Shield className="h-9 w-9 text-gray-900" />
-                  <h3 className="text-xl font-semibold">Zero Data Liability</h3>
+                  <ShieldCheck className="h-9 w-9 text-gray-900" />
+                  <h3 className="text-xl font-semibold">Reduced Compliance Risk</h3>
+                  <p className="text-gray-600 text-sm">Effortlessly meet global privacy and security standards.</p>
                   <p className="text-gray-800">
-                    Businesses never store customer documents. This eliminates
-                    breach risks, reduces compliance complexity, and ensures
-                    instant trust with customers.
+                    Businesses avoid storing sensitive identity documents, minimizing exposure 
+                    to breaches and regulatory violations like GDPR.
                   </p>
                 </CardContent>
               </Card>
             </div>
 
-            {/* Wide */}
+            {/* 2. Enhanced Data Security */}
             <div className="lg:col-span-8 flex">
               <Card className="rounded-3xl bg-[#FFE4E9] shadow-md border-none flex-1">
                 <CardContent className="p-7 text-left space-y-3">
-                  <Zap className="h-9 w-9 text-gray-900" />
-                  <h3 className="text-xl font-semibold">
-                    Faster Customer Onboarding
-                  </h3>
+                  <Lock className="h-9 w-9 text-gray-900" />
+                  <h3 className="text-xl font-semibold">Enhanced Data Security</h3>
+                  <p className="text-gray-600 text-sm">Strong encryption and zero-document handling built in.</p>
                   <p className="text-gray-800">
-                    No uploads, no waiting. Customers verify instantly, reducing
-                    drop-offs and accelerating conversions.
+                    Eliminates document handling, reducing risks of leaks, theft, or misuse 
+                    of personal information.
                   </p>
                 </CardContent>
               </Card>
             </div>
 
-            {/* Small Cards */}
+            {/* 3. Lower Operational Costs */}
             <div className="lg:col-span-4 flex">
               <Card className="rounded-3xl bg-[#FFF9E6] shadow-md border-none flex-1">
                 <CardContent className="p-7 space-y-3 text-left">
-                  <Eye className="h-9 w-9 text-gray-900" />
-                  <h3 className="text-xl font-semibold">Transparent Request Control</h3>
+                  <TrendingDown className="h-9 w-9 text-gray-900" />
+                  <h3 className="text-xl font-semibold">Lower Operational Costs</h3>
+                  <p className="text-gray-600 text-sm">Reduce manual reviews and document management expenses.</p>
                   <p className="text-gray-800">
-                    Customers see exactly what data is being requested, helping
-                    businesses build trust and reduce verification rejection rates.
+                    No document systems, no secure storage, no manual checks — saving time, 
+                    resources, and money.
                   </p>
                 </CardContent>
               </Card>
             </div>
 
-            <div className="lg:col-span-4 flex">
-              <Card className="rounded-3xl bg-[#F5F9EF] shadow-md border-none flex-1">
-                <CardContent className="p-7 space-y-3 text-left">
-                  <Lock className="h-9 w-9 text-gray-900" />
-                  <h3 className="text-xl font-semibold">Secure & Compliant by Design</h3>
-                  <p className="text-gray-800">
-                    End-to-end encryption ensures your business meets data
-                    protection requirements without needing extra infrastructure.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Large Cards */}
+            {/* 4. Faster Customer Onboarding */}
             <div className="lg:col-span-8 flex">
               <Card className="rounded-3xl bg-[#FFECDD] shadow-md border-none flex-1">
                 <CardContent className="p-7 space-y-3 text-left">
-                  <Smile className="h-9 w-9 text-gray-900" />
-                  <h3 className="text-xl font-semibold">Frictionless Customer Experience</h3>
+                  <Zap className="h-9 w-9 text-gray-900" />
+                  <h3 className="text-xl font-semibold">Faster Customer Onboarding</h3>
+                  <p className="text-gray-600 text-sm">Speed up sign-ups with a seamless and intuitive flow.</p>
                   <p className="text-gray-800">
-                    One-tap verification means less churn, higher satisfaction,
-                    and smoother onboarding for every customer.
+                    Instant, upload-free verification improves user experience 
+                    and increases conversion rates.
                   </p>
                 </CardContent>
               </Card>
             </div>
 
+            {/* 5. Increased Customer Trust */}
             <div className="lg:col-span-4 flex">
-              <Card className="rounded-3xl bg-[#EEF1F8] shadow-md border-none flex-1">
+              <Card className="rounded-3xl bg-[#F0F7FF] shadow-md border-none flex-1">
                 <CardContent className="p-7 space-y-3 text-left">
-                  <CheckCircle className="h-9 w-9 text-gray-900" />
-                  <h3 className="text-xl font-semibold">Reduced Fraud & Manual Work</h3>
+                  <HeartHandshake className="h-9 w-9 text-gray-900" />
+                  <h3 className="text-xl font-semibold">Increased Customer Trust</h3>
+                  <p className="text-gray-600 text-sm">A transparent process that boosts confidence.</p>
                   <p className="text-gray-800">
-                    Automated verification reduces manual checks, lowers fraud
-                    attempts, and cuts operational workload significantly.
+                    A privacy-first, secure process builds confidence and positively 
+                    strengthens brand reputation.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* 6. Scalability & Global Compliance */}
+            <div className="lg:col-span-6 flex">
+              <Card className="rounded-3xl bg-[#FFF3D9] shadow-md border-none flex-1">
+                <CardContent className="p-7 space-y-3 text-left">
+                  <Globe className="h-9 w-9 text-gray-900" />
+                  <h3 className="text-xl font-semibold">Scalability & Global Compliance</h3>
+                  <p className="text-gray-600 text-sm">Easily expand your operations across borders.</p>
+                  <p className="text-gray-800">
+                    Designed to work across jurisdictions without document handling, 
+                    simplifying global expansion.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* 7. Competitive Advantage */}
+            <div className="lg:col-span-6 flex">
+              <Card className="rounded-3xl bg-[#E8FFF1] shadow-md border-none flex-1">
+                <CardContent className="p-7 space-y-3 text-left">
+                  <TrendingUp className="h-9 w-9 text-gray-900" />
+                  <h3 className="text-xl font-semibold">Competitive Advantage</h3>
+                  <p className="text-gray-600 text-sm">Offer a modern, frictionless verification experience.</p>
+                  <p className="text-gray-800">
+                    A frictionless, secure verification flow helps businesses stand apart 
+                    in a crowded digital market.
                   </p>
                 </CardContent>
               </Card>

@@ -39,53 +39,78 @@ const Home = () => {
   });
 
   return (
-    <section
-      className="
-        relative 
-        min-h-screen 
-        bg-[#f8f7fc] 
-        flex flex-col 
-        overflow-visible
-        md:h-screen
-        md:overflow-hidden
-      "
-    >
-      {/* HEADER */}
-      <div className="fixed top-0 left-0 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md shadow-sm z-40 flex justify-center items-center py-3">
-        <div className="flex items-center gap-2 text-gray-900 font-semibold text-xl">
-          <ShieldCheck className="w-6 h-6 text-indigo-500" />
-          <span>YouID</span>
-        </div>
-      </div>
+<section
+  className="
+    relative 
+    min-h-screen 
+    flex flex-col 
+    overflow-visible
+    md:h-screen
+    md:overflow-hidden
+bg-[linear-gradient(to_right,#000000_0%,#060E11_35%,#06253B_65%,#001B2E_100%)]
+  "
+>
 
-      {/* TOP BUTTONS */}
-      <div
-        className="
-          hidden md:flex 
-          fixed top-[70px] left-0 w-full 
-          z-30 
-          justify-between items-center
-          px-6
-          md:translate-y-[-10px]
-        "
-      >
-        <Button
-          onClick={() => navigate("/user")}
-          size="lg"
-          className="rounded-full px-6 py-3 text-lg shadow-sm bg-white text-gray-900 hover:bg-gray-100"
-        >
-          I'm a User — Get Started
-        </Button>
 
-        <Button
-          onClick={() => navigate("/business")}
-          size="lg"
-          variant="outline"
-          className="rounded-full px-6 py-3 text-lg shadow-sm"
-        >
-          I'm a Business — See Demo
-        </Button>
-      </div>
+<div
+  style={{
+    background:
+      "linear-gradient(90deg, #000000 0%, #041620 30%, #062E3F 70%, #0A4155 100%)",
+  }}
+  className="
+    fixed top-0 left-0 w-full h-[60px]
+    border-b border-white/10 
+    backdrop-blur-md shadow-sm 
+    z-40 
+    flex justify-center items-center
+  "
+>
+  <div className="flex items-center gap-2 text-white font-semibold text-3xl">
+    <ShieldCheck className="w-6 h-6 text-white" />
+    <span>YouID</span>
+  </div>
+</div>
+
+
+<div
+  className="
+    hidden md:flex 
+    fixed top-[70px] left-0 w-full 
+    z-30 
+    justify-between items-center
+    px-6
+  "
+>
+  <Button
+    onClick={() => navigate('/user')}
+    size="lg"
+    className="
+      rounded-full px-6 py-3 text-lg shadow-sm 
+      text-white 
+      border border-white/20
+      bg-[linear-gradient(to_right,#000000,#0C364A)] 
+      hover:brightness-110
+    "
+  >
+    I'm a User — Get Started
+  </Button>
+
+  <Button
+    onClick={() => navigate('/business')}
+    size="lg"
+    className="
+      rounded-full px-6 py-3 text-lg shadow-sm 
+      text-white 
+      border border-white/20
+      bg-[linear-gradient(to_right,#000000,#0C364A)] 
+      hover:brightness-110
+    "
+  >
+    I'm a Business — See Demo
+  </Button>
+</div>
+
+
 
       {/* CONTENT */}
       <div
@@ -120,12 +145,12 @@ const Home = () => {
               </Button>
             </div>
 
-            <h1 className="text-4xl font-extrabold text-gray-900 leading-tight w-full md:mt-10 lg:mt-10 md:pl-0 md:self-start md:max-w-[500px] xl:max-w-[550px] 2xl:max-w-[600px]">
+            <h1 className="text-4xl font-extrabold text-white leading-tight w-full md:mt-10 lg:mt-10 md:pl-0 md:self-start md:max-w-[500px] xl:max-w-[550px] 2xl:max-w-[600px]">
               Verify Your Identity <br />
               Without Surrendering Control.
             </h1>
 
-            <p className="text-lg text-gray-600 max-w-md mt-4 md:pl-0 md:self-start md:max-w-[450px] xl:max-w-[480px] 2xl:max-w-[500px]">
+            <p className="text-lg text-gray-400 max-w-md mt-4 md:pl-0 md:self-start md:max-w-[450px] xl:max-w-[480px] 2xl:max-w-[500px]">
               Empowering users to verify their identity without uploading or sharing their identity documents.
             </p>
 
@@ -179,11 +204,11 @@ const Home = () => {
               </Button>
             </div>
 
-            <h1 className="text-4xl font-extrabold text-gray-900 leading-tight md:mt-10 lg:mt-10 md:max-w-[500px] xl:max-w-[550px] 2xl:max-w-[600px]">
+            <h1 className="text-4xl font-extrabold text-white leading-tight md:mt-10 lg:mt-10 md:max-w-[500px] xl:max-w-[550px] 2xl:max-w-[600px]">
               Identity Verification without the risks and overheads.
             </h1>
 
-            <p className="text-lg text-gray-600 mt-4 md:max-w-[450px] xl:max-w-[480px] 2xl:max-w-[500px]">
+            <p className="text-lg text-gray-400 mt-4 md:max-w-[450px] xl:max-w-[480px] 2xl:max-w-[500px]">
               Empowering businesses to verify users securely without storing personal data, reducing risk and ensuring compliance.
             </p>
 

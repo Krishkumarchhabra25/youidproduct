@@ -1,6 +1,8 @@
   import {
-    Shield, CheckCircle, Clock, Lock, Eye,
-    Upload, Bell
+    Shield, CheckCircle, Lock, Eye,
+    Upload, Bell,
+    AlertTriangle,
+    ShieldAlert
   } from "lucide-react";
   import Navigation from "../Components/Navigation";
   import { Badge } from "../Components/ui/badge";
@@ -18,26 +20,27 @@
       { value: "99.9%", label: "Uptime" },
     ];
 
-    const problems = [
-      {
-        icon: Upload,
-        title: "Upload Documents Everywhere",
-        description:
-          "You’ve uploaded your passport to 10+ websites. Each time increases your risk of data breach and identity theft.",
-      },
-      {
-        icon: Lock,
-        title: "Zero Control Over Your Data",
-        description:
-          "Once uploaded, you have no idea where your documents are stored, who can access them, or how they’re being used.",
-      },
-      {
-        icon: Clock,
-        title: "Time Wasting",
-        description:
-          "Each verification takes 5–15 minutes. Blurry photos get rejected. Manual reviews take 24–48 hours.",
-      },
-    ];
+const problems = [
+  {
+    title: "Risk of Data Breaches and Identity Theft",
+    description:
+      "Social media platforms have been subject to numerous data breaches. Users are concerned that providing government ID would give hackers access to highly sensitive information, increasing the risk of identity theft and financial fraud.",
+    icon: ShieldAlert, // or whichever destructive icon you're using
+  },
+  {
+    title: "Lack of Trust in Social Media Companies",
+    description:
+      "Many users do not trust social media giants to handle their data responsibly or use it solely for the stated purpose of verification. There are fears that data could be mishandled, leading to further privacy violations.",
+    icon: AlertTriangle,
+  },
+  {
+    title: "Data Minimization Concerns",
+    description:
+      "To verify identity, platforms need to collect sensitive data (e.g., passports, driver's licenses, or even biometric scans). Users worry that platforms might collect more data than necessary, which goes against data minimization principles and increases overall exposure.",
+    icon: Lock,
+  },
+];
+
 
     const features = [
       {
