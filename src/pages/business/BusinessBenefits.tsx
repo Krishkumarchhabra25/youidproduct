@@ -1,143 +1,308 @@
+// BusinessBenefits.jsx
 import Footer from "@/Components/Footer";
 import Navigation from "@/Components/Navigation";
 import { Card, CardContent } from "@/Components/ui/card";
-import { 
+import {
   ShieldCheck,
-  Lock,
-  TrendingDown,
-  Zap,
-  HeartHandshake,
-  Globe,
-  TrendingUp
+  TrendingUp,
+  Clock,
+  FileCheck,
+  ScanLine,
+  Handshake,
 } from "lucide-react";
+import { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const BusinessBenefits = () => {
+ const sectionRef = useRef<HTMLDivElement | null>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  cardsRef.current = [];
+
+  useLayoutEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) {
+      cardsRef.current.forEach((c) => {
+        if (c) gsap.set(c, { x: 0, opacity: 1, y: 0 });
+      });
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 1024px)", () => {
+        const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
+
+        gsap.set(cards, { x: 300, opacity: 0 });
+
+        cards.forEach((card) => {
+          gsap.fromTo(
+            card,
+            { x: 300, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 1.2,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 80%",
+                end: "top 30%",
+                scrub: true,
+              },
+            }
+          );
+        });
+
+        gsap.set(el, {
+          background:
+            "radial-gradient(circle at top left, #ff6a00 0%, #1a0a00 25%, #000000 70%, #000000 100%)",
+        });
+
+        gsap.to(el, {
+          background:
+            "radial-gradient(circle at top left, #ff6a00 0%, #e05f00 22%, #2a1200 55%, #050100 100%)",
+          ease: "none",
+          scrollTrigger: {
+            trigger: el,
+            start: "top top",
+            end: "bottom center",
+            scrub: 0.7,
+          },
+        });
+
+        return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+      });
+
+      mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
+        const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
+
+        gsap.set(cards, { x: 180, opacity: 0 });
+
+        cards.forEach((card) => {
+          gsap.fromTo(
+            card,
+            { x: 180, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 1,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 82%",
+                end: "top 35%",
+                scrub: true,
+              },
+            }
+          );
+        });
+
+        gsap.to(el, {
+          background:
+            "radial-gradient(circle at top left, #6a2200 0%, #160702 35%, #000000 75%)",
+          ease: "none",
+          scrollTrigger: {
+            trigger: el,
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.6,
+          },
+        });
+
+        return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+      });
+
+      mm.add("(max-width: 767px)", () => {
+        const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
+
+        cards.forEach((card) => {
+          gsap.fromTo(
+            card,
+            { y: 24, opacity: 0, scale: 0.995 },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 0.7,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 90%",
+                end: "top 60%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          );
+        });
+
+        gsap.set(el, {
+          background:
+            "radial-gradient(circle at top left, #7a2a00 0%, #180a02 25%, #000000 70%)",
+        });
+
+        return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+      });
+
+      return () => mm.revert();
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="min-h-screen flex flex-col bg-[linear-gradient(to_bottom_right,#eee6ff,#ffffff,#ffe9d6)]">
+<div
+  ref={sectionRef}
+  className="min-h-screen flex flex-col text-white bg-black overflow-hidden"
+>
+
       <Navigation />
 
-      <main className="flex-1 py-20">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
-            Why Businesses Trust youID
+      {/* HEADER */}
+      <section className="container mx-auto px-6 py-16 md:py-28 flex flex-col lg:flex-row justify-between items-start gap-10 md:gap-16 bg-transparent">
+        {/* LEFT — TITLE */}
+        <div className="max-w-xl">
+          <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] tracking-tight">
+            Business
+            <br /> Benefits
           </h1>
 
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-12">
-            youID gives businesses a safe, compliant, and document-free identity verification
-            flow that strengthens security, reduces operational burden, and increases customer trust.
-          </p>
+          <div className="w-20 h-1 bg-white mt-6 rounded-full opacity-80"></div>
+        </div>
 
-          {/* GRID */}
-          <div className="grid gap-6 max-w-6xl mx-auto grid-cols-1 sm:grid-cols-2 lg:grid-cols-12">
+        {/* RIGHT — SUBHEADING */}
+        <div className="max-w-xl space-y-6 md:space-y-8 font-body">
+          <div className="space-y-3">
+            <h2 className="font-heading text-xl sm:text-2xl md:text-3xl font-semibold leading-snug">
+              A Modern Identity Layer for Every Business
+            </h2>
 
-            {/* 1. Reduced Compliance Risk */}
-            <div className="lg:col-span-4 flex">
-              <Card className="rounded-3xl bg-[#EDEAFF] shadow-md border-none flex-1">
-                <CardContent className="p-7 space-y-3 text-left">
-                  <ShieldCheck className="h-9 w-9 text-gray-900" />
-                  <h3 className="text-xl font-semibold">Reduced Compliance Risk</h3>
-                  <p className="text-gray-600 text-sm">Effortlessly meet global privacy and security standards.</p>
-                  <p className="text-gray-800">
-                    Businesses avoid storing sensitive identity documents, minimizing exposure 
-                    to breaches and regulatory violations like GDPR.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
+            <p className="text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed">
+              youID helps businesses reduce fraud, speed up customer onboarding,
+              improve trust, and eliminate the need to store sensitive documents.
+            </p>
+          </div>
 
-            {/* 2. Enhanced Data Security */}
-            <div className="lg:col-span-8 flex">
-              <Card className="rounded-3xl bg-[#FFE4E9] shadow-md border-none flex-1">
-                <CardContent className="p-7 text-left space-y-3">
-                  <Lock className="h-9 w-9 text-gray-900" />
-                  <h3 className="text-xl font-semibold">Enhanced Data Security</h3>
-                  <p className="text-gray-600 text-sm">Strong encryption and zero-document handling built in.</p>
-                  <p className="text-gray-800">
-                    Eliminates document handling, reducing risks of leaks, theft, or misuse 
-                    of personal information.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* 3. Lower Operational Costs */}
-            <div className="lg:col-span-4 flex">
-              <Card className="rounded-3xl bg-[#FFF9E6] shadow-md border-none flex-1">
-                <CardContent className="p-7 space-y-3 text-left">
-                  <TrendingDown className="h-9 w-9 text-gray-900" />
-                  <h3 className="text-xl font-semibold">Lower Operational Costs</h3>
-                  <p className="text-gray-600 text-sm">Reduce manual reviews and document management expenses.</p>
-                  <p className="text-gray-800">
-                    No document systems, no secure storage, no manual checks — saving time, 
-                    resources, and money.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* 4. Faster Customer Onboarding */}
-            <div className="lg:col-span-8 flex">
-              <Card className="rounded-3xl bg-[#FFECDD] shadow-md border-none flex-1">
-                <CardContent className="p-7 space-y-3 text-left">
-                  <Zap className="h-9 w-9 text-gray-900" />
-                  <h3 className="text-xl font-semibold">Faster Customer Onboarding</h3>
-                  <p className="text-gray-600 text-sm">Speed up sign-ups with a seamless and intuitive flow.</p>
-                  <p className="text-gray-800">
-                    Instant, upload-free verification improves user experience 
-                    and increases conversion rates.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* 5. Increased Customer Trust */}
-            <div className="lg:col-span-4 flex">
-              <Card className="rounded-3xl bg-[#F0F7FF] shadow-md border-none flex-1">
-                <CardContent className="p-7 space-y-3 text-left">
-                  <HeartHandshake className="h-9 w-9 text-gray-900" />
-                  <h3 className="text-xl font-semibold">Increased Customer Trust</h3>
-                  <p className="text-gray-600 text-sm">A transparent process that boosts confidence.</p>
-                  <p className="text-gray-800">
-                    A privacy-first, secure process builds confidence and positively 
-                    strengthens brand reputation.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* 6. Scalability & Global Compliance */}
-            <div className="lg:col-span-6 flex">
-              <Card className="rounded-3xl bg-[#FFF3D9] shadow-md border-none flex-1">
-                <CardContent className="p-7 space-y-3 text-left">
-                  <Globe className="h-9 w-9 text-gray-900" />
-                  <h3 className="text-xl font-semibold">Scalability & Global Compliance</h3>
-                  <p className="text-gray-600 text-sm">Easily expand your operations across borders.</p>
-                  <p className="text-gray-800">
-                    Designed to work across jurisdictions without document handling, 
-                    simplifying global expansion.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* 7. Competitive Advantage */}
-            <div className="lg:col-span-6 flex">
-              <Card className="rounded-3xl bg-[#E8FFF1] shadow-md border-none flex-1">
-                <CardContent className="p-7 space-y-3 text-left">
-                  <TrendingUp className="h-9 w-9 text-gray-900" />
-                  <h3 className="text-xl font-semibold">Competitive Advantage</h3>
-                  <p className="text-gray-600 text-sm">Offer a modern, frictionless verification experience.</p>
-                  <p className="text-gray-800">
-                    A frictionless, secure verification flow helps businesses stand apart 
-                    in a crowded digital market.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
+          <div className="bg-white/5 border border-white/10 backdrop-blur-sm p-4 sm:p-6 rounded-2xl">
+            <p className="text-gray-200 text-sm md:text-base leading-relaxed">
+              A secure, document-free identity experience designed for modern
+              global brands.
+            </p>
           </div>
         </div>
-      </main>
+      </section>
+
+      {/* CARDS */}
+      <section className="container mx-auto px-6 pb-20 md:pb-32 font-body bg-transparent">
+        <div className="grid gap-6 md:gap-8 lg:gap-10 max-w-7xl mx-auto grid-cols-1 sm:grid-cols-2 lg:grid-cols-12">
+          {/* 1 */}
+          <div
+            className="lg:col-span-4 lg:row-span-2"
+            ref={(el) => {
+              cardsRef.current[0] = el;
+            }}
+          >
+            <Card className="h-full rounded-3xl bg-[#0f0b07] border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white">
+              <CardContent className="p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
+                <ShieldCheck className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400" />
+                <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">
+                  Reduce Identity Fraud
+                </h3>
+                <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+                  Eliminate fake or altered documents with verification powered by youID's tamper-proof digital identity.
+                </p>
+                <p className="text-gray-500 text-xs sm:text-sm">Trusted verification.</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* 2 */}
+          <div className="lg:col-span-8" ref={(el) => {
+              cardsRef.current[1] = el;
+            }}>
+            <Card className="rounded-3xl bg-[#0f0b07] border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white">
+              <CardContent className="p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
+                <TrendingUp className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400" />
+                <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">Reduce Operational Cost</h3>
+                <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+                  No manual document review, no storing sensitive files, and no complex identity workflows.
+                </p>
+                <p className="text-gray-500 text-xs sm:text-sm">Save time & resources.</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* 3 */}
+          <div className="lg:col-span-4" ref={(el) => {
+              cardsRef.current[2] = el;
+            }}>
+            <Card className="rounded-3xl bg-[#0f0b07] border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white">
+              <CardContent className="p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
+                <Clock className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400" />
+                <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">Faster Customer Onboarding</h3>
+                <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+                  Cut onboarding times by up to 90% — instant verification without friction or paperwork.
+                </p>
+                <p className="text-gray-500 text-xs sm:text-sm">Speed drives conversion.</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* 4 */}
+          <div className="lg:col-span-4" ref={(el) => {
+              cardsRef.current[3] = el;
+            }}>
+            <Card className="rounded-3xl bg-[#0f0b07] border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white">
+              <CardContent className="p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
+                <FileCheck className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400" />
+                <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">Better Compliance</h3>
+                <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+                  youID supports privacy-first identity standards, reducing the need for businesses to store documents.
+                </p>
+                <p className="text-gray-500 text-xs sm:text-sm">Effortless compliance.</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* 5 */}
+          <div className="lg:col-span-8" ref={(el) => {
+              cardsRef.current[4] = el;
+            }}>
+            <Card className="rounded-3xl bg-[#0f0b07] border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white">
+              <CardContent className="p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
+                <ScanLine className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400" />
+                <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">No More Document Handling</h3>
+                <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+                  Businesses no longer need to collect, store, or process sensitive ID files — reducing legal and security risks.
+                </p>
+                <p className="text-gray-500 text-xs sm:text-sm">Zero document liability.</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* 6 */}
+          <div className="lg:col-span-4" ref={(el) => {
+              cardsRef.current[5] = el;
+            }}>
+            <Card className="rounded-3xl bg-[#0f0b07] border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white">
+              <CardContent className="p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
+                <Handshake className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400" />
+                <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">Increase Conversion Rates</h3>
+                <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+                  With fewer steps, less friction, and instant verification, more customers complete onboarding.
+                </p>
+                <p className="text-gray-500 text-xs sm:text-sm">Less drop-off. More users.</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </div>

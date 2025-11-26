@@ -47,6 +47,20 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+fontFamily: {
+  heading: ["Gruppo", "sans-serif"],
+  body: ["Arimo", "sans-serif"],
+  mono: ["UbuntuMono", "monospace"],
+  amatic: ["AmaticSc", "cursive"],
+  gloria: ["GloriaHallelujah", "cursive"],
+  gochi: ["GochiHand", "cursive"],
+},
+
+      safelist: [
+    {
+      pattern: /bg-\[linear-gradient.*/ // allow all custom gradients
+    }
+  ],
     },
   },
   plugins: [],

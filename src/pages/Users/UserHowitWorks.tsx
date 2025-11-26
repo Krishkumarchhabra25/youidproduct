@@ -28,8 +28,8 @@ const steps: Step[] = [
       "Create a secure password for your account.",
       "Verify your identity using OTP.",
       "Set up your basic profile details.",
-      "Access your dashboard and start uploading documents."
-    ]
+      "Access your dashboard and start uploading documents.",
+    ],
   },
   {
     id: 2,
@@ -41,8 +41,8 @@ const steps: Step[] = [
       "Use camera or gallery to upload images or PDF.",
       "Ensure the document photo is clear and readable.",
       "Submit the document for admin review.",
-      "Track upload progress in real time."
-    ]
+      "Track upload progress in real time.",
+    ],
   },
   {
     id: 3,
@@ -54,8 +54,8 @@ const steps: Step[] = [
       "Admins review your submitted documents.",
       "Rejected documents show reason and require re-upload.",
       "Expired documents must be updated for continued use.",
-      "Get notified instantly when document status changes."
-    ]
+      "Get notified instantly when document status changes.",
+    ],
   },
   {
     id: 4,
@@ -67,68 +67,81 @@ const steps: Step[] = [
       "Your profile is now fully verified.",
       "You can now access all features without limitations.",
       "Share your verified identity anytime.",
-      "Stay updated and renew documents before they expire."
-    ]
-  }
+      "Stay updated and renew documents before they expire.",
+    ],
+  },
 ];
 
 const UserHowitWorks = () => {
   const [activeStep, setActiveStep] = useState(0);
-
   const containerRef = useRef<HTMLDivElement | null>(null);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
-
   const totalSteps = steps.length;
 
-// ⭐ Auto scroll (desktop only)
-useEffect(() => {
-  if (window.innerWidth < 768) return; // mobile → no auto scroll
+  const [dynamicHeight, setDynamicHeight] = useState(500);
 
-  const t = setTimeout(() => {
-    const nextStep = (activeStep + 1) % totalSteps; // ⭐ Infinite looping
-    scrollToStep(nextStep);
-  }, 2000);
+  // Detect tallest step
+  useEffect(() => {
+    if (!stepRefs.current.length) return;
+    let max = 0;
 
-  return () => clearTimeout(t);
-}, [activeStep]);
+    stepRefs.current.forEach((el) => {
+      if (!el) return;
+      const h = el.clientHeight;
+      if (h > max) max = h;
+    });
 
+    setDynamicHeight(max + 120);
+  }, []);
 
-  // ⭐ Scroll to center (desktop only)
-const scrollToStep = (i: number) => {
-  if (window.innerWidth < 768) return;
+  // Auto-scroll
+  useEffect(() => {
+    if (window.innerWidth < 768) return;
 
-  const container = containerRef.current;
-  const el = stepRefs.current[i];
-  if (!container || !el) return;
+    const t = setTimeout(() => {
+      const nextStep = (activeStep + 1) % totalSteps;
+      scrollToStep(nextStep);
+    }, 2000);
 
-  const containerHeight = container.clientHeight;
-  const elHeight = el.clientHeight;
-  const targetScroll = el.offsetTop - (containerHeight / 2 - elHeight / 2);
+    return () => clearTimeout(t);
+  }, [activeStep]);
 
-  // Custom slow scrolling
-  const start = container.scrollTop;
-  const distance = targetScroll - start;
-  const duration = 1200; // ⏳ 1.2 seconds → slow motion
-  let startTime: number | null = null;
+  const scrollToStep = (i: number) => {
+    if (window.innerWidth < 768) return;
 
-  const easeInOutQuad = (t: number) =>
-    t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    const container = containerRef.current;
+    const el = stepRefs.current[i];
+    if (!container || !el) return;
 
-  const animate = (currentTime: number) => {
-    if (!startTime) startTime = currentTime;
-    const elapsed = currentTime - startTime;
-    const progress = Math.min(elapsed / duration, 1);
+    const containerHeight = container.clientHeight;
+    const elHeight = el.clientHeight;
 
-    container.scrollTop = start + distance * easeInOutQuad(progress);
+    const centerPos = el.offsetTop - (containerHeight / 2 - elHeight / 2);
 
-    if (elapsed < duration) requestAnimationFrame(animate);
+    const start = container.scrollTop;
+    const distance = centerPos - start;
+    const duration = 1000;
+
+    let startTime: number | null = null;
+
+    const animate = (time: number) => {
+      if (!startTime) startTime = time;
+      const progress = Math.min((time - startTime) / duration, 1);
+
+      container.scrollTop =
+        start +
+        distance *
+          (progress < 0.5
+            ? 2 * progress * progress
+            : -1 + (4 - 2 * progress) * progress);
+
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+
+    requestAnimationFrame(animate);
   };
 
-  requestAnimationFrame(animate);
-};
-
-
-  // ⭐ Scroll detection (desktop only)
+  // Scroll listener
   useEffect(() => {
     if (window.innerWidth < 768) return;
 
@@ -136,8 +149,9 @@ const scrollToStep = (i: number) => {
     if (!container) return;
 
     const onScroll = () => {
-      const cRect = container.getBoundingClientRect();
-      const midpoint = cRect.top + cRect.height / 2;
+      const mid =
+        container.getBoundingClientRect().top +
+        container.clientHeight / 2;
 
       let nearest = 0;
       let minDist = Infinity;
@@ -146,12 +160,12 @@ const scrollToStep = (i: number) => {
         if (!ref) return;
 
         const r = ref.getBoundingClientRect();
-        const elementMid = r.top + r.height / 2;
-        const dist = Math.abs(midpoint - elementMid);
+        const elMid = r.top + r.height / 2;
+        const d = Math.abs(mid - elMid);
 
-        if (dist < minDist) {
+        if (d < minDist) {
+          minDist = d;
           nearest = idx;
-          minDist = dist;
         }
       });
 
@@ -166,76 +180,75 @@ const scrollToStep = (i: number) => {
     <div>
       <Navigation />
 
-      <div className="min-h-screen w-full bg-gradient-to-br from-purple-50 via-white to-orange-50">
+      <div className="min-h-screen w-full bg-[linear-gradient(135deg,#000000_0%,#000000_40%,#b45309_100%)]">
         <section className="relative w-full px-6 md:px-10 pt-20 pb-20">
           <div className="text-center mb-10">
-            <h2 className="text-black text-3xl md:text-4xl font-bold">
+            <h2 className="text-white text-3xl md:text-4xl font-bold">
               How It Works
             </h2>
-            <p className="text-black/70 text-lg max-w-2xl mx-auto mt-3">
+            <p className="text-white/70 text-lg max-w-2xl mx-auto mt-3">
               Your complete journey through the youID app — from uploading to verified status.
             </p>
           </div>
 
-<div className="relative max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-
-         
-            {/* LEFT SIDE — MOBILE NORMAL LIST, DESKTOP SCROLL BOX */}
-         <div
-  ref={containerRef}
-  className="
-    w-full md:w-[85%] md:mx-auto
-    bg-white rounded-2xl shadow-xl p-8
-    flex flex-col space-y-24
-    md:h-[320px] md:overflow-y-auto
-    md:self-center md:-translate-y-6 md:transform
-  "
->
-
+          {/* DESKTOP LAYOUT */}
+          <div className="relative max-w-7xl mx-auto hidden md:grid grid-cols-2 gap-16 items-center">
+            
+            {/* LEFT SIDE (step cards) */}
+            <div
+              ref={containerRef}
+              style={{ height: dynamicHeight }}
+              className="w-full md:w-[85%] md:mx-auto rounded-2xl p-8 flex flex-col space-y-20 overflow-y-auto md:self-center"
+            >
               {steps.map((step, idx) => (
-                <div key={step.id} className="w-full">
-
-                  {/* CONTENT */}
+                <motion.div
+                  key={step.id}
+                  ref={(el) => {
+                    stepRefs.current[idx] = el;
+                  }}
+                  className="w-full p-6 rounded-2xl border-l-4 border-orange-500 mb-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{
+                    opacity: activeStep === idx ? 1 : 0.3,
+                    y: 0,
+                  }}
+                  transition={{ duration: 0.4 }}
+                  style={{ background: "rgba(30, 30, 30, 0.85)" }}
+                >
                   <div
-ref={(el) => {
-  stepRefs.current[idx] = el;
-}}
-                    className="w-full flex flex-col justify-center"
+                    className={`w-12 h-12 mb-4 rounded-full flex items-center justify-center text-lg font-semibold ${
+                      activeStep === idx
+                        ? "bg-orange-500 text-black"
+                        : "bg-gray-800 text-white"
+                    }`}
                   >
-                    <div
-                      className={`w-12 h-12 mb-4 rounded-full flex items-center justify-center text-lg font-semibold ${
-                        activeStep === idx && window.innerWidth >= 768
-                          ? "bg-blue-600 text-white"
-                          : "bg-white border border-gray-300 text-gray-700"
-                      }`}
-                    >
-                      {String(idx + 1).padStart(2, "0")}
-                    </div>
-
-                    <h3 className="text-xl font-semibold text-black">{step.title}</h3>
-                    <p className="text-sm text-gray-600 mt-2">{step.desc}</p>
-
-                    <ul className="mt-4 list-disc text-gray-700 text-sm pl-5 space-y-1">
-                      {step.points.map((p, i) => (
-                        <li key={i}>{p}</li>
-                      ))}
-                    </ul>
+                    {String(idx + 1).padStart(2, "0")}
                   </div>
 
-                  {/* MOBILE IMAGE */}
-                  <div className="block md:hidden mt-4 mb-8">
-                    <img
-                      src={step.image}
-                      alt={step.title}
-                      className="w-full h-auto rounded-xl shadow-md"
-                    />
-                  </div>
-                </div>
+                  <h3 className="text-xl font-semibold text-white">
+                    {step.title}
+                  </h3>
+
+                  <p className="text-sm text-orange-300 mt-2">
+                    {step.desc}
+                  </p>
+
+                  <ul className="mt-4 list-disc text-white text-sm pl-5 space-y-1">
+                    {step.points.map((p, i) => (
+                      <li key={i}>{p}</li>
+                    ))}
+                  </ul>
+                </motion.div>
               ))}
             </div>
 
-            {/* RIGHT SIDE — PHONE PREVIEW (Desktop Only) */}
-            <div className="hidden md:flex justify-center">
+            {/* RIGHT PHONE FRAME — FORCE HIDDEN ON MOBILE */}
+            <div
+              className="hidden md:flex justify-center"
+              style={{
+                display: window.innerWidth < 768 ? "none" : "flex",
+              }}
+            >
               <div className="sticky top-24 w-[280px] h-[560px] rounded-[40px] border-[6px] border-gray-300 shadow-2xl overflow-hidden bg-black relative">
                 <div className="absolute top-3 left-1/2 -translate-x-1/2 w-24 h-4 bg-black/40 rounded-full" />
 
@@ -247,13 +260,54 @@ ref={(el) => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.35 }}
+                    transition={{ duration: 0.3 }}
                     className="w-full h-full object-cover rounded-[34px]"
                   />
                 </AnimatePresence>
               </div>
             </div>
+          </div>
 
+          {/* MOBILE VERSION */}
+          <div className="md:hidden flex flex-col space-y-16 mt-10 px-2">
+            {steps.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.4 }}
+                className="bg-black/40 p-5 rounded-2xl border border-white/10 shadow-lg w-full overflow-hidden"
+              >
+                {/* Step number */}
+                <div className="w-12 h-12 mb-4 rounded-full bg-orange-500 text-black flex items-center justify-center text-lg font-bold">
+                  {String(index + 1).padStart(2, "0")}
+                </div>
+
+                <h3 className="text-xl font-semibold text-white">
+                  {step.title}
+                </h3>
+
+                <p className="text-sm text-orange-300 mt-2">{step.desc}</p>
+
+                <ul className="mt-4 list-disc text-white text-sm pl-5 space-y-1">
+                  {step.points.map((p, i) => (
+                    <li key={i}>{p}</li>
+                  ))}
+                </ul>
+
+                {/* Full Image on Mobile */}
+                <motion.img
+                  src={step.image}
+                  alt={step.title}
+                  className="w-full h-full object-cover rounded-xl mt-6"
+                  initial={{ opacity: 0, y: 60 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7 }}
+                  viewport={{ once: true }}
+                />
+              </motion.div>
+            ))}
           </div>
         </section>
 

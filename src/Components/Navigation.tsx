@@ -1,8 +1,8 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Shield, Menu, X } from "lucide-react";
+import {  Menu, X } from "lucide-react";
 import { useState, useMemo } from "react";
 import { Button } from "./ui/button";
-
+import youidLogo from "../assets/images/logo1id.png"
 const Navigation = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -89,22 +89,31 @@ const Navigation = () => {
   };
 
   return (
-    <nav
-      className="
-        sticky top-0 z-50 w-full border-b border-[#1a1a1a] 
-        bg-[linear-gradient(to_right,#000000,#1a0f00)]
-        backdrop-blur 
-      "
-    >
+<nav
+  className="
+    sticky top-0 z-50 w-full border-b border-[#1a1a1a]
+    bg-[linear-gradient(to_right,#000000_0%,#000000_25%,#FF6B00_50%,#000000_75%,#000000_100%)]
+    backdrop-blur
+  "
+>
+
+
+
+
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
 
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <Shield className="h-6 w-6 text-[#FF6B35]" />
-            <span className="text-xl font-bold text-white">youID</span>
+          {/* Logo with proper aspect ratio */}
+          <Link to="/" className="flex items-center">
+            <div className="relative h-40 w-auto">
+              <img
+                src={youidLogo}
+                alt="youID Logo"
+                className="h-full w-auto object-contain"
+                style={{ aspectRatio: 'auto' }}
+              />
+            </div>
           </Link>
-
           {/* Desktop Nav */}
           <div className="hidden md:flex md:items-center md:space-x-1">
             {navLinks.map((link) => (
