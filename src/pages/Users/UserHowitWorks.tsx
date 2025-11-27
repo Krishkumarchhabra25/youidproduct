@@ -271,7 +271,7 @@ const UserHowitWorks = () => {
       viewport={{ once: true }}
       className="relative flex justify-center"
     >
-      {/* CARD – behaves like the UseCases mobile card */}
+      {/* CARD */}
       <div
         className="
           relative
@@ -280,7 +280,7 @@ const UserHowitWorks = () => {
           rounded-[2.5rem]
           px-6
           pt-8
-          pb-16
+          pb-10
           bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
           shadow-[0_30px_80px_rgba(0,0,0,0.85)]
           border border-white/5
@@ -291,44 +291,46 @@ const UserHowitWorks = () => {
           {String(index + 1).padStart(2, "0")}
         </div>
 
-        {/* title + desc */}
+        {/* title only */}
         <h3 className="text-xl font-semibold text-white font-heading">
           {step.title}
         </h3>
 
+        {/* subheading commented out */}
+        {/*
         <p className="text-sm text-orange-200 mt-2 font-body">
           {step.desc}
         </p>
+        */}
 
-        {/* bullets – extra right padding so they don't go under phone */}
-        <ul className="mt-4 list-disc text-white text-sm pl-5 pr-36 sm:pr-40 space-y-1 leading-relaxed font-body">
+        {/* bullets – extra right padding so they don’t go under phone */}
+        <ul className="mt-4 list-disc text-white text-sm pl-5 pr-28 sm:pr-32 space-y-1 leading-relaxed font-body">
           {step.points.map((p, i) => (
             <li key={i}>{p}</li>
           ))}
         </ul>
       </div>
 
-      {/* PHONE IMAGE – EXACT SAME BEHAVIOR AS USE CASES */}
- <motion.img
-  src={step.image}
-  alt={step.title}
-  className="
-    absolute
-    bottom-4
-    right-[-6px]
-    w-[72%]          /* bigger phone */
-    max-w-[210px]    /* larger max size */
-    translate-y-1/4
-    object-contain
-    bg-transparent   /* remove fake background look */
-    drop-shadow-2xl  /* cleaner shadow */
-  "
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6 }}
-  viewport={{ once: true }}
-/>
-
+      {/* PHONE IMAGE – pushed further down & a bit smaller */}
+      <motion.img
+        src={step.image}
+        alt={step.title}
+        className="
+          absolute
+          -bottom-10       /* mostly outside card */
+          -right-4       /* moved slightly in from edge */
+          w-[60%]          /* a bit smaller so it covers less */
+          max-w-[190px]
+          object-contain
+          bg-transparent
+          drop-shadow-2xl
+          pointer-events-none
+        "
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      />
     </motion.div>
   ))}
 </div>
