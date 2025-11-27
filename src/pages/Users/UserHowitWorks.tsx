@@ -260,72 +260,81 @@ const UserHowitWorks = () => {
             </div>
           </div>
 
-          {/* MOBILE VERSION – MATCH USE CASES STYLE */}
-          <div className="md:hidden flex flex-col space-y-16 mt-10 px-2">
-            {steps.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                viewport={{ once: true, amount: 0.4 }}
-                className="relative w-full"
-              >
-                {/* CARD with extra right padding for image */}
-                <div
-                  className="
-                    relative
-                    w-full
-                    rounded-[2.5rem]
-                    px-6
-                    pt-8
-                    pb-28
-                    bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
-                    shadow-[0_30px_80px_rgba(0,0,0,0.85)]
-                    border border-white/5
-                  "
-                >
-                  <div className="w-12 h-12 mb-4 rounded-full bg-orange-500 text-black flex items-center justify-center text-lg font-bold">
-                    {String(index + 1).padStart(2, "0")}
-                  </div>
+{/* MOBILE VERSION – SAME STRUCTURE AS USE CASES */}
+<div className="md:hidden flex flex-col space-y-16 mt-10">
+  {steps.map((step, index) => (
+    <motion.div
+      key={index}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      viewport={{ once: true }}
+      className="relative flex justify-center"
+    >
+      {/* CARD – behaves like the UseCases mobile card */}
+      <div
+        className="
+          relative
+          w-[92%]
+          max-w-[380px]
+          rounded-[2.5rem]
+          px-6
+          pt-8
+          pb-16
+          bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
+          shadow-[0_30px_80px_rgba(0,0,0,0.85)]
+          border border-white/5
+        "
+      >
+        {/* step number circle */}
+        <div className="w-12 h-12 mb-4 rounded-full bg-orange-500 text-black flex items-center justify-center text-lg font-bold">
+          {String(index + 1).padStart(2, "0")}
+        </div>
 
-                  <h3 className="text-xl font-semibold text-white font-heading">
-                    {step.title}
-                  </h3>
+        {/* title + desc */}
+        <h3 className="text-xl font-semibold text-white font-heading">
+          {step.title}
+        </h3>
 
-                  <p className="text-sm text-orange-200 mt-2 font-body">
-                    {step.desc}
-                  </p>
+        <p className="text-sm text-orange-200 mt-2 font-body">
+          {step.desc}
+        </p>
 
-                  {/* big right padding so bullets don't go under the phone */}
-                  <ul className="mt-4 list-disc text-white text-sm pl-5 pr-36 sm:pr-40 space-y-1 font-body">
-                    {step.points.map((p, i) => (
-                      <li key={i}>{p}</li>
-                    ))}
-                  </ul>
-                </div>
+        {/* bullets – extra right padding so they don't go under phone */}
+        <ul className="mt-4 list-disc text-white text-sm pl-5 pr-36 sm:pr-40 space-y-1 leading-relaxed font-body">
+          {step.points.map((p, i) => (
+            <li key={i}>{p}</li>
+          ))}
+        </ul>
+      </div>
 
-                {/* PHONE IMAGE attached on the right, like use cases */}
-                <motion.img
-                  src={step.image}
-                  alt={step.title}
-                  className="
-                    absolute
-                    bottom-2
-                    right-[-10px]
-                    w-[100%]
-                    max-w-[200px]
-                    translate-y-1/4
-                    rounded-[2rem]
-                  "
-                  initial={{ opacity: 0, y: 60 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7 }}
-                  viewport={{ once: true }}
-                />
-              </motion.div>
-            ))}
-          </div>
+      {/* PHONE IMAGE – EXACT SAME BEHAVIOR AS USE CASES */}
+ <motion.img
+  src={step.image}
+  alt={step.title}
+  className="
+    absolute
+    bottom-4
+    right-[-6px]
+    w-[52%]          /* bigger phone */
+    max-w-[210px]    /* larger max size */
+    translate-y-1/4
+    object-contain
+    bg-transparent   /* remove fake background look */
+    drop-shadow-2xl  /* cleaner shadow */
+  "
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+  viewport={{ once: true }}
+/>
+
+    </motion.div>
+  ))}
+</div>
+
+
+
         </section>
 
         <Footer />
