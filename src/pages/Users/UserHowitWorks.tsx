@@ -317,8 +317,8 @@ const UserHowitWorks = () => {
         alt={step.title}
         className="
           absolute
-          bottom-3     /* mostly outside card */
-          -right-2    /* moved slightly in from edge */
+          -bottom-1     /* mostly outside card */
+          -right-6   /* moved slightly in from edge */
           w-[60%]          /* a bit smaller so it covers less */
           max-w-[190px]
           object-contain
