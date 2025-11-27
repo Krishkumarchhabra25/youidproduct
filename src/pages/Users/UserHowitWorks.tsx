@@ -316,7 +316,7 @@ const UserHowitWorks = () => {
     absolute
     bottom-4
     right-[-6px]
-    w-[52%]          /* bigger phone */
+    w-[72%]          /* bigger phone */
     max-w-[210px]    /* larger max size */
     translate-y-1/4
     object-contain
