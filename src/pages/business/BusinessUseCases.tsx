@@ -326,7 +326,7 @@ const BusinessUseCases = () => {
             "
           >
             {/* BADGE AS SIMPLE HEADING */}
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading tracking-wide">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-extrabold tracking-wide">
               {useCase.badge}
             </h2>
 

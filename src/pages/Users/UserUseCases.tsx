@@ -367,7 +367,7 @@
               <h2
                 className="
                   text-2xl sm:text-3xl md:text-[2.4rem] lg:text-[2.7rem]
-                  font-heading
+                  font-heading font-extrabold
                   tracking-[0.25em]
                   uppercase
                   leading-tight
