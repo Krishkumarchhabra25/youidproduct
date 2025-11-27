@@ -233,7 +233,7 @@ const UserHowitWorks = () => {
                     {step.desc}
                   </p>
 
-                  <ul className="mt-4 list-disc text-white text-sm pl-5 space-y-1">
+                  <ul className="mt-4 list-disc font-body text-white text-sm pl-5 space-y-1">
                     {step.points.map((p, i) => (
                       <li key={i}>{p}</li>
                     ))}
