@@ -35,7 +35,7 @@ const steps: Step[] = [
     id: 2,
     title: "Upload Documents",
     desc: "Choose documents to upload for verification.",
-    image: step2Img, // ✅ now correct
+    image: step2Img,
     points: [
       "Select the type of document you want to upload.",
       "Use camera or gallery to upload images or PDF.",
@@ -48,7 +48,7 @@ const steps: Step[] = [
     id: 3,
     title: "Verify Documents",
     desc: "See pending, verified, rejected, or expired documents.",
-    image: step3Img, // ✅ now correct
+    image: step3Img,
     points: [
       "Documents enter the 'Pending' stage after upload.",
       "Admins review your submitted documents.",
@@ -94,7 +94,7 @@ const UserHowitWorks = () => {
     setDynamicHeight(max + 120);
   }, []);
 
-  // Auto-scroll
+  // Auto-scroll (desktop / tablet only)
   useEffect(() => {
     if (window.innerWidth < 768) return;
 
@@ -141,7 +141,7 @@ const UserHowitWorks = () => {
     requestAnimationFrame(animate);
   };
 
-  // Scroll listener
+  // Scroll listener (desktop / tablet)
   useEffect(() => {
     if (window.innerWidth < 768) return;
 
@@ -191,7 +191,7 @@ const UserHowitWorks = () => {
             </p>
           </div>
 
-          {/* DESKTOP LAYOUT */}
+          {/* DESKTOP / TABLET LAYOUT (UNCHANGED) */}
           <div className="relative max-w-7xl mx-auto hidden md:grid grid-cols-2 gap-16 items-center">
             {/* LEFT SIDE (step cards) */}
             <div
@@ -260,7 +260,7 @@ const UserHowitWorks = () => {
             </div>
           </div>
 
-          {/* MOBILE VERSION */}
+          {/* MOBILE VERSION – MATCH USE CASES STYLE */}
           <div className="md:hidden flex flex-col space-y-16 mt-10 px-2">
             {steps.map((step, index) => (
               <motion.div
@@ -269,28 +269,55 @@ const UserHowitWorks = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
                 viewport={{ once: true, amount: 0.4 }}
-                className="bg-black/40 p-5 rounded-2xl border border-white/10 shadow-lg w-full overflow-hidden"
+                className="relative w-full"
               >
-                <div className="w-12 h-12 mb-4 rounded-full bg-orange-500 text-black flex items-center justify-center text-lg font-bold">
-                  {String(index + 1).padStart(2, "0")}
+                {/* CARD with extra right padding for image */}
+                <div
+                  className="
+                    relative
+                    w-full
+                    rounded-[2.5rem]
+                    px-6
+                    pt-8
+                    pb-16
+                    bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
+                    shadow-[0_30px_80px_rgba(0,0,0,0.85)]
+                    border border-white/5
+                  "
+                >
+                  <div className="w-12 h-12 mb-4 rounded-full bg-orange-500 text-black flex items-center justify-center text-lg font-bold">
+                    {String(index + 1).padStart(2, "0")}
+                  </div>
+
+                  <h3 className="text-xl font-semibold text-white font-heading">
+                    {step.title}
+                  </h3>
+
+                  <p className="text-sm text-orange-200 mt-2 font-body">
+                    {step.desc}
+                  </p>
+
+                  {/* big right padding so bullets don't go under the phone */}
+                  <ul className="mt-4 list-disc text-white text-sm pl-5 pr-36 sm:pr-40 space-y-1 font-body">
+                    {step.points.map((p, i) => (
+                      <li key={i}>{p}</li>
+                    ))}
+                  </ul>
                 </div>
 
-                <h3 className="text-xl font-semibold text-white">
-                  {step.title}
-                </h3>
-
-                <p className="text-sm text-orange-300 mt-2">{step.desc}</p>
-
-                <ul className="mt-4 list-disc text-white text-sm pl-5 space-y-1">
-                  {step.points.map((p, i) => (
-                    <li key={i}>{p}</li>
-                  ))}
-                </ul>
-
+                {/* PHONE IMAGE attached on the right, like use cases */}
                 <motion.img
                   src={step.image}
                   alt={step.title}
-                  className="w-full h-auto object-contain rounded-2xl mt-6"
+                  className="
+                    absolute
+                    bottom-2
+                    right-[-10px]
+                    w-[100%]
+                    max-w-[200px]
+                    translate-y-1/4
+                    rounded-[2rem]
+                  "
                   initial={{ opacity: 0, y: 60 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7 }}
