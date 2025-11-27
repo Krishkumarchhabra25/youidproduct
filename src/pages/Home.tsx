@@ -2,8 +2,8 @@ import { motion, useMotionValue, type Variants } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-import userMockup from "@/assets/images/usermokup1.png";
-import userMockup2 from "@/assets/images/usermodkup2.png";
+import userMockup from "@/assets/images/underverification-Photoroom.png";
+import userMockup2 from "@/assets/images/verifiedones-Photoroom.png";
 import businessMockup from "@/assets/images/finalonedash.png";
 import youidLogo from "@/assets/images/logo1id.png";
 
@@ -91,7 +91,7 @@ const Home = () => {
       {/* CONTENT */}
       <div
         className="
-          mt-24 md:mt-20
+          mt-24 md:mt-14
           px-6 md:px-0
           w-full 
           pb-10
@@ -167,7 +167,7 @@ const Home = () => {
                   alt="User Mockup Left"
                   className="
                     w-[210px] sm:w-[230px] 
-                    md:w-[270px] lg:w-[260px] 
+                    md:w-[260px] lg:w-[260px] 
                     drop-shadow-2xl
                   "
                 />
@@ -179,7 +179,7 @@ const Home = () => {
                   alt="User Mockup Right"
                   className="
                     w-[200px] sm:w-[230px] 
-                    md:w-[260px] lg:w-[260px] 
+                    md:w-[220px] lg:w-[220px] 
                     drop-shadow-2xl
                   "
                 />
@@ -222,7 +222,7 @@ const Home = () => {
               className="
                 text-4xl font-extrabold text-white leading-tight 
                 md:max-w-[500px] xl:max-w-[550px] 2xl:max-w-[600px]
-                font-heading
+                font-heading mt-8
               "
             >
               <span className="text-[#FF6B35]">Identity Verification </span>

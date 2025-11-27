@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import step1Img from "../../assets/images/Image (1).jpg";
-import step2Img from "../../assets/images/documentunder.png";
-import step3Img from "../../assets/images/Image (3).jpg";
-import step6Img from "../../assets/images/verifieddocumetsss.png";
+import step1Img from "../../assets/images/signsigupyuid.png";
+import step2Img from "../../assets/images/doumentselect-Photoroom.png";
+import step3Img from "../../assets/images/underverification-Photoroom.png";
+import step6Img from "../../assets/images/verifiedones-Photoroom.png";
 
 import Footer from "@/Components/Footer";
 import Navigation from "@/Components/Navigation";
@@ -104,7 +104,7 @@ const UserHowitWorks = () => {
     }, 2000);
 
     return () => clearTimeout(t);
-  }, [activeStep]);
+  }, [activeStep, totalSteps]);
 
   const scrollToStep = (i: number) => {
     if (window.innerWidth < 768) return;
@@ -150,8 +150,7 @@ const UserHowitWorks = () => {
 
     const onScroll = () => {
       const mid =
-        container.getBoundingClientRect().top +
-        container.clientHeight / 2;
+        container.getBoundingClientRect().top + container.clientHeight / 2;
 
       let nearest = 0;
       let minDist = Infinity;
@@ -187,13 +186,13 @@ const UserHowitWorks = () => {
               How It Works
             </h2>
             <p className="text-white/70 text-lg font-body max-w-2xl mx-auto mt-3">
-              Your complete journey through the youID app — from uploading to verified status.
+              Your complete journey through the youID app — from uploading to
+              verified status.
             </p>
           </div>
 
           {/* DESKTOP LAYOUT */}
           <div className="relative max-w-7xl mx-auto hidden md:grid grid-cols-2 gap-16 items-center">
-            
             {/* LEFT SIDE (step cards) */}
             <div
               ref={containerRef}
@@ -242,16 +241,9 @@ const UserHowitWorks = () => {
               ))}
             </div>
 
-            {/* RIGHT PHONE FRAME — FORCE HIDDEN ON MOBILE */}
-            <div
-              className="hidden md:flex justify-center"
-              style={{
-                display: window.innerWidth < 768 ? "none" : "flex",
-              }}
-            >
-              <div className="sticky top-24 w-[280px] h-[560px] rounded-[40px] border-[6px] border-gray-300 shadow-2xl overflow-hidden bg-black relative">
-                <div className="absolute top-3 left-1/2 -translate-x-1/2 w-24 h-4 bg-black/40 rounded-full" />
-
+            {/* RIGHT SIDE — BIG, FULLY VISIBLE IMAGE */}
+            <div className="hidden md:flex justify-center">
+              <div className="sticky top-24 w-[300px] lg:w-[330x] xl:w-[350px]">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={steps[activeStep].id}
@@ -261,7 +253,7 @@ const UserHowitWorks = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="w-full h-full object-cover rounded-[34px]"
+                    className="w-full h-auto rounded-3xl object-contain shadow-2xl"
                   />
                 </AnimatePresence>
               </div>
@@ -279,7 +271,6 @@ const UserHowitWorks = () => {
                 viewport={{ once: true, amount: 0.4 }}
                 className="bg-black/40 p-5 rounded-2xl border border-white/10 shadow-lg w-full overflow-hidden"
               >
-                {/* Step number */}
                 <div className="w-12 h-12 mb-4 rounded-full bg-orange-500 text-black flex items-center justify-center text-lg font-bold">
                   {String(index + 1).padStart(2, "0")}
                 </div>
@@ -296,11 +287,10 @@ const UserHowitWorks = () => {
                   ))}
                 </ul>
 
-                {/* Full Image on Mobile */}
                 <motion.img
                   src={step.image}
                   alt={step.title}
-                  className="w-full h-full object-cover rounded-xl mt-6"
+                  className="w-full h-auto object-contain rounded-2xl mt-6"
                   initial={{ opacity: 0, y: 60 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7 }}

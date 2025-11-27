@@ -1,428 +1,428 @@
-// UserUseCases.tsx
-import Footer from "@/Components/Footer";
-import Navigation from "@/Components/Navigation";
-import { useLayoutEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+  // UserUseCases.tsx
+  import Footer from "@/Components/Footer";
+  import Navigation from "@/Components/Navigation";
+  import { useLayoutEffect, useRef } from "react";
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import bankingImg from "../../assets/images/Image (1).jpg";
-import ecommerceImg from "../../assets/images/Image (2).jpg";
-import healthcareImg from "../../assets/images/Image (3).jpg";
-import travelImg from "../../assets/images/Image (4).jpg";
+  import bankingImg from "../../assets/images/Image (1).jpg";
+  import ecommerceImg from "../../assets/images/Image (2).jpg";
+  import healthcareImg from "../../assets/images/Image (3).jpg";
+  import travelImg from "../../assets/images/Image (4).jpg";
 
-gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger);
 
-const UserUseCases = () => {
-  const panelsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const leftTextRef = useRef<HTMLElement | null>(null);
-  const containerWrapperRef = useRef<HTMLDivElement | null>(null);
-  const rightSectionRef = useRef<HTMLElement | null>(null);
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const UserUseCases = () => {
+    const panelsRef = useRef<(HTMLDivElement | null)[]>([]);
+    const leftTextRef = useRef<HTMLElement | null>(null);
+    const containerWrapperRef = useRef<HTMLDivElement | null>(null);
+    const rightSectionRef = useRef<HTMLElement | null>(null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
 
-  // reset refs each render
-  panelsRef.current = [];
+    // reset refs each render
+    panelsRef.current = [];
 
-  useLayoutEffect(() => {
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    useLayoutEffect(() => {
+      const prefersReduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
 
-    const initialBg =
-      "radial-gradient(circle at top left, #ff6a00 0%, #1a0a00 25%, #000000 70%, #000000 100%)";
+      const initialBg =
+        "radial-gradient(circle at top left, #ff6a00 0%, #1a0a00 25%, #000000 70%, #000000 100%)";
 
-    if (containerRef.current) {
-      gsap.set(containerRef.current, {
-        background: initialBg,
-        backgroundSize: "cover",
-        backgroundPosition: "top left",
-      });
-    }
+      if (containerRef.current) {
+        gsap.set(containerRef.current, {
+          background: initialBg,
+          backgroundSize: "cover",
+          backgroundPosition: "top left",
+        });
+      }
 
-    if (prefersReduced) {
-      panelsRef.current.forEach((p) => {
-        if (p) gsap.set(p, { opacity: 1, y: 0 });
-      });
-      return;
-    }
+      if (prefersReduced) {
+        panelsRef.current.forEach((p) => {
+          if (p) gsap.set(p, { opacity: 1, y: 0 });
+        });
+        return;
+      }
 
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
+      const ctx = gsap.context(() => {
+        const mm = gsap.matchMedia();
 
-      // BG SCROLL
-      mm.add("(min-width: 0px)", () => {
-        if (!containerRef.current) return;
+        // BG SCROLL
+        mm.add("(min-width: 0px)", () => {
+          if (!containerRef.current) return;
 
-        const endBg =
-          "radial-gradient(circle at top left, #ff6a00 0%, #e05f00 20%, #2a1200 55%, #050100 100%)";
+          const endBg =
+            "radial-gradient(circle at top left, #ff6a00 0%, #e05f00 20%, #2a1200 55%, #050100 100%)";
 
-        const tween = gsap.to(containerRef.current, {
-          background: endBg,
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerWrapperRef.current || containerRef.current,
+          const tween = gsap.to(containerRef.current, {
+            background: endBg,
+            ease: "none",
+            scrollTrigger: {
+              trigger: containerWrapperRef.current || containerRef.current,
+              start: "top top",
+              end: "bottom center",
+              scrub: 0.7,
+            },
+          });
+
+          return () => {
+            tween.scrollTrigger && tween.scrollTrigger.kill();
+            tween.kill();
+          };
+        });
+
+        // DESKTOP
+        mm.add("(min-width: 1024px)", () => {
+          const left = leftTextRef.current;
+          const right = rightSectionRef.current;
+          const panels = panelsRef.current.filter(Boolean);
+          if (!left || !right || !panels.length) return;
+
+          gsap.set(panels, { opacity: 0, y: 120 });
+
+          const totalScrollHeight = right.scrollHeight - window.innerHeight;
+          ScrollTrigger.create({
+            trigger: containerWrapperRef.current,
             start: "top top",
-            end: "bottom center",
-            scrub: 0.7,
-          },
+            end: () => `+=${Math.max(totalScrollHeight, window.innerHeight)}`,
+            pin: left,
+            pinSpacing: true,
+            anticipatePin: 1,
+          });
+
+          panels.forEach((panel) => {
+            gsap.fromTo(
+              panel,
+              { opacity: 0, y: 120 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: panel,
+                  start: "top 75%",
+                  end: "top 30%",
+                  scrub: true,
+                },
+              }
+            );
+          });
+
+          gsap.set(panels[0], { opacity: 1, y: 0 });
+
+          return () => {
+            ScrollTrigger.getAll().forEach((t) => t.kill());
+          };
         });
 
-        return () => {
-          tween.scrollTrigger && tween.scrollTrigger.kill();
-          tween.kill();
-        };
-      });
+        // TABLET
+        mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
+          const left = leftTextRef.current;
+          const right = rightSectionRef.current;
+          const panels = panelsRef.current.filter(Boolean);
+          if (!left || !right || !panels.length) return;
 
-      // DESKTOP
-      mm.add("(min-width: 1024px)", () => {
-        const left = leftTextRef.current;
-        const right = rightSectionRef.current;
-        const panels = panelsRef.current.filter(Boolean);
-        if (!left || !right || !panels.length) return;
+          gsap.set(panels, { opacity: 0, y: 90 });
 
-        gsap.set(panels, { opacity: 0, y: 120 });
+          const totalScrollHeight = right.scrollHeight - window.innerHeight;
+          ScrollTrigger.create({
+            trigger: containerWrapperRef.current,
+            start: "top top",
+            end: () =>
+              `+=${Math.max(totalScrollHeight * 0.9, window.innerHeight)}`,
+            pin: left,
+            pinSpacing: false,
+            anticipatePin: 0.5,
+          });
 
-        const totalScrollHeight = right.scrollHeight - window.innerHeight;
-        ScrollTrigger.create({
-          trigger: containerWrapperRef.current,
-          start: "top top",
-          end: () => `+=${Math.max(totalScrollHeight, window.innerHeight)}`,
-          pin: left,
-          pinSpacing: true,
-          anticipatePin: 1,
+          panels.forEach((panel) => {
+            gsap.fromTo(
+              panel,
+              { opacity: 0, y: 90 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: panel,
+                  start: "top 78%",
+                  end: "top 35%",
+                  scrub: true,
+                },
+              }
+            );
+          });
+
+          gsap.set(panels[0], { opacity: 1, y: 0 });
+
+          return () => {
+            ScrollTrigger.getAll().forEach((t) => t.kill());
+          };
         });
 
-        panels.forEach((panel) => {
-          gsap.fromTo(
-            panel,
-            { opacity: 0, y: 120 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 1.2,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: panel,
-                start: "top 75%",
-                end: "top 30%",
-                scrub: true,
-              },
-            }
-          );
+        // MOBILE
+        mm.add("(max-width: 767px)", () => {
+          const panels = panelsRef.current.filter(Boolean);
+
+          panels.forEach((panel) => {
+            gsap.fromTo(
+              panel,
+              { opacity: 0, y: 40, scale: 0.995 },
+              {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.8,
+                ease: "power2.out",
+                scrollTrigger: {
+                  trigger: panel,
+                  start: "top 85%",
+                  end: "top 60%",
+                  toggleActions: "play none none reverse",
+                },
+              }
+            );
+          });
+
+          if (panels[0]) gsap.set(panels[0], { opacity: 1, y: 0, scale: 1 });
+
+          return () => {
+            ScrollTrigger.getAll().forEach((t) => t.kill());
+          };
         });
 
-        gsap.set(panels[0], { opacity: 1, y: 0 });
+        return () => mm.revert();
+      }, containerWrapperRef);
 
-        return () => {
+      return () => {
+        try {
+          ctx.revert();
           ScrollTrigger.getAll().forEach((t) => t.kill());
-        };
-      });
+        } catch (e) {}
+      };
+    }, []);
 
-      // TABLET
-      mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
-        const left = leftTextRef.current;
-        const right = rightSectionRef.current;
-        const panels = panelsRef.current.filter(Boolean);
-        if (!left || !right || !panels.length) return;
+    const useCases = [
+      {
+        badge: "Identity Verification",
+        title: "Verify Identity Instantly",
+        points: [
+          "No need to upload Aadhaar, PAN, Passport, or License",
+          "Zero document storage required",
+          "Instant verification within seconds",
+          "Ideal for platforms that require identity trust",
+        ],
+        image: bankingImg,
+      },
+      {
+        badge: "Age Verification",
+        title: "Anonymous Age Verification",
+        points: [
+          "Perfect for adult-content platforms",
+          "Anonymous verification without ID exposure",
+          "Zero document uploads required",
+          "Eliminates risks of identity theft",
+        ],
+        image: ecommerceImg,
+      },
+      {
+        badge: "Proof of Address",
+        title: "Address Verification Without Documents",
+        points: [
+          "No need to upload passports or driving licenses",
+          "Instant digital address verification",
+          "Improves onboarding speed by 10×",
+          "Reduces fraud using decentralized validation",
+        ],
+        image: healthcareImg,
+      },
+      {
+        badge: "Adult Sites",
+        title: "Anonymous Age Checks for Adult Platforms",
+        points: [
+          "No ID upload required",
+          "Prevents underage access",
+          "Anonymous age confirmation",
+          "Protects user privacy",
+        ],
+        image: travelImg,
+      },
+      {
+        badge: "Dating Sites",
+        title: "Safer & Verified Dating Profiles",
+        points: [
+          "Instant document-free verification",
+          "Reduce fake profiles & scams",
+          "No passport/ID uploads",
+          "Higher trust and safety",
+        ],
+        image: bankingImg,
+      },
+      {
+        badge: "Social Media",
+        title: "Verified Social Accounts Without Uploading IDs",
+        points: [
+          "No document upload required",
+          "Protects privacy from platforms",
+          "Eliminates risk of data leaks",
+          "Reduce impersonation & fake accounts",
+        ],
+        image: ecommerceImg,
+      },
+    ];
 
-        gsap.set(panels, { opacity: 0, y: 90 });
+    return (
+      <div ref={containerRef}     className="min-h-screen text-white overflow-x-hidden bg-[#050100]"
+  >
+        <Navigation />
 
-        const totalScrollHeight = right.scrollHeight - window.innerHeight;
-        ScrollTrigger.create({
-          trigger: containerWrapperRef.current,
-          start: "top top",
-          end: () =>
-            `+=${Math.max(totalScrollHeight * 0.9, window.innerHeight)}`,
-          pin: left,
-          pinSpacing: false,
-          anticipatePin: 0.5,
-        });
-
-        panels.forEach((panel) => {
-          gsap.fromTo(
-            panel,
-            { opacity: 0, y: 90 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 1,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: panel,
-                start: "top 78%",
-                end: "top 35%",
-                scrub: true,
-              },
-            }
-          );
-        });
-
-        gsap.set(panels[0], { opacity: 1, y: 0 });
-
-        return () => {
-          ScrollTrigger.getAll().forEach((t) => t.kill());
-        };
-      });
-
-      // MOBILE
-      mm.add("(max-width: 767px)", () => {
-        const panels = panelsRef.current.filter(Boolean);
-
-        panels.forEach((panel) => {
-          gsap.fromTo(
-            panel,
-            { opacity: 0, y: 40, scale: 0.995 },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 0.8,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: panel,
-                start: "top 85%",
-                end: "top 60%",
-                toggleActions: "play none none reverse",
-              },
-            }
-          );
-        });
-
-        if (panels[0]) gsap.set(panels[0], { opacity: 1, y: 0, scale: 1 });
-
-        return () => {
-          ScrollTrigger.getAll().forEach((t) => t.kill());
-        };
-      });
-
-      return () => mm.revert();
-    }, containerWrapperRef);
-
-    return () => {
-      try {
-        ctx.revert();
-        ScrollTrigger.getAll().forEach((t) => t.kill());
-      } catch (e) {}
-    };
-  }, []);
-
-  const useCases = [
-    {
-      badge: "Identity Verification",
-      title: "Verify Identity Instantly",
-      points: [
-        "No need to upload Aadhaar, PAN, Passport, or License",
-        "Zero document storage required",
-        "Instant verification within seconds",
-        "Ideal for platforms that require identity trust",
-      ],
-      image: bankingImg,
-    },
-    {
-      badge: "Age Verification",
-      title: "Anonymous Age Verification",
-      points: [
-        "Perfect for adult-content platforms",
-        "Anonymous verification without ID exposure",
-        "Zero document uploads required",
-        "Eliminates risks of identity theft",
-      ],
-      image: ecommerceImg,
-    },
-    {
-      badge: "Proof of Address",
-      title: "Address Verification Without Documents",
-      points: [
-        "No need to upload passports or driving licenses",
-        "Instant digital address verification",
-        "Improves onboarding speed by 10×",
-        "Reduces fraud using decentralized validation",
-      ],
-      image: healthcareImg,
-    },
-    {
-      badge: "Adult Sites",
-      title: "Anonymous Age Checks for Adult Platforms",
-      points: [
-        "No ID upload required",
-        "Prevents underage access",
-        "Anonymous age confirmation",
-        "Protects user privacy",
-      ],
-      image: travelImg,
-    },
-    {
-      badge: "Dating Sites",
-      title: "Safer & Verified Dating Profiles",
-      points: [
-        "Instant document-free verification",
-        "Reduce fake profiles & scams",
-        "No passport/ID uploads",
-        "Higher trust and safety",
-      ],
-      image: bankingImg,
-    },
-    {
-      badge: "Social Media",
-      title: "Verified Social Accounts Without Uploading IDs",
-      points: [
-        "No document upload required",
-        "Protects privacy from platforms",
-        "Eliminates risk of data leaks",
-        "Reduce impersonation & fake accounts",
-      ],
-      image: ecommerceImg,
-    },
-  ];
-
-  return (
-    <div ref={containerRef}     className="min-h-screen text-white overflow-x-hidden bg-[#050100]"
->
-      <Navigation />
-
-      <div
-        ref={containerWrapperRef}
-        className="flex flex-col md:flex-row relative min-h-screen"
-      >
-        {/* LEFT STICKY TEXT HERO */}
-        <section
-          ref={leftTextRef}
-          className="
-            w-full md:w-[40%]
-            h-auto md:h-screen
-            md:sticky top-0 
-            flex flex-col justify-center
-            items-center text-center md:items-start md:text-left
-            px-6 md:px-10
-            pt-24 md:pt-0
-            mb-10 md:mb-0
-          "
-        >
-          <h1
-            className="mx-auto md:mx-0 text-4xl sm:text-5xl md:text-5xl lg:text-[4rem]
-                       font-heading font-extrabold leading-[1.0] tracking-[0.03em]
-                       drop-shadow-[0_0_18px_rgba(0,0,0,0.35)] mb-2"
-          >
-            One Identity
-          </h1>
-
-          <h2
-            className="mx-auto md:mx-0 text-4xl sm:text-5xl md:text-5xl lg:text-[4rem]
-                       font-heading font-extrabold leading-[1.0] tracking-[0.03em]
-                       drop-shadow-[0_0_18px_rgba(0,0,0,0.35)]"
-          >
-            For Every User
-          </h2>
-
-          <p className="mx-auto md:mx-0 text-base sm:text-lg md:text-xl text-white/80 max-w-full md:max-w-md mt-4 md:mt-8 font-body leading-snug">
-            Identity, Age & Address Verification for users on modern platforms.
-          </p>
-        </section>
-
-{/* RIGHT SCROLL PANELS */}
-{/* RIGHT SCROLL PANELS */}
-<section
-  ref={rightSectionRef}
-  className="w-full md:w-[60%] space-y-10 sm:space-y-16 md:space-y-24 py-8 sm:py-12 md:py-24 pr-6 md:pr-20 pl-6 md:pl-14 font-body"
->
-  {useCases.map((useCase, idx) => (
-    <div
-      key={idx}
-      ref={(el: HTMLDivElement | null) => {
-        panelsRef.current[idx] = el;
-      }}
-      className="min-h-[70vh] md:min-h-screen flex items-center"
-    >
-      <div
-        className="
-          w-full max-w-6xl mx-auto
-          relative
-          flex flex-col md:flex-row items-center md:items-stretch
-          gap-10 md:gap-12
-          pt-10 md:pt-0
-        "
-      >
-        {/* CONTENT CARD – MATCH BUSINESS LOOK */}
         <div
-          className="
-            flex-1
-            rounded-[2.5rem]
-            p-[2px] sm:p-[3px] md:p-[4px]
-            bg-gradient-to-br from-black via-[#1f0a00] to-[#FF6B35]
-            shadow-[0_30px_80px_rgba(0,0,0,0.85)]
-          "
+          ref={containerWrapperRef}
+          className="flex flex-col md:flex-row relative min-h-screen"
         >
-          <div
+          {/* LEFT STICKY TEXT HERO */}
+          <section
+            ref={leftTextRef}
             className="
-              h-full w-full
-              rounded-[2.5rem]
-              bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
-              px-6 sm:px-10 md:px-14
-              py-8 sm:py-10 md:py-14
-              text-white
+              w-full md:w-[40%]
+              h-auto md:h-screen
+              md:sticky top-0 
               flex flex-col justify-center
-              gap-6 sm:gap-7 md:gap-8
+              items-center text-center md:items-start md:text-left
+              px-6 md:px-10
+              pt-24 md:pt-0
+              mb-10 md:mb-0
             "
           >
-            {/* BADGE AS HEADING (LIKE ADULT SITES CARD) */}
-            <h2
-              className="
-                text-2xl sm:text-3xl md:text-[2.4rem] lg:text-[2.7rem]
-                font-heading
-                tracking-[0.25em]
-                uppercase
-                leading-tight
-              "
+            <h1
+              className="mx-auto md:mx-0 text-4xl sm:text-5xl md:text-5xl lg:text-[4rem]
+                        font-heading font-extrabold leading-[1.0] tracking-[0.03em]
+                        drop-shadow-[0_0_18px_rgba(0,0,0,0.35)] mb-2"
             >
-              {useCase.badge}
+              One Identity
+            </h1>
+
+            <h2
+              className="mx-auto md:mx-0 text-4xl sm:text-5xl md:text-5xl lg:text-[4rem]
+                        font-heading font-extrabold leading-[1.0] tracking-[0.03em]
+                        drop-shadow-[0_0_18px_rgba(0,0,0,0.35)]"
+            >
+              For Every User
             </h2>
 
-            {/* POINTS LIST */}
-            <ul className="space-y-3 sm:space-y-4 text-sm sm:text-lg md:text-xl text-white/90">
-              {useCase.points.map((point, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <span className="mt-[3px] text-[#FF6B35] text-lg sm:text-xl">
-                    •
-                  </span>
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+            <p className="mx-auto md:mx-0 text-base sm:text-lg md:text-xl text-white/80 max-w-full md:max-w-md mt-4 md:mt-8 font-body leading-snug">
+              Identity, Age & Address Verification for users on modern platforms.
+            </p>
+          </section>
 
-        {/* PHONE IMAGE – OFFSET TO THE RIGHT, LIKE FIRST SCREENSHOT */}
+  {/* RIGHT SCROLL PANELS */}
+  {/* RIGHT SCROLL PANELS */}
+  <section
+    ref={rightSectionRef}
+    className="w-full md:w-[60%] space-y-10 sm:space-y-16 md:space-y-24 py-8 sm:py-12 md:py-24 pr-6 md:pr-20 pl-6 md:pl-14 font-body"
+  >
+    {useCases.map((useCase, idx) => (
+      <div
+        key={idx}
+        ref={(el: HTMLDivElement | null) => {
+          panelsRef.current[idx] = el;
+        }}
+        className="min-h-[70vh] md:min-h-screen flex items-center"
+      >
         <div
           className="
+            w-full max-w-6xl mx-auto
             relative
-            w-full md:w-[32%]
-            flex items-center justify-center md:justify-start
-            md:-ml-10 lg:-ml-14
+            flex flex-col md:flex-row items-center md:items-stretch
+            gap-10 md:gap-12
+            pt-10 md:pt-0
           "
         >
-          <img
-            src={useCase.image}
-            alt={useCase.title}
+          {/* CONTENT CARD – MATCH BUSINESS LOOK */}
+          <div
+            className="
+              flex-1
+              rounded-[2.5rem]
+              p-[2px] sm:p-[3px] md:p-[4px]
+              bg-gradient-to-br from-black via-[#1f0a00] to-[#FF6B35]
+              shadow-[0_30px_80px_rgba(0,0,0,0.85)]
+            "
+          >
+            <div
+              className="
+                h-full w-full
+                rounded-[2.5rem]
+                bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
+                px-6 sm:px-10 md:px-14
+                py-8 sm:py-10 md:py-14
+                text-white
+                flex flex-col justify-center
+                gap-6 sm:gap-7 md:gap-8
+              "
+            >
+              {/* BADGE AS HEADING (LIKE ADULT SITES CARD) */}
+              <h2
+                className="
+                  text-2xl sm:text-3xl md:text-[2.4rem] lg:text-[2.7rem]
+                  font-heading
+                  tracking-[0.25em]
+                  uppercase
+                  leading-tight
+                "
+              >
+                {useCase.badge}
+              </h2>
+
+              {/* POINTS LIST */}
+              <ul className="space-y-3 sm:space-y-4 text-sm sm:text-lg md:text-xl text-white/90">
+                {useCase.points.map((point, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="mt-[3px] text-[#FF6B35] text-lg sm:text-xl">
+                      •
+                    </span>
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* PHONE IMAGE – OFFSET TO THE RIGHT, LIKE FIRST SCREENSHOT */}
+          <div
             className="
               relative
-              w-[60%] sm:w-[70%] md:w-full
-              max-w-sm
-              rounded-[2.5rem]
-              shadow-[0_25px_60px_rgba(0,0,0,0.95)]
-              object-cover
+              w-full md:w-[32%]
+              flex items-center justify-center md:justify-start
+              md:-ml-10 lg:-ml-14
             "
-          />
+          >
+            <img
+              src={useCase.image}
+              alt={useCase.title}
+              className="
+                relative
+                w-[60%] sm:w-[70%] md:w-full
+                max-w-sm
+                rounded-[2.5rem]
+                shadow-[0_25px_60px_rgba(0,0,0,0.95)]
+                object-cover
+              "
+            />
+          </div>
         </div>
       </div>
-    </div>
-  ))}
-</section>
+    ))}
+  </section>
 
 
+        </div>
+
+        <Footer />
       </div>
+    );
+  };
 
-      <Footer />
-    </div>
-  );
-};
-
-export default UserUseCases;
+  export default UserUseCases;
