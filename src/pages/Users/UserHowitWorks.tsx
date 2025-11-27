@@ -183,10 +183,10 @@ const UserHowitWorks = () => {
       <div className="min-h-screen w-full bg-[linear-gradient(135deg,#000000_0%,#000000_40%,#b45309_100%)]">
         <section className="relative w-full px-6 md:px-10 pt-20 pb-20">
           <div className="text-center mb-10">
-            <h2 className="text-white text-3xl md:text-4xl font-bold">
+            <h2 className="text-white text-5xl md:text-4xl font-heading">
               How It Works
             </h2>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto mt-3">
+            <p className="text-white/70 text-lg font-body max-w-2xl mx-auto mt-3">
               Your complete journey through the youID app — from uploading to verified status.
             </p>
           </div>
@@ -225,11 +225,11 @@ const UserHowitWorks = () => {
                     {String(idx + 1).padStart(2, "0")}
                   </div>
 
-                  <h3 className="text-xl font-semibold text-white">
+                  <h3 className="text-xl font-semibold text-white font-heading">
                     {step.title}
                   </h3>
 
-                  <p className="text-sm text-orange-300 mt-2">
+                  <p className="text-sm text-orange-300 mt-2 font-body">
                     {step.desc}
                   </p>
 

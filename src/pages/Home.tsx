@@ -41,17 +41,14 @@ const Home = () => {
 
   return (
     <section
-  className="
-    relative 
-    min-h-screen 
-    flex flex-col 
-    overflow-visible
-    md:h-screen
-    md:overflow-hidden
-    bg-[linear-gradient(90deg,#7a2e00_0%,#000000_50%,#7a2e00_100%)]
-  "
->
-
+      className="
+        relative 
+        min-h-screen 
+        flex flex-col 
+        overflow-visible
+        bg-[linear-gradient(90deg,#7a2e00_0%,#000000_50%,#7a2e00_100%)]
+      "
+    >
       {/* CENTER DIVIDER (DESKTOP) */}
       <div
         className="
@@ -66,81 +63,48 @@ const Home = () => {
         "
       />
 
-{/* TOP BAR WITH LOGO (CUSTOM NAV) */}
-<div
-  style={{
-    background:
-      "linear-gradient(90deg, #7a2e00 0%, #000000 50%, #7a2e00 100%)",
-  }}
-  className="
-    fixed top-0 left-0 w-full h-[60px]
-    border-b border-white/10 
-    backdrop-blur-md shadow-sm 
-    z-40 
-    flex justify-center items-center
-  "
->
-  <div className="flex items-center gap-2 text-white">
-    <div className="relative h-40 md:h-40 w-auto">
-      <img
-        src={youidLogo}
-        alt="youID Logo"
-        className="h-full w-auto object-contain"
-      />
-    </div>
-  </div>
-</div>
-
-
-      {/* TOP BUTTONS (DESKTOP) */}
+      {/* TOP BAR WITH LOGO (CUSTOM NAV) */}
       <div
+        style={{
+          background:
+            "linear-gradient(90deg, #7a2e00 0%, #000000 50%, #7a2e00 100%)",
+        }}
         className="
-          hidden md:flex 
-          fixed top-[70px] left-0 w-full 
-          z-30 
-          justify-between items-center
-          px-6
+          fixed top-0 left-0 w-full h-[60px]
+          border-b border-white/10 
+          backdrop-blur-md shadow-sm 
+          z-40 
+          flex justify-center items-center
         "
       >
-        <Button
-          onClick={() => navigate("/user")}
-          size="lg"
-          className="
-            rounded-full px-6 py-3 text-lg shadow-sm 
-            text-white font-body
-            border border-white/20
-            bg-[linear-gradient(to_right,#b45309_0%,#b45309_40%,#000000_70%)]
-            hover:brightness-110
-          "
-        >
-          I'm a User — Get Started
-        </Button>
-
-        <Button
-          onClick={() => navigate("/business")}
-          size="lg"
-          className="
-            rounded-full px-6 py-3 text-lg shadow-sm 
-            text-white font-body
-            border border-white/20
-            bg-[linear-gradient(to_right,#000000_0%,#000000_60%,#b45309_100%)]
-            hover:brightness-110
-          "
-        >
-          I'm a Business — See Demo
-        </Button>
+        <div className="flex items-center gap-2 text-white">
+          <div className="relative h-40 md:h-40 w-auto">
+            <img
+              src={youidLogo}
+              alt="youID Logo"
+              className="h-full w-auto object-contain"
+            />
+          </div>
+        </div>
       </div>
 
       {/* CONTENT */}
       <div
         className="
-          mt-24 
+          mt-24 md:mt-20
           px-6 md:px-0
           w-full 
-          md:h-screen md:flex md:items-center
+          pb-10
         "
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-24 md:gap-8 lg:gap-12 xl:gap-16 w-full">
+        <div
+          className="
+            grid grid-cols-1 md:grid-cols-2 
+            gap-24 md:gap-8 lg:gap-12 xl:gap-16 
+            w-full
+            md:min-h-[calc(100vh-220px)]
+          "
+        >
           {/* USER SECTION */}
           <motion.div
             variants={fadeUp(0.2)}
@@ -148,33 +112,17 @@ const Home = () => {
             animate="visible"
             className="
               flex flex-col 
+              justify-center
               items-center md:items-start
               text-center md:text-left
               md:pl-8 lg:pl-16 xl:pl-24 2xl:pl-32
-              md:mb-20
+              h-full
             "
           >
-            {/* Mobile CTA - now same gradient as desktop */}
-            <div className="md:hidden mb-6">
-              <Button
-                onClick={() => navigate("/user")}
-                className="
-                  rounded-full px-6 py-3 text-base shadow-sm 
-                  font-body text-white
-                  border border-white/20
-                  bg-[linear-gradient(to_right,#b45309_0%,#b45309_40%,#000000_70%)]
-                  hover:brightness-110
-                "
-              >
-                I'm a User — Get Started
-              </Button>
-            </div>
-
-            {/* Heading – font-heading */}
             <h1
               className="
                 text-4xl font-extrabold text-white leading-tight
-                w-full md:mt-10 lg:mt-10 md:pl-0 md:self-start 
+                w-full md:pl-0 md:self-start 
                 md:max-w-[500px] xl:max-w-[550px] 2xl:max-w-[600px]
                 font-heading
               "
@@ -184,7 +132,6 @@ const Home = () => {
               <span className="text-[#FF6B35]"> Control.</span>
             </h1>
 
-            {/* Subheading – font-body */}
             <p
               className="
                 text-lg text-gray-300 mt-4 
@@ -197,7 +144,6 @@ const Home = () => {
               sharing their identity documents.
             </p>
 
-            {/* USER MOCKUPS – bigger on mobile & desktop */}
             <div
               className="
                 relative w-full flex items-center justify-center 
@@ -239,6 +185,23 @@ const Home = () => {
                 />
               </div>
             </div>
+
+            {/* MOBILE BUTTON – UNDER IMAGE (USER) */}
+            <div className="mt-8 md:hidden flex justify-center">
+              <Button
+                onClick={() => navigate("/user")}
+                size="lg"
+                className="
+                  rounded-full px-8 py-3 text-lg shadow-lg 
+                  text-white font-body
+                  border border-white/20
+                  bg-[linear-gradient(to_right,#b45309_0%,#b45309_40%,#000000_70%)]
+                  hover:brightness-110
+                "
+              >
+                I'm a User — Get Started
+              </Button>
+            </div>
           </motion.div>
 
           {/* BUSINESS SECTION */}
@@ -248,32 +211,16 @@ const Home = () => {
             animate="visible"
             className="
               flex flex-col 
+              justify-center
               items-center md:items-end 
               text-center md:text-right 
               md:pr-8 lg:pr-16 xl:pr-24 2xl:pr-32
+              h-full
             "
           >
-            {/* Mobile CTA - same gradient style as desktop */}
-            <div className="md:hidden mb-6">
-              <Button
-                onClick={() => navigate("/business")}
-                className="
-                  rounded-full px-6 py-3 text-base shadow-sm 
-                  font-body text-white
-                  border border-white/20
-                  bg-[linear-gradient(to_right,#000000_0%,#000000_60%,#b45309_100%)]
-                  hover:brightness-110
-                "
-              >
-                I'm a Business — See Demo
-              </Button>
-            </div>
-
-            {/* Heading – font-heading */}
             <h1
               className="
                 text-4xl font-extrabold text-white leading-tight 
-                md:mt-10 lg:mt-10 
                 md:max-w-[500px] xl:max-w-[550px] 2xl:max-w-[600px]
                 font-heading
               "
@@ -285,7 +232,6 @@ const Home = () => {
               <span className="text-[#FF6B35]"> overheads.</span>
             </h1>
 
-            {/* Subheading – font-body */}
             <p
               className="
                 text-lg text-gray-300 mt-4 
@@ -304,11 +250,67 @@ const Home = () => {
               className="
                 mt-10
                 w-full 
-                max-w-[460px] md:max-w-[520px] lg:max-w-[580px]
+                max-w-[460px] md:max-w-[520px] lg:max-w-[580px] md:ml-20
                 mx-auto
               "
             />
+
+            {/* MOBILE BUTTON – UNDER IMAGE (BUSINESS) */}
+            <div className="mt-8 md:hidden flex justify-center">
+              <Button
+                onClick={() => navigate("/business")}
+                size="lg"
+                className="
+                  rounded-full px-8 py-3 text-lg shadow-lg 
+                  text-white font-body
+                  border border-white/20
+                  bg-[linear-gradient(to_right,#000000_0%,#000000_60%,#b45309_100%)]
+                  hover:brightness-110
+                "
+              >
+                I'm a Business — See Demo
+              </Button>
+            </div>
           </motion.div>
+        </div>
+
+        {/* DESKTOP BUTTONS - SEPARATE & CENTERED IN EACH SIDE */}
+        <div className="hidden md:block absolute bottom-8 left-0 w-full z-40">
+          <div className="grid grid-cols-2 w-full">
+            {/* LEFT SIDE BUTTON - USER */}
+            <div className="flex justify-center">
+              <Button
+                onClick={() => navigate("/user")}
+                size="lg"
+                className="
+                  rounded-full px-8 py-3 text-lg shadow-lg 
+                  text-white font-body
+                  border border-white/20
+                  bg-[linear-gradient(to_right,#b45309_0%,#b45309_40%,#000000_70%)]
+                  hover:brightness-110
+                "
+              >
+                I'm a User — Get Started
+              </Button>
+            </div>
+
+            {/* RIGHT SIDE BUTTON - BUSINESS */}
+            <div className="flex justify-center">
+              <Button
+                onClick={() => navigate("/business")}
+                size="lg"
+                className="
+                  rounded-full px-8 py-3 text-lg shadow-lg 
+                  text-white font-body
+                  border border-white/20
+                  bg-[linear-gradient(to_right,#000000_0%,#000000_60%,#b45309_100%)]
+                  hover:brightness-110
+                "
+              >
+                I'm a Business — See Demo
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </section>

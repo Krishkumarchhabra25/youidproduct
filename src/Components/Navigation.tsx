@@ -176,7 +176,7 @@ const Navigation = () => {
             <div className="pt-4 space-y-2">
               <Button
                 variant="ghost"
-                className="w-full text-[#FF6B35]"
+                className="w-full text-white"
                 onClick={() => {
                   navigate("/business");
                   setMobileMenuOpen(false);

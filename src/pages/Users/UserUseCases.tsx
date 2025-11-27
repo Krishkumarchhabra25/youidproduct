@@ -5,10 +5,10 @@ import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import bankingImg from "../../assets/images/banking.png";
-import ecommerceImg from "../../assets/images/ecommerce.png";
-import healthcareImg from "../../assets/images/healthcare.jpg";
-import travelImg from "../../assets/images/travel.jpg";
+import bankingImg from "../../assets/images/Image (1).jpg";
+import ecommerceImg from "../../assets/images/Image (2).jpg";
+import healthcareImg from "../../assets/images/Image (3).jpg";
+import travelImg from "../../assets/images/Image (4).jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,7 +27,6 @@ const UserUseCases = () => {
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    // SAME darker gradient as BusinessUseCases (orange → deep brown → black)
     const initialBg =
       "radial-gradient(circle at top left, #ff6a00 0%, #1a0a00 25%, #000000 70%, #000000 100%)";
 
@@ -49,11 +48,10 @@ const UserUseCases = () => {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
 
-      // ---------- BACKGROUND GRADIENT SCROLL EFFECT (all breakpoints) ----------
+      // BG SCROLL
       mm.add("(min-width: 0px)", () => {
         if (!containerRef.current) return;
 
-        // keep strong orange as you scroll, don't fade to flat black
         const endBg =
           "radial-gradient(circle at top left, #ff6a00 0%, #e05f00 20%, #2a1200 55%, #050100 100%)";
 
@@ -74,7 +72,7 @@ const UserUseCases = () => {
         };
       });
 
-      // ------------------ DESKTOP / LAPTOP ------------------
+      // DESKTOP
       mm.add("(min-width: 1024px)", () => {
         const left = leftTextRef.current;
         const right = rightSectionRef.current;
@@ -112,7 +110,6 @@ const UserUseCases = () => {
           );
         });
 
-        // ensure first panel visible
         gsap.set(panels[0], { opacity: 1, y: 0 });
 
         return () => {
@@ -120,7 +117,7 @@ const UserUseCases = () => {
         };
       });
 
-      // ------------------ TABLET ------------------
+      // TABLET
       mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
         const left = leftTextRef.current;
         const right = rightSectionRef.current;
@@ -133,7 +130,8 @@ const UserUseCases = () => {
         ScrollTrigger.create({
           trigger: containerWrapperRef.current,
           start: "top top",
-          end: () => `+=${Math.max(totalScrollHeight * 0.9, window.innerHeight)}`,
+          end: () =>
+            `+=${Math.max(totalScrollHeight * 0.9, window.innerHeight)}`,
           pin: left,
           pinSpacing: false,
           anticipatePin: 0.5,
@@ -165,7 +163,7 @@ const UserUseCases = () => {
         };
       });
 
-      // ------------------ MOBILE ------------------
+      // MOBILE
       mm.add("(max-width: 767px)", () => {
         const panels = panelsRef.current.filter(Boolean);
 
@@ -277,7 +275,8 @@ const UserUseCases = () => {
   ];
 
   return (
-    <div ref={containerRef} className="min-h-screen text-white overflow-hidden">
+    <div ref={containerRef}     className="min-h-screen text-white overflow-x-hidden bg-[#050100]"
+>
       <Navigation />
 
       <div
@@ -299,81 +298,126 @@ const UserUseCases = () => {
           "
         >
           <h1
-            className="mx-auto md:mx-0 text-4xl sm:text-5xl md:text-6xl lg:text-[6rem]
+            className="mx-auto md:mx-0 text-4xl sm:text-5xl md:text-5xl lg:text-[4rem]
                        font-heading font-extrabold leading-[1.0] tracking-[0.03em]
                        drop-shadow-[0_0_18px_rgba(0,0,0,0.35)] mb-2"
-            style={{ fontFamily: "Arimo-Bold" }}
           >
             One Identity
           </h1>
 
           <h2
-            className="mx-auto md:mx-0 text-4xl sm:text-5xl md:text-6xl lg:text-[6rem]
+            className="mx-auto md:mx-0 text-4xl sm:text-5xl md:text-5xl lg:text-[4rem]
                        font-heading font-extrabold leading-[1.0] tracking-[0.03em]
                        drop-shadow-[0_0_18px_rgba(0,0,0,0.35)]"
-            style={{ fontFamily: "Arimo-Bold" }}
           >
             For Every User
           </h2>
 
-          <p className="mx-auto md:mx-0 text-base sm:text-lg md:text-2xl text-white/80 max-w-full md:max-w-md mt-4 md:mt-8 font-body leading-snug">
+          <p className="mx-auto md:mx-0 text-base sm:text-lg md:text-xl text-white/80 max-w-full md:max-w-md mt-4 md:mt-8 font-body leading-snug">
             Identity, Age & Address Verification for users on modern platforms.
           </p>
         </section>
 
-        {/* RIGHT SCROLL PANELS */}
-        <section
-          ref={rightSectionRef}
-          className="w-full md:w-[60%] space-y-6 sm:space-y-12 md:space-y-32 py-8 sm:py-12 md:py-24 pr-6 md:pr-20 pl-6 md:pl-14 font-body"
+{/* RIGHT SCROLL PANELS */}
+{/* RIGHT SCROLL PANELS */}
+<section
+  ref={rightSectionRef}
+  className="w-full md:w-[60%] space-y-10 sm:space-y-16 md:space-y-24 py-8 sm:py-12 md:py-24 pr-6 md:pr-20 pl-6 md:pl-14 font-body"
+>
+  {useCases.map((useCase, idx) => (
+    <div
+      key={idx}
+      ref={(el: HTMLDivElement | null) => {
+        panelsRef.current[idx] = el;
+      }}
+      className="min-h-[70vh] md:min-h-screen flex items-center"
+    >
+      <div
+        className="
+          w-full max-w-6xl mx-auto
+          relative
+          flex flex-col md:flex-row items-center md:items-stretch
+          gap-10 md:gap-12
+          pt-10 md:pt-0
+        "
+      >
+        {/* CONTENT CARD – MATCH BUSINESS LOOK */}
+        <div
+          className="
+            flex-1
+            rounded-[2.5rem]
+            p-[2px] sm:p-[3px] md:p-[4px]
+            bg-gradient-to-br from-black via-[#1f0a00] to-[#FF6B35]
+            shadow-[0_30px_80px_rgba(0,0,0,0.85)]
+          "
         >
-          {useCases.map((useCase, idx) => (
-            <div
-              key={idx}
-              ref={(el: HTMLDivElement | null) => {
-                panelsRef.current[idx] = el;
-              }}
-              className="min-h-[70vh] md:min-h-screen md:grid md:grid-cols-2 gap-6 md:gap-10 items-center flex flex-col md:flex-row"
+          <div
+            className="
+              h-full w-full
+              rounded-[2.5rem]
+              bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
+              px-6 sm:px-10 md:px-14
+              py-8 sm:py-10 md:py-14
+              text-white
+              flex flex-col justify-center
+              gap-6 sm:gap-7 md:gap-8
+            "
+          >
+            {/* BADGE AS HEADING (LIKE ADULT SITES CARD) */}
+            <h2
+              className="
+                text-2xl sm:text-3xl md:text-[2.4rem] lg:text-[2.7rem]
+                font-heading
+                tracking-[0.25em]
+                uppercase
+                leading-tight
+              "
             >
-              {/* TEXT SIDE */}
-              <div className="space-y-6 md:space-y-8 max-w-full md:max-w-xl font-body text-center md:text-left">
-                <div
-                  className="inline-block px-4 py-2 text-sm sm:text-base md:text-lg w-fit mx-auto md:mx-0
-                             bg-white/10 backdrop-blur-md border border-white/30 rounded-2xl
-                             shadow-[0_0_25px_rgba(255,255,255,0.06)] tracking-wide"
-                >
-                  {useCase.badge}
-                </div>
+              {useCase.badge}
+            </h2>
 
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading tracking-wide leading-[1.12]">
-                  {useCase.title}
-                </h2>
+            {/* POINTS LIST */}
+            <ul className="space-y-3 sm:space-y-4 text-sm sm:text-lg md:text-xl text-white/90">
+              {useCase.points.map((point, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <span className="mt-[3px] text-[#FF6B35] text-lg sm:text-xl">
+                    •
+                  </span>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
 
-                <ul className="space-y-2 md:space-y-4 text-sm sm:text-base md:text-[20px] text-white/85 font-body leading-relaxed">
-                  {useCase.points.map((p, i) => (
-                    <li
-                      key={i}
-                      className="flex gap-3 md:gap-4 items-start justify-center md:justify-start"
-                    >
-                      <span className="text-orange-400 text-xl md:text-2xl leading-none mt-1">
-                        ✔
-                      </span>
-                      <span>{p}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+        {/* PHONE IMAGE – OFFSET TO THE RIGHT, LIKE FIRST SCREENSHOT */}
+        <div
+          className="
+            relative
+            w-full md:w-[32%]
+            flex items-center justify-center md:justify-start
+            md:-ml-10 lg:-ml-14
+          "
+        >
+          <img
+            src={useCase.image}
+            alt={useCase.title}
+            className="
+              relative
+              w-[60%] sm:w-[70%] md:w-full
+              max-w-sm
+              rounded-[2.5rem]
+              shadow-[0_25px_60px_rgba(0,0,0,0.95)]
+              object-cover
+            "
+          />
+        </div>
+      </div>
+    </div>
+  ))}
+</section>
 
-              {/* IMAGE SIDE */}
-              <div className="flex justify-center mt-6 md:mt-0">
-                <img
-                  src={useCase.image}
-                  alt={useCase.title}
-                  className="w-full md:w-[85%] max-w-xl rounded-3xl shadow-2xl object-cover"
-                />
-              </div>
-            </div>
-          ))}
-        </section>
+
       </div>
 
       <Footer />

@@ -1,5 +1,4 @@
 import Navigation from "../Components/Navigation";
-import { Badge } from "../Components/ui/badge";
 import Footer from "../Components/Footer";
 import { Button } from "../Components/ui/button";
 import gsap from "gsap";
@@ -19,7 +18,7 @@ const BusinessLanding = () => {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       // ---------------------------
-      // HERO SECTION (same on all sizes)
+      // HERO SECTION
       // ---------------------------
       const hero = heroRef.current;
       if (hero) {
@@ -69,7 +68,6 @@ const BusinessLanding = () => {
 
       // ---------------------------
       // RESPONSIVE ANIMATIONS
-      // desktop/tablet vs mobile
       // ---------------------------
       const section = problemRef.current;
       const points = pointsRef.current;
@@ -78,9 +76,7 @@ const BusinessLanding = () => {
 
       const mm = gsap.matchMedia();
 
-      // ≥768px: your original pinned / scrub behavior
       mm.add("(min-width: 768px)", () => {
-        // PROBLEM SECTION (pinned)
         if (section && points.length > 0) {
           gsap.set(points, { opacity: 0, y: 60 });
 
@@ -101,7 +97,6 @@ const BusinessLanding = () => {
           });
         }
 
-        // CHOOSE YOU-ID SECTION (pulsing box + staggered bullets)
         if (chooseSection && chooseBox) {
           gsap.set(chooseBox, { opacity: 0, scale: 0.95 });
 
@@ -150,9 +145,7 @@ const BusinessLanding = () => {
         }
       });
 
-      // <768px: simple fade-in / fade-out on scroll (no pin, no scrub timelines)
       mm.add("(max-width: 767px)", () => {
-        // PROBLEM SECTION: whole right column fades in/out
         if (section && points.length > 0) {
           gsap.set(points, { opacity: 0, y: 40 });
 
@@ -166,12 +159,11 @@ const BusinessLanding = () => {
               trigger: section,
               start: "top 80%",
               end: "bottom 20%",
-              scrub: true, // gives fade-in and fade-out as you scroll
+              scrub: true,
             },
           });
         }
 
-        // CHOOSE YOU-ID SECTION: box + bullets simple fade in/out
         if (chooseSection && chooseBox) {
           gsap.fromTo(
             chooseBox,
@@ -185,7 +177,7 @@ const BusinessLanding = () => {
                 trigger: chooseSection,
                 start: "top 85%",
                 end: "bottom 25%",
-                scrub: true, // fade in and fade out
+                scrub: true,
               },
             }
           );
@@ -227,39 +219,41 @@ const BusinessLanding = () => {
           ref={heroRef}
           className="hero-section relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-black to-[#1a0f00]"
         >
-          <div className="absolute inset-0 pointer-events-none opacity-40">
-            <div className="absolute top-10 left-1/4 w-3 h-3 bg-orange-200 rounded-full" />
-            <div className="absolute top-40 right-1/4 w-2 h-2 bg-orange-300 rounded-full" />
-            <div className="absolute bottom-32 left-10 w-4 h-4 bg-orange-100 rounded-full" />
-          </div>
-
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center space-y-6">
-              <Badge variant="secondary" className="mb-4 font-body tracking-wide">
-                Built for Modern Businesses
-              </Badge>
-
               <h1 className="hero-title text-5xl md:text-6xl font-heading font-extrabold text-white leading-[1.1] tracking-tight">
                 Verify Customers Instantly.<br />
                 Stay Compliant Effortlessly.
               </h1>
 
               <p className="hero-desc text-lg md:text-2xl text-white/80 max-w-2xl mx-auto leading-relaxed font-body">
-                youID helps organizations onboard verified users in seconds — without storing or handling sensitive documents.
+                youID helps organizations onboard verified users in seconds  without storing or handling sensitive documents.
               </p>
 
-              <Button
-                size="lg"
-                variant="secondary"
-                className="hero-btn mt-4 text-lg px-10 py-6 font-semibold font-body"
-              >
-                Request Demo
-              </Button>
+              {/* GRADIENT REQUEST DEMO BUTTON */}
+<Button
+  size="lg"
+  variant="secondary"
+  className="
+    hero-btn
+    mt-6 mx-auto
+    text-lg px-10 py-6 font-semibold font-body
+    flex items-center justify-center
+    bg-gradient-to-r from-black via-black to-[#FF6B35]
+    text-white border border-white/10
+    hover:from-black hover:via-[#1a1a1a] hover:to-[#ff824f]
+    shadow-lg shadow-black/40
+    rounded-xl
+  "
+>
+  Request Demo
+</Button>
+
             </div>
           </div>
         </section>
 
-        {/* ------------- PROBLEM SECTION (PINNED ON DESKTOP/TABLET) ------------- */}
+        {/* ------------- PROBLEM SECTION ------------- */}
         <section
           ref={problemRef}
           className="py-28 px-6 md:px-12 lg:px-20 bg-black text-white relative overflow-visible"
@@ -319,45 +313,71 @@ const BusinessLanding = () => {
           <div className="max-w-7xl mx-auto px-4">
             <div
               ref={chooseBoxRef}
-              className="bg-[#FF6B35] text-black rounded-3xl p-20 shadow-2xl min-h-[620px]"
+              className="
+                rounded-3xl 
+                p-[2px] sm:p-[3px] md:p-[4px]
+                bg-gradient-to-br from-black via-[#1f0a00] to-[#FF6B35]
+                shadow-2xl
+                min-h-[480px] md:min-h-[620px]
+              "
             >
-              <h2 className="text-5xl md:text-6xl font-heading font-extrabold leading-[1.15] mb-14 tracking-tight">
-                Why Businesses Choose youID
-              </h2>
+              <div
+                className="
+                  h-full w-full
+                  rounded-3xl
+                  bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
+                  px-6 sm:px-8 md:px-16
+                  py-6 sm:py-8 md:py-16
+                  text-white
+                "
+              >
+                <h2 className="text-3xl sm:text-4xl md:text-6xl font-heading font-extrabold leading-[1.15] mb-10 md:mb-14 tracking-tight">
+                  Why Businesses Choose youID
+                </h2>
 
-              <div className="space-y-14 text-lg">
-                {[
-                  [
-                    "01",
-                    "Instant Verification",
-                    "Skip document uploads — verify instantly with zero-document checks.",
-                  ],
-                  [
-                    "02",
-                    "Reduce Fraud",
-                    "Stop fraudulent sign-ups using decentralized identity methods.",
-                  ],
-                  [
-                    "03",
-                    "Zero PII Storage",
-                    "youID stores nothing — eliminating all data breach risk.",
-                  ],
-                  [
-                    "04",
-                    "Faster Onboarding",
-                    "Reduce friction and increase customer conversions instantly.",
-                  ],
-                ].map((item, i) => (
-                  <div key={i} className="choose-item">
-                    <h3 className="text-3xl font-heading font-bold mb-2 tracking-tight flex items-center gap-4">
-                      <span className="text-4xl font-extrabold">{item[0]}</span>{" "}
-                      {item[1]}
-                    </h3>
-                    <p className="text-black/80 text-lg leading-relaxed font-body max-w-xl">
-                      {item[2]}
-                    </p>
-                  </div>
-                ))}
+                <div className="space-y-10 md:space-y-14 text-lg">
+                  {[
+                    {
+                      number: "01",
+                      title: "Instant Verification",
+                      description:
+                        "Skip document uploads — verify customers instantly with zero-document checks.",
+                    },
+                    {
+                      number: "02",
+                      title: "Reduce Fraud",
+                      description:
+                        "Stop fraudulent sign-ups using decentralized, cryptographic identity proofs.",
+                    },
+                    {
+                      number: "03",
+                      title: "Zero PII Storage",
+                      description:
+                        "youID stores no customer documents — dramatically reducing data breach exposure.",
+                    },
+                    {
+                      number: "04",
+                      title: "Faster Onboarding",
+                      description:
+                        "Cut friction at signup and increase conversion while staying fully compliant.",
+                    },
+                  ].map((item, i) => (
+                    <div
+                      key={i}
+                      className="choose-item border-t border-white/10 pt-6 first:pt-0 first:border-t-0"
+                    >
+                      <h3 className="text-2xl sm:text-3xl font-heading font-bold mb-2 tracking-tight flex items-center gap-4">
+                        <span className="text-3xl sm:text-4xl font-extrabold px-3 py-1 rounded-full bg-black/60 text-[#FFCF9A]">
+                          {item.number}
+                        </span>
+                        <span className="text-white">{item.title}</span>
+                      </h3>
+                      <p className="text-white/80 text-sm sm:text-base md:text-lg leading-relaxed font-body max-w-xl">
+                        {item.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

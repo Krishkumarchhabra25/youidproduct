@@ -214,7 +214,6 @@ const UserBenefits = () => {
                   Users never have to upload or share sensitive identity documents, reducing the risk of data 
           breaches or misuse.
                 </p>
-                <p className="text-gray-500 text-xs sm:text-sm">Stay protected everywhere.</p>
               </CardContent>
             </Card>
           </div>
@@ -231,7 +230,6 @@ const UserBenefits = () => {
                    Instant identity checks without lengthy document submission processes, making onboarding 
           quick and hassle-free.
                 </p>
-                <p className="text-gray-500 text-xs sm:text-sm">Stay protected everywhere.</p>
               </CardContent>
             </Card>
           </div>
@@ -248,7 +246,6 @@ const UserBenefits = () => {
                    No need to scan, upload, or email documents — verification happens seamlessly in the 
           background.
                 </p>
-                <p className="text-gray-500 text-xs sm:text-sm">Verification in seconds.</p>
               </CardContent>
             </Card>
           </div>
@@ -266,7 +263,6 @@ const UserBenefits = () => {
           risks.
 
                 </p>
-                <p className="text-gray-500 text-xs sm:text-sm">A smoother experience.</p>
               </CardContent>
             </Card>
           </div>
@@ -282,7 +278,6 @@ const UserBenefits = () => {
                 <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-body">
                   Businesses no longer need to collect, store, or process sensitive ID files — reducing legal and security risks.
                 </p>
-                <p className="text-gray-500 text-xs sm:text-sm">Security-first identity.</p>
               </CardContent>
             </Card>
           </div>
@@ -298,7 +293,6 @@ const UserBenefits = () => {
                 <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-body">
     Users retain ownership of their identity information, ensuring compliance with privacy 
           standards like GDPR.                </p>
-                <p className="text-gray-500 text-xs sm:text-sm">You own your identity</p>
               </CardContent>
             </Card>
           </div>
@@ -313,7 +307,6 @@ const UserBenefits = () => {
                 <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">Improved User Experience</h3>
                 <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-body">
 A frictionless process that avoids delays and enhances trust in the service.    </p>
-                <p className="text-gray-500 text-xs sm:text-sm">Simple. Smooth. Reliable.</p>
               </CardContent>
             </Card>
           </div>

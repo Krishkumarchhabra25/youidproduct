@@ -217,7 +217,6 @@ const BusinessBenefits = () => {
                 <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
                   Eliminate fake or altered documents with verification powered by youID's tamper-proof digital identity.
                 </p>
-                <p className="text-gray-500 text-xs sm:text-sm">Trusted verification.</p>
               </CardContent>
             </Card>
           </div>
@@ -233,7 +232,6 @@ const BusinessBenefits = () => {
                 <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
                   No manual document review, no storing sensitive files, and no complex identity workflows.
                 </p>
-                <p className="text-gray-500 text-xs sm:text-sm">Save time & resources.</p>
               </CardContent>
             </Card>
           </div>
@@ -249,7 +247,6 @@ const BusinessBenefits = () => {
                 <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
                   Cut onboarding times by up to 90% — instant verification without friction or paperwork.
                 </p>
-                <p className="text-gray-500 text-xs sm:text-sm">Speed drives conversion.</p>
               </CardContent>
             </Card>
           </div>
@@ -265,7 +262,6 @@ const BusinessBenefits = () => {
                 <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
                   youID supports privacy-first identity standards, reducing the need for businesses to store documents.
                 </p>
-                <p className="text-gray-500 text-xs sm:text-sm">Effortless compliance.</p>
               </CardContent>
             </Card>
           </div>
@@ -281,7 +277,6 @@ const BusinessBenefits = () => {
                 <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
                   Businesses no longer need to collect, store, or process sensitive ID files — reducing legal and security risks.
                 </p>
-                <p className="text-gray-500 text-xs sm:text-sm">Zero document liability.</p>
               </CardContent>
             </Card>
           </div>
@@ -297,7 +292,6 @@ const BusinessBenefits = () => {
                 <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
                   With fewer steps, less friction, and instant verification, more customers complete onboarding.
                 </p>
-                <p className="text-gray-500 text-xs sm:text-sm">Less drop-off. More users.</p>
               </CardContent>
             </Card>
           </div>

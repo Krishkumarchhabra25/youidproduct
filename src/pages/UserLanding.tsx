@@ -1,11 +1,11 @@
 // UserLanding.tsx
 import Navigation from "../Components/Navigation";
-import { Badge } from "../Components/ui/badge";
 import Footer from "../Components/Footer";
 import { Button } from "../Components/ui/button";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLayoutEffect, useRef } from "react";
+import { SiAndroid, SiApple } from "react-icons/si"; // npm i react-icons if you don't have it
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -69,11 +69,13 @@ const UserLanding = () => {
       if (hero) {
         const heroTitle = hero.querySelector(".hero-title");
         const heroDesc = hero.querySelector(".hero-desc");
-        const heroBtn = hero.querySelector(".hero-btn");
+      const heroBtns = hero.querySelectorAll(".hero-btn");
 
-        const elements = [heroTitle, heroDesc, heroBtn].filter(
-          Boolean
-        ) as Element[];
+   const elements = [
+        heroTitle,
+        heroDesc,
+        ...Array.from(heroBtns),
+      ].filter(Boolean) as Element[];
 
         gsap.set(elements, { opacity: 0 });
 
@@ -105,20 +107,20 @@ const UserLanding = () => {
             }
           );
         }
-
-        if (heroBtn) {
-          gsap.fromTo(
-            heroBtn,
-            { opacity: 0, scale: 0.8 },
-            {
-              opacity: 1,
-              scale: 1,
-              duration: 0.8,
-              ease: "back.out(1.7)",
-              delay: 0.8,
-            }
-          );
-        }
+ if (heroBtns.length) {
+        gsap.fromTo(
+          heroBtns,
+          { opacity: 0, scale: 0.8 },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+            delay: 0.8,
+            stagger: 0.1, // nice little offset between Android & iOS
+          }
+        );
+      }
       }
 
       // ANIMATIONS
@@ -274,20 +276,16 @@ const UserLanding = () => {
           ref={heroRef}
           className="hero-section relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-black to-[#1a0f00]"
         >
-          <div className="absolute inset-0 pointer-events-none opacity-40">
-            <div className="absolute top-10 left-1/4 w-3 h-3 bg-orange-200 rounded-full" />
-            <div className="absolute top-40 right-1/4 w-2 h-2 bg-orange-300 rounded-full" />
-            <div className="absolute bottom-32 left-10 w-4 h-4 bg-orange-100 rounded-full" />
-          </div>
+          
 
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center space-y-6">
-              <Badge
+              {/* <Badge
                 variant="secondary"
                 className="mb-4 font-body tracking-wide"
               >
                 For Individuals & Everyday Users
-              </Badge>
+              </Badge> */}
 
               <h1 className="hero-title text-4xl md:text-6xl font-heading font-extrabold text-white leading-[1.1] tracking-tight">
                 Verify Your Identity Once.
@@ -297,17 +295,48 @@ const UserLanding = () => {
 
               <p className="hero-desc text-base md:text-2xl text-white/80 max-w-2xl mx-auto leading-relaxed font-body">
                 youID keeps your documents on your phone and lets you approve
-                verification with a single tap — companies verify you without
+                verification with a single tap  companies verify you without
                 ever seeing your ID.
               </p>
+<div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+  <Button
+    size="lg"
+    variant="secondary"
+    className="
+      hero-btn
+      min-w-[180px]
+      text-lg px-10 py-6 font-semibold font-body
+      flex items-center gap-3 justify-center
+      bg-gradient-to-r from-black via-black to-[#FF6B35]
+      text-white border border-white/10
+      hover:from-black hover:via-[#1a1a1a] hover:to-[#ff824f]
+      shadow-lg shadow-black/40
+    "
+  >
+    <SiAndroid className="w-5 h-5" />
+     Android
+  </Button>
 
-              <Button
-                size="lg"
-                variant="secondary"
-                className="hero-btn mt-4 text-lg px-10 py-6 font-semibold font-body"
-              >
-                Get Started with youID
-              </Button>
+  <Button
+    size="lg"
+    variant="secondary"
+    className="
+      hero-btn
+      min-w-[180px]
+      text-lg px-10 py-6 font-semibold font-body
+      flex items-center gap-3 justify-center
+      bg-gradient-to-r from-[#FF6B35] via-black to-black
+      text-white border border-white/10
+      hover:from-[#ff824f] hover:via-[#1a1a1a] hover:to-black
+      shadow-lg shadow-black/40
+    "
+  >
+    <SiApple className="w-5 h-5" />
+     IOS
+  </Button>
+</div>
+
+
             </div>
           </div>
         </section>
@@ -362,35 +391,53 @@ const UserLanding = () => {
           className="py-20 md:py-28 bg-black text-white relative overflow-visible"
         >
           <div className="max-w-7xl mx-auto px-4">
-            <div
-              ref={chooseBoxRef}
-              className="
-                bg-[#FF6B35] text-black rounded-3xl 
-                p-6 sm:p-8 md:p-20 
-                shadow-2xl 
-                min-h-[480px] md:min-h-[620px]
-              "
-            >
-              <h2 className="text-3xl sm:text-4xl md:text-6xl font-heading font-extrabold leading-[1.15] mb-10 md:mb-14 tracking-tight">
-                Why People Trust youID
-              </h2>
+<div
+  ref={chooseBoxRef}
+  className="
+    rounded-3xl 
+    p-[2px] sm:p-[3px] md:p-[4px]
+    bg-gradient-to-br from-black via-[#1f0a00] to-[#FF6B35]
+    shadow-2xl
+    min-h-[480px] md:min-h-[620px]
+  "
+>
+  <div
+    className="
+      h-full w-full
+      rounded-3xl
+      bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
+      px-6 sm:px-8 md:px-16
+      py-6 sm:py-8 md:py-16
+      text-white
+    "
+  >
+    <h2 className="text-3xl sm:text-4xl md:text-6xl font-heading font-extrabold leading-[1.15] mb-10 md:mb-14 tracking-tight">
+      Why People Trust youID
+    </h2>
 
-              <div className="space-y-10 md:space-y-14 text-lg">
-                {userReasons.map((item, i) => (
-                  <div key={i} className="choose-item">
-                    <h3 className="text-2xl sm:text-3xl font-heading font-bold mb-2 tracking-tight flex items-center gap-4">
-                      <span className="text-3xl sm:text-4xl font-extrabold">
-                        {item.number}
-                      </span>
-                      {item.title}
-                    </h3>
-                    <p className="text-black/80 text-sm sm:text-base md:text-lg leading-relaxed font-body max-w-xl">
-                      {item.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
+    <div className="space-y-10 md:space-y-14 text-lg">
+      {userReasons.map((item, i) => (
+        <div
+          key={i}
+          className="choose-item border-t border-white/10 pt-6 first:pt-0 first:border-t-0"
+        >
+          <h3 className="text-2xl sm:text-3xl font-heading font-bold mb-2 tracking-tight flex items-center gap-4">
+            <span className="text-3xl sm:text-4xl font-extrabold px-3 py-1 rounded-full bg-black/60 text-[#FFCF9A]">
+              {item.number}
+            </span>
+            <span className="text-white">{item.title}</span>
+          </h3>
+          <p className="text-white/80 text-sm sm:text-base md:text-lg leading-relaxed font-body max-w-xl">
+            {item.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+
+
           </div>
         </section>
       </main>
