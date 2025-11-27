@@ -186,7 +186,7 @@ const UserHowitWorks = () => {
               How It Works
             </h2>
             <p className="text-white/70 text-lg font-body max-w-2xl mx-auto mt-3">
-              Your complete journey through the youID app — from uploading to
+              Your complete journey through the youID app from uploading to
               verified status.
             </p>
           </div>
@@ -279,7 +279,7 @@ const UserHowitWorks = () => {
                     rounded-[2.5rem]
                     px-6
                     pt-8
-                    pb-16
+                    pb-28
                     bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
                     shadow-[0_30px_80px_rgba(0,0,0,0.85)]
                     border border-white/5
