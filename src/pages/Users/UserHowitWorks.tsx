@@ -35,7 +35,7 @@ const steps: Step[] = [
     id: 2,
     title: "Upload Documents",
     desc: "Choose documents to upload for verification.",
-    image: step3Img,
+    image: step2Img, // ✅ now correct
     points: [
       "Select the type of document you want to upload.",
       "Use camera or gallery to upload images or PDF.",
@@ -48,7 +48,7 @@ const steps: Step[] = [
     id: 3,
     title: "Verify Documents",
     desc: "See pending, verified, rejected, or expired documents.",
-    image: step2Img,
+    image: step3Img, // ✅ now correct
     points: [
       "Documents enter the 'Pending' stage after upload.",
       "Admins review your submitted documents.",
@@ -243,7 +243,7 @@ const UserHowitWorks = () => {
 
             {/* RIGHT SIDE — BIG, FULLY VISIBLE IMAGE */}
             <div className="hidden md:flex justify-center">
-              <div className="sticky top-24 w-[300px] lg:w-[330x] xl:w-[350px]">
+              <div className="sticky top-24 w-[300px] lg:w-[330px] xl:w-[350px]">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={steps[activeStep].id}

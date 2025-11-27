@@ -4,43 +4,61 @@
 
 @layer base {
   :root {
-    --background: oklch(1 0 0);
+    /* Use the dark value as the effective background (your "dark fallback") */
+    --background: oklch(0.13 0.028 261.692);
     --foreground: oklch(0.13 0.028 261.692);
+
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.13 0.028 261.692);
+
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.13 0.028 261.692);
+
     --primary: oklch(0.21 0.034 264.665);
     --primary-foreground: oklch(0.985 0.002 247.839);
+
     --secondary: oklch(0.967 0.003 264.542);
     --secondary-foreground: oklch(0.21 0.034 264.665);
+
     --muted: oklch(0.967 0.003 264.542);
     --muted-foreground: oklch(0.551 0.027 264.364);
+
     --accent: oklch(0.967 0.003 264.542);
     --accent-foreground: oklch(0.21 0.034 264.665);
+
     --destructive: oklch(0.577 0.245 27.325);
+
     --border: oklch(0.928 0.006 264.531);
     --input: oklch(0.928 0.006 264.531);
     --ring: oklch(0.707 0.022 261.325);
+
     --radius: 0.5rem;
   }
 
   .dark {
     --background: oklch(0.13 0.028 261.692);
     --foreground: oklch(0.985 0.002 247.839);
+
     --card: oklch(0.21 0.034 264.665);
     --card-foreground: oklch(0.985 0.002 247.839);
+
     --popover: oklch(0.21 0.034 264.665);
     --popover-foreground: oklch(0.985 0.002 247.839);
+
     --primary: oklch(0.928 0.006 264.531);
     --primary-foreground: oklch(0.21 0.034 264.665);
+
     --secondary: oklch(0.278 0.033 256.848);
     --secondary-foreground: oklch(0.985 0.002 247.839);
+
     --muted: oklch(0.278 0.033 256.848);
     --muted-foreground: oklch(0.707 0.022 261.325);
+
     --accent: oklch(0.278 0.033 256.848);
     --accent-foreground: oklch(0.985 0.002 247.839);
+
     --destructive: oklch(0.704 0.191 22.216);
+
     --border: oklch(1 0 0 / 10%);
     --input: oklch(1 0 0 / 15%);
     --ring: oklch(0.551 0.027 264.364);
@@ -49,12 +67,14 @@
   * {
     @apply border-border;
   }
-  
-  body {
-     @apply bg-background text-foreground font-body;
 
+  body {
+    @apply bg-background text-foreground font-body;
   }
 }
+
+/* ---------- ANIMATIONS ---------- */
+
 @keyframes slideIn {
   from {
     transform: translateX(100%);
@@ -67,23 +87,6 @@
 .animate-slideIn {
   animation: slideIn 0.3s ease-out forwards;
 }
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  scrollbar-width: none;
-}
-
-::-webkit-scrollbar {
-  display: none;
-}
-
-* {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
 
 @keyframes scroll {
   0% {
@@ -102,14 +105,37 @@
   animation-play-state: paused;
 }
 
+/* ---------- SCROLLBARS ---------- */
 
-html, body {
-  scroll-behavior: auto !important;
-  background: transparent !important;
-    overflow-x: hidden !important;
-
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* ---------- GLOBAL HTML/BODY (FIX WHITE FLICKER) ---------- */
+
+html,
+body {
+  scroll-behavior: auto !important;
+  overflow-x: hidden !important;
+
+  /* IMPORTANT: real background, not transparent */
+  background-color: oklch(0.13 0.028 261.692);
+  color: var(--foreground);
+  color-scheme: dark;
+}
 
 /* helper to expand the reveal area for progress-based animation */
 .reveal-track {
@@ -123,6 +149,7 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ---------- FONTS ---------- */
 
 /* ----------------- GRUPPO (HEADINGS) ----------------- */
 @font-face {
@@ -161,37 +188,40 @@ html, body {
   font-style: normal;
 }
 
-
 /* ----------------- UBUNTU MONO (SUBHEADINGS + PARAGRAPHS) ----------------- */
 @font-face {
   font-family: "UbuntuMono";
-  src: url("/src/assets/fonts/Ubuntumono/UbuntuMono-Regular.ttf") format("truetype");
+  src: url("/src/assets/fonts/Ubuntumono/UbuntuMono-Regular.ttf")
+    format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "UbuntuMono";
-  src: url("/src/assets/fonts/Ubuntumono/UbuntuMono-Italic.ttf") format("truetype");
+  src: url("/src/assets/fonts/Ubuntumono/UbuntuMono-Italic.ttf")
+    format("truetype");
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
   font-family: "UbuntuMono";
-  src: url("/src/assets/fonts/Ubuntumono/UbuntuMono-Bold.ttf") format("truetype");
+  src: url("/src/assets/fonts/Ubuntumono/UbuntuMono-Bold.ttf")
+    format("truetype");
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: "UbuntuMono";
-  src: url("/src/assets/fonts/Ubuntumono/UbuntuMono-BoldItalic.ttf") format("truetype");
+  src: url("/src/assets/fonts/Ubuntumono/UbuntuMono-BoldItalic.ttf")
+    format("truetype");
   font-weight: 700;
   font-style: italic;
 }
 
-
+/* AMATIC */
 @font-face {
   font-family: "AmaticSc";
   src: url("/src/assets/fonts/Amatic/AmaticSC-Regular.ttf") format("truetype");
@@ -199,11 +229,11 @@ html, body {
   font-style: normal;
 }
 
-
 /* ----------------- GLORIA HALLELUJAH (SUBHEADINGS + BULLETS) ----------------- */
 @font-face {
   font-family: "GloriaHallelujah";
-  src: url("/src/assets/fonts/GloriaHallelujah/GloriaHallelujah-Regular.ttf") format("truetype");
+  src: url("/src/assets/fonts/GloriaHallelujah/GloriaHallelujah-Regular.ttf")
+    format("truetype");
   font-weight: 400;
   font-style: normal;
 }
@@ -211,13 +241,13 @@ html, body {
 /* ----------------- GOCHI HAND (SUBHEADINGS + BULLETS) ----------------- */
 @font-face {
   font-family: "GochiHand";
-  src: url("/src/assets/fonts/GochiHand/GochiHand-Regular.ttf") format("truetype");
+  src: url("/src/assets/fonts/GochiHand/GochiHand-Regular.ttf")
+    format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
-
-/* Add to the top of your globals.css (inside @layer base or outside) */
+/* ---------- LAYOUT HELPERS ---------- */
 
 /* make pinned sections full width and remove unexpected left offsets */
 .pinned-fullwidth {
@@ -226,26 +256,31 @@ html, body {
   box-sizing: border-box;
 }
 
-/* Ensure body fallback background is dark so any gaps won't be white */
-@layer base {
-  :root {
-    --background: oklch(0.13 0.028 261.692); /* dark fallback */
-    /* keep other variables as they are */
-  }
-}
-
+/* ---------- UTILITIES LAYER (GRADIENTS ETC) ---------- */
 
 @layer utilities {
   /* Mobile-first deep blue → black radial gradient */
   .bg-gradient-mobile {
-    background-image: radial-gradient(circle at top left, #003a8c 0%, #00121a 28%, #000000 65%, #000000 100%);
+    background-image: radial-gradient(
+      circle at top left,
+      #003a8c 0%,
+      #00121a 28%,
+      #000000 65%,
+      #000000 100%
+    );
     background-position: top left;
     background-size: cover;
   }
 
   /* Desktop / tablet: orange -> dark radial (your existing) */
   .bg-gradient-desktop {
-    background-image: radial-gradient(circle at top left, #ff6a00 0%, #1a0a00 25%, #000000 70%, #000000 100%);
+    background-image: radial-gradient(
+      circle at top left,
+      #ff6a00 0%,
+      #1a0a00 25%,
+      #000000 70%,
+      #000000 100%
+    );
     background-position: top left;
     background-size: cover;
   }
@@ -256,3 +291,53 @@ html, body {
   }
 }
 
+/* ---------- OUR STORY SECTION ---------- */
+
+#our-story {
+  position: relative;
+  height: 100vh; /* REQUIRED */
+  width: 100%;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(135deg, #000, #111, #000);
+  color: white;
+}
+
+/* WHITE CURTAIN OVERLAY */
+#story-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 10;
+  transform: translateY(0); /* Start fully covering */
+  will-change: transform;
+}
+
+/* CONTENT */
+.story-content {
+  position: relative;
+  z-index: 20; /* ABOVE overlay */
+  text-align: center;
+  max-width: 700px;
+  padding: 20px;
+}
+
+#story-title {
+  font-size: 3.2rem;
+  margin-bottom: 20px;
+  opacity: 1;
+}
+
+#story-paragraph {
+  opacity: 0; /* Will fade in */
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-top: 10px;
+}
