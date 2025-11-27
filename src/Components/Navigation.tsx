@@ -164,28 +164,57 @@ const Navigation = () => {
               </Link>
             ))}
 
-            <div className="pt-4 space-y-2">
-              <Button
-                variant="ghost"
-                className="w-full text-white"
-                onClick={() => {
-                  navigate("/business");
-                  setMobileMenuOpen(false);
-                }}
-              >
-                For Businesses
-              </Button>
+      <div className="pt-4 space-y-2">
+  {isBusiness && (
+    <Button
+      className="w-full bg-[#FF6B35] hover:bg-[#e85c2e] text-white"
+      onClick={() => {
+        navigate("/user");
+        setMobileMenuOpen(false);
+      }}
+    >
+      For Users
+    </Button>
+  )}
 
-              <Button
-                className="w-full bg-[#FF6B35] hover:bg-[#e85c2e] text-white"
-                onClick={() => {
-                  navigate("/user");
-                  setMobileMenuOpen(false);
-                }}
-              >
-                Download App
-              </Button>
-            </div>
+  {isUser && (
+    <Button
+      className="w-full bg-[#FF6B35] hover:bg-[#e85c2e] text-white"
+      onClick={() => {
+        navigate("/business");
+        setMobileMenuOpen(false);
+      }}
+    >
+      For Businesses
+    </Button>
+  )}
+
+  {!isBusiness && !isUser && (
+    <>
+      <Button
+        variant="ghost"
+        className="w-full text-white"
+        onClick={() => {
+          navigate("/business");
+          setMobileMenuOpen(false);
+        }}
+      >
+        For Businesses
+      </Button>
+
+      <Button
+        className="w-full bg-[#FF6B35] hover:bg-[#e85c2e] text-white"
+        onClick={() => {
+          navigate("/user");
+          setMobileMenuOpen(false);
+        }}
+      >
+        Download App
+      </Button>
+    </>
+  )}
+</div>
+
           </div>
         )}
       </div>
