@@ -8,11 +8,9 @@ const Navigation = () => {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Route detection
   const isBusiness = location.pathname.startsWith("/business");
   const isUser = location.pathname.startsWith("/user");
 
-  // Navigation Links
   const navLinks = useMemo(() => {
     if (isBusiness) {
       return [
@@ -40,14 +38,7 @@ const Navigation = () => {
     }
   }, [isBusiness, isUser]);
 
-  // Active link
-  const isActive = (path: string) => {
-    if (path === "/") return location.pathname === "/";
-    return (
-      location.pathname === path ||
-      location.pathname.startsWith(path + "/")
-    );
-  };
+  const isActive = (path: string) => location.pathname === path;
 
   // Desktop CTA
   const renderDesktopCTA = () => {
