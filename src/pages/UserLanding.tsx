@@ -317,7 +317,7 @@ const UserLanding = () => {
     Download and use it – it’s free!
   </p>
 
-  <div className="flex flex-col sm:flex-row items-center gap-4">
+  <div className="flex flex-col items-center gap-4">
     <Button
       size="lg"
       variant="secondary"
