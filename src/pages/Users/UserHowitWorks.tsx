@@ -20,53 +20,53 @@ type Step = {
 const steps: Step[] = [
   {
     id: 1,
-    title: "Sign Up / Sign In",
+    title: "Sign Up",
     desc: "Create an account or sign in to manage your documents.",
     image: step1Img,
     points: [
-      "Enter your mobile number or email to get started.",
-      "Create a secure password for your account.",
-      "Verify your identity using OTP.",
+      "Enter your mobile number to get started.",
+      "Create a secure 5-digit security PIN for your account.",
+      "Verify your login details via mobile and email OTP.",
       "Set up your basic profile details.",
-      "Access your dashboard and start uploading documents.",
+      "Access your dashboard and start activation process.",
     ],
   },
   {
     id: 2,
-    title: "Upload Documents",
-    desc: "Choose documents to upload for verification.",
+    title: "Scan Documents",
+    desc: "Choose documents to scan for verification.",
     image: step2Img,
     points: [
-      "Select the type of document you want to upload.",
-      "Use camera or gallery to upload images or PDF.",
-      "Ensure the document photo is clear and readable.",
-      "Submit the document for admin review.",
-      "Track upload progress in real time.",
+      "Select the Countries (Max 3)",
+      "Select the type of document you want to scan to be used for Verification.",
+      "Ensure the document clear and readable by the app scanner",
+      "Submit the document for review.",
+   //   "Track upload progress in real time.",
     ],
   },
   {
     id: 3,
     title: "Verify Documents",
-    desc: "See pending, verified, rejected, or expired documents.",
+    desc: "Documents are verified instantly and ready for use.",
     image: step3Img,
     points: [
-      "Documents enter the 'Pending' stage after upload.",
-      "Admins review your submitted documents.",
-      "Rejected documents show reason and require re-upload.",
-      "Expired documents must be updated for continued use.",
+      "Documents are in 'Pending' stage until verified successfully.",
+     // "Admins review your submitted documents.",
+      "Rejected documents show reason and require re-upload",
+      "Expired documents must be updated for continued use",
       "Get notified instantly when document status changes.",
     ],
   },
   {
     id: 4,
-    title: "Ready for Verification",
+    title: "Ready for Use",
     desc: "All required documents verified.",
     image: step6Img,
     points: [
       "All your documents have been successfully validated.",
       "Your profile is now fully verified.",
       "You can now access all features without limitations.",
-      "Share your verified identity anytime.",
+      "Use your verified identity anytime..",
       "Stay updated and renew documents before they expire.",
     ],
   },
@@ -186,8 +186,7 @@ const UserHowitWorks = () => {
               How It Works
             </h2>
             <p className="text-white/70 text-lg font-body max-w-2xl mx-auto mt-3">
-              Your complete journey through the youID app from uploading to
-              verified status.
+              Registering & activating youIDsecure wallet is easy and simple
             </p>
           </div>
 

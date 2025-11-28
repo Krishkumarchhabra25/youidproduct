@@ -13,7 +13,7 @@ const userProblems = [
   {
     title: "Risk of Data Breaches and Identity Theft",
     description:
-      "Social platforms have suffered major data breaches. Sharing your government ID online feels risky because one leak can expose everything—name, address, ID numbers, and more.",
+      "Businesses have suffered major data breaches. Sharing your Identity documents online feels risky because one leak can expose everything about you.",
   },
   {
     title: "Lack of Trust in Platforms",
@@ -32,7 +32,7 @@ const userReasons = [
     number: "01",
     title: "You Stay In Control",
     description:
-      "Your documents live on your phone, not on someone else’s server. You approve every verification with your fingerprint or face.",
+      "Your documents are stored on your phone, not on someone else’s server not even ours. You approve every verification just like your banking apps.",
   },
   {
     number: "02",
@@ -42,15 +42,15 @@ const userReasons = [
   },
   {
     number: "03",
-    title: "Private by Design",
+    title: "Private and Secure by Design",
     description:
-      "Zero-knowledge architecture and strong encryption keep your identity safe—even if a company’s systems are attacked.",
+      "Zero-knowledge architecture and strong encryption keep your identity secure and private.",
   },
   {
     number: "04",
     title: "One Time, Use Anywhere",
     description:
-      "Verify once, reuse securely across apps and platforms without uploading documents again and again.",
+      "Verify once, reuse securely across apps and platforms without uploading or sharing documents again and again.",
   },
 ];
 
@@ -290,13 +290,11 @@ const UserLanding = () => {
               <h1 className="hero-title text-4xl md:text-6xl font-heading font-extrabold text-white leading-[1.1] tracking-tight">
                 Verify Your Identity Once.
                 <br />
-                Use It Everywhere.
+                Use It Anywhere, Anytime.
               </h1>
 
               <p className="hero-desc text-base md:text-2xl text-white/80 max-w-2xl mx-auto leading-relaxed font-body">
-                youID keeps your documents on your phone and lets you approve
-                verification with a single tap  companies verify you without
-                ever seeing your ID.
+               Easily and securely verify your documents using the youID digital wallet on your smartphone. Approve requests without sharing your documents with any business  not even us. The approval process works just like your banking apps.
               </p>
 <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
   <Button
@@ -349,17 +347,15 @@ const UserLanding = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
             <div>
               <h2 className="text-3xl sm:text-4xl md:text-6xl font-heading font-extrabold leading-[1.15]">
-                Why People
-                <br /> Worry About{" "}
+                Why Users
+                <br /> worry about {" "}
                 <span className="text-[#FF6B35]">
-                  Sharing Their ID Online
+                  Sharing their documents Online
                 </span>
               </h2>
 
               <p className="mt-6 text-base md:text-xl text-gray-400 max-w-sm leading-relaxed font-body">
-                Traditional verification asks you to hand over too much
-                sensitive information — and trust that nothing bad happens to
-                it.
+               Current verification process asks you to hand over too much sensitive information and trust that nothing bad happens with your data but it does
               </p>
             </div>
 
@@ -412,7 +408,7 @@ const UserLanding = () => {
     "
   >
     <h2 className="text-3xl sm:text-4xl md:text-6xl font-heading font-extrabold leading-[1.15] mb-10 md:mb-14 tracking-tight">
-      Why People Trust youID
+      Why can Users trust youID?
     </h2>
 
     <div className="space-y-10 md:space-y-14 text-lg">

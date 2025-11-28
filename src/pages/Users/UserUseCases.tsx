@@ -207,68 +207,70 @@ const UserUseCases = () => {
 
   const useCases = [
     {
-      badge: "Identity Verification",
+      badge: "IDENTITY VERIFICATION",
       title: "Verify Identity Instantly",
       points: [
-        "No need to upload Aadhaar, PAN, Passport, or License",
+        "No need to upload or share your documents.",
         "Zero document storage required",
-        "Instant verification within seconds",
-        "Ideal for platforms that require identity trust",
+        "Instant verification within seconds.",
+        "Ideal for platforms that require identity trust.",
       ],
       image: bankingImg,
     },
     {
-      badge: "Age Verification",
+      badge: "AGE VERIFICATION",
       title: "Anonymous Age Verification",
       points: [
         "Perfect for adult-content platforms",
-        "Anonymous verification without ID exposure",
-        "Zero document uploads required",
-        "Eliminates risks of identity theft",
+        "Anonymous verification without exposing any PID, protects privacy.",
+        "Zero document uploads or verification required revealing other sources.",
+        "No need to upload your face Video or Picture.",
+        "Eliminates risks of identity theft or exploiting your Privacy rights.",
       ],
       image: ecommerceImg,
     },
     {
-      badge: "Proof of Address",
+      badge: "PROOF OF ADDRESS",
       title: "Address Verification Without Documents",
       points: [
-        "No need to upload passports or driving licenses",
-        "Instant digital address verification",
+        "No need to upload Driving license, Bank Statements or Utility Bills.",
+        "Instant digital address verification.",
+        "Avoid giving more information than needed, e.g. financial records.",
         "Improves onboarding speed by 10×",
-        "Reduces fraud using decentralized validation",
+        "Reduces the risk significantly of data profiling you.",
       ],
       image: healthcareImg,
     },
     {
-      badge: "Adult Sites",
+      badge: "ANONYMOUSLY VERIFY YOUR AGE ON ADULT SITES.",
       title: "Anonymous Age Checks for Adult Platforms",
       points: [
-        "No ID upload required",
-        "Prevents underage access",
-        "Anonymous age confirmation",
+        "No ID upload required or sharing of other platform  information.",
+        "No need to uploads your live Video or Photo.",
+        "Anonymous age confirmation just with a random code",
         "Protects user privacy",
       ],
       image: travelImg,
     },
     {
-      badge: "Dating Sites",
+      badge: "VERIFICATION WITHOUT THE NEED TO SHARE YOUR DOCUMENTS ON DATING SITES",
       title: "Safer & Verified Dating Profiles",
       points: [
-        "Instant document-free verification",
-        "Reduce fake profiles & scams",
-        "No passport/ID uploads",
-        "Higher trust and safety",
+        "Instant document-free verification.",
+        "Reduce the risk of fake profiles & scams on Dating Sites providing youID.",
+        "No passport/ID uploads.",
+        "Higher trust and safety in Dating Sites providing youID.",
       ],
       image: bankingImg,
     },
     {
-      badge: "Social Media",
+      badge: "IDENTITIFY WITHOUT THE NEED TO GIVE OWNERSHIP TO SOCIAL MEDIA",
       title: "Verified Social Accounts Without Uploading IDs",
       points: [
-        "No document upload required",
-        "Protects privacy from platforms",
-        "Eliminates risk of data leaks",
-        "Reduce impersonation & fake accounts",
+        "No document upload required.",
+        "Protects privacy from platforms.",
+        "Eliminates risk of data leaks.",
+        "Reduce impersonation & fake accounts.",
       ],
       image: ecommerceImg,
     },
@@ -304,7 +306,7 @@ const UserUseCases = () => {
                        font-heading font-extrabold leading-[1.0] tracking-[0.03em]
                        drop-shadow-[0_0_18px_rgba(0,0,0,0.35)] mb-2"
           >
-            One Identity
+           Your Own Document Secure Wallet
           </h1>
 
           <h2
@@ -312,183 +314,361 @@ const UserUseCases = () => {
                        font-heading font-extrabold leading-[1.0] tracking-[0.03em]
                        drop-shadow-[0_0_18px_rgba(0,0,0,0.35)]"
           >
-            For Every User
+            Use it Anywhere, Anytime
           </h2>
 
           <p className="mx-auto md:mx-0 text-base sm:text-lg md:text-xl text-white/80 max-w-full md:max-w-md mt-4 md:mt-8 font-body leading-snug">
-            Identity, Age & Address Verification for users on modern platforms.
+           You can use it for any type of Verification on any platform.
           </p>
         </section>
 
         {/* RIGHT SCROLL PANELS */}
-  <section
+<section
   ref={rightSectionRef}
   className="
     w-full md:w-[60%]
- space-y-20 sm:space-y-24 md:space-y-24
-
+    space-y-20 sm:space-y-24 md:space-y-24
     py-8 sm:py-12 md:py-24
     pr-6 md:pr-20 pl-6 md:pl-14
     font-body
   "
 >
-
-          {useCases.map((useCase, idx) => (
-            <div
-              key={idx}
-              ref={(el: HTMLDivElement | null) => {
-                panelsRef.current[idx] = el;
-              }}
-              className="
-                md:min-h-screen       /* no min height on mobile */
-                flex
-                md:items-center       /* center only on md+ */
-              "
-            >
-              <div className="w-full max-w-6xl mx-auto relative">
-       {/* ---------- MOBILE (< md) : CARD + PHONE ATTACHED ---------- */}
-{/* ---------- MOBILE (< md) : CARD + PHONE ATTACHED ---------- */}
-{/* ---------- MOBILE (< md) : CARD + PHONE ATTACHED ---------- */}
-<div className="relative w-full md:hidden pb-40 sm:pb-48">
-  {/* CARD */}
-  <div
-    className="
-      relative
-      w-full
-      rounded-[2.5rem]
-      px-6
-      pt-8
-      pb-12
-      bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
-      shadow-[0_30px_80px_rgba(0,0,0,0.85)]
-    "
-  >
-    <h2
+  {/* QUESTION 1: WHAT CAN YOU USE IT FOR? */}
+  <div className="space-y-10 sm:space-y-12 md:space-y-16">
+    <h3
       className="
-        text-lg sm:text-xl
+        text-2xl sm:text-3xl md:text-4xl
         font-heading font-extrabold
-        tracking-[0.25em]
+        tracking-[0.08em]
         uppercase
-        leading-tight
-        mb-4
+        text-white
       "
     >
-      {useCase.badge}
-    </h2>
+      What can you use it for?
+    </h3>
 
-    <ul className="space-y-3 text-sm sm:text-base text-white/90 pr-36 sm:pr-40">
-      {useCase.points.map((point, i) => (
-        <li key={i} className="flex items-start gap-3">
-          <span className="mt-[2px] text-[#FF6B35] text-lg">•</span>
-          <span>{point}</span>
-        </li>
-      ))}
-    </ul>
-  </div>
+    {useCases.slice(0, 3).map((useCase, idx) => {
+      const globalIdx = idx; // 0,1,2
 
-  {/* PHONE IMAGE */}
-  <img
-    src={useCase.image}
-    alt={useCase.title}
-    className="
-      absolute
-      bottom-28
-      right-[-10px]
-      w-[40%]
-      max-w-[150px]
-      translate-y-1/4
-      rounded-[2rem]
-      shadow-[0_20px_50px_rgba(0,0,0,0.9)]
-    "
-  />
-</div>
-
-
-
-                {/* ---------- TABLET / DESKTOP (md and up) : ORIGINAL LAYOUT ---------- */}
-                <div
+      return (
+        <div
+          key={globalIdx}
+          ref={(el: HTMLDivElement | null) => {
+            panelsRef.current[globalIdx] = el;
+          }}
+          className="
+             md:min-h-screen
+        flex
+        md:items-start  
+        md:pt-10         
+        "
+        >
+          <div className="w-full max-w-6xl mx-auto relative">
+            {/* MOBILE CARD + PHONE (same as you have) */}
+            <div className="relative w-full md:hidden pb-40 sm:pb-48">
+              <div
+                className="
+                  relative
+                  w-full
+                  rounded-[2.5rem]
+                  px-6
+                  pt-8
+                  pb-12
+                  bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
+                  shadow-[0_30px_80px_rgba(0,0,0,0.85)]
+                "
+              >
+                <h2
                   className="
-                    hidden md:flex
-                    relative
-                    flex-col md:flex-row items-center md:items-stretch
-                    gap-10 md:gap-12
-                    pt-10 md:pt-0
+                    text-lg sm:text-xl
+                    font-heading font-extrabold
+                    tracking-[0.25em]
+                    uppercase
+                    leading-tight
+                    mb-4
                   "
                 >
-                  {/* CONTENT CARD */}
-                  <div
+                  {useCase.badge}
+                </h2>
+
+                <ul className="space-y-3 text-sm sm:text-base text-white/90 pr-36 sm:pr-40">
+                  {useCase.points.map((point, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <span className="mt-[2px] text-[#FF6B35] text-lg">•</span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <img
+                src={useCase.image}
+                alt={useCase.title}
+                className="
+                  absolute
+                  bottom-28
+                  right-[-10px]
+                  w-[40%]
+                  max-w-[150px]
+                  translate-y-1/4
+                  rounded-[2rem]
+                  shadow-[0_20px_50px_rgba(0,0,0,0.9)]
+                "
+              />
+            </div>
+
+            {/* DESKTOP/TABLET LAYOUT (same as your original) */}
+            <div
+              className="
+                hidden md:flex
+                relative
+                flex-col md:flex-row items-center md:items-stretch
+                gap-10 md:gap-12
+                pt-10 md:pt-0
+              "
+            >
+              <div
+                className="
+                  flex-1
+                  rounded-[2.5rem]
+                  p-[2px] sm:p-[3px] md:p-[4px]
+                  bg-gradient-to-br from-black via-[#1f0a00] to-[#FF6B35]
+                  shadow-[0_30px_80px_rgba(0,0,0,0.85)]
+                "
+              >
+                <div
+                  className="
+                    h-full w-full
+                    rounded-[2.5rem]
+                    bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
+                    px-6 sm:px-10 md:px-14
+                    py-8 sm:py-10 md:py-14
+                    text-white
+                    flex flex-col justify-center
+                    gap-6 sm:gap-7 md:gap-8
+                  "
+                >
+                  <h2
                     className="
-                      flex-1
-                      rounded-[2.5rem]
-                      p-[2px] sm:p-[3px] md:p-[4px]
-                      bg-gradient-to-br from-black via-[#1f0a00] to-[#FF6B35]
-                      shadow-[0_30px_80px_rgba(0,0,0,0.85)]
+                      text-2xl sm:text-3xl md:text-[2.4rem] lg:text-[2.7rem]
+                      font-heading font-extrabold
+                      tracking-[0.25em]
+                      uppercase
+                      leading-tight
                     "
                   >
-                    <div
-                      className="
-                        h-full w-full
-                        rounded-[2.5rem]
-                        bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
-                        px-6 sm:px-10 md:px-14
-                        py-8 sm:py-10 md:py-14
-                        text-white
-                        flex flex-col justify-center
-                        gap-6 sm:gap-7 md:gap-8
-                      "
-                    >
-                      <h2
-                        className="
-                          text-2xl sm:text-3xl md:text-[2.4rem] lg:text-[2.7rem]
-                          font-heading font-extrabold
-                          tracking-[0.25em]
-                          uppercase
-                          leading-tight
-                        "
-                      >
-                        {useCase.badge}
-                      </h2>
+                    {useCase.badge}
+                  </h2>
 
-                      <ul className="space-y-3 sm:space-y-4 text-sm sm:text-lg md:text-xl text-white/90">
-                        {useCase.points.map((point, i) => (
-                          <li key={i} className="flex items-start gap-3">
-                            <span className="mt-[3px] text-[#FF6B35] text-lg sm:text-xl">
-                              •
-                            </span>
-                            <span>{point}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  {/* PHONE IMAGE – RIGHT SIDE */}
-                  <div
-                    className="
-                      relative
-                      w-full md:w-[32%]
-                      flex items-center justify-center md:justify-start
-                      md:-ml-10 lg:-ml-14
-                    "
-                  >
-                    <img
-                      src={useCase.image}
-                      alt={useCase.title}
-                      className="
-                        relative
-                        w-[60%] sm:w-[70%] md:w-full
-                        max-w-sm
-                        rounded-[2.5rem]
-                        shadow-[0_25px_60px_rgba(0,0,0,0.95)]
-                        object-cover
-                      "
-                    />
-                  </div>
+                  <ul className="space-y-3 sm:space-y-4 text-sm sm:text-lg md:text-xl text-white/90">
+                    {useCase.points.map((point, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <span className="mt-[3px] text-[#FF6B35] text-lg sm:text-xl">
+                          •
+                        </span>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
+
+              <div
+                className="
+                  relative
+                  w-full md:w-[32%]
+                  flex items-center justify-center md:justify-start
+                  md:-ml-10 lg:-ml-14
+                "
+              >
+                <img
+                  src={useCase.image}
+                  alt={useCase.title}
+                  className="
+                    relative
+                    w-[60%] sm:w-[70%] md:w-full
+                    max-w-sm
+                    rounded-[2.5rem]
+                    shadow-[0_25px_60px_rgba(0,0,0,0.95)]
+                    object-cover
+                  "
+                />
+              </div>
             </div>
-          ))}
-        </section>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+
+  {/* QUESTION 2: WHERE CAN YOU USE IT? (remaining 3) */}
+  <div className="space-y-10 sm:space-y-12 md:space-y-16">
+    <h3
+      className="
+        text-2xl sm:text-3xl md:text-4xl
+        font-heading font-extrabold
+        tracking-[0.08em]
+        uppercase
+        text-white 
+      "
+    >
+      Where can you use it?
+    </h3>
+
+    {useCases.slice(3).map((useCase, idx) => {
+      const globalIdx = idx + 3; // 3,4,5
+
+      return (
+        <div
+          key={globalIdx}
+          ref={(el: HTMLDivElement | null) => {
+            panelsRef.current[globalIdx] = el;
+          }}
+          className="
+  md:min-h-screen
+        flex
+        md:items-start  
+        md:pt-10"
+        >
+          <div className="w-full max-w-6xl mx-auto relative">
+            {/* MOBILE CARD + PHONE */}
+            <div className="relative w-full md:hidden pb-40 sm:pb-48">
+              <div
+                className="
+                  relative
+                  w-full
+                  rounded-[2.5rem]
+                  px-6
+                  pt-8
+                  pb-12
+                  bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
+                  shadow-[0_30px_80px_rgba(0,0,0,0.85)]
+                "
+              >
+                <h2
+                  className="
+                    text-lg sm:text-xl
+                    font-heading font-extrabold
+                    tracking-[0.25em]
+                    uppercase
+                    leading-tight
+                    mb-4
+                  "
+                >
+                  {useCase.badge}
+                </h2>
+
+                <ul className="space-y-3 text-sm sm:text-base text-white/90 pr-36 sm:pr-40">
+                  {useCase.points.map((point, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <span className="mt-[2px] text-[#FF6B35] text-lg">•</span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <img
+                src={useCase.image}
+                alt={useCase.title}
+                className="
+                  absolute
+                  bottom-28
+                  right-[-10px]
+                  w-[40%]
+                  max-w-[150px]
+                  translate-y-1/4
+                  rounded-[2rem]
+                  shadow-[0_20px_50px_rgba(0,0,0,0.9)]
+                "
+              />
+            </div>
+
+            {/* DESKTOP/TABLET LAYOUT */}
+            <div
+              className="
+                hidden md:flex
+                relative
+                flex-col md:flex-row items-center md:items-stretch
+                gap-10 md:gap-12
+                pt-10 md:pt-0
+              "
+            >
+              <div
+                className="
+                  flex-1
+                  rounded-[2.5rem]
+                  p-[2px] sm:p-[3px] md:p-[4px]
+                  bg-gradient-to-br from-black via-[#1f0a00] to-[#FF6B35]
+                  shadow-[0_30px_80px_rgba(0,0,0,0.85)]
+                "
+              >
+                <div
+                  className="
+                    h-full w-full
+                    rounded-[2.5rem]
+                    bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
+                    px-6 sm:px-10 md:px-14
+                    py-8 sm:py-10 md:py-14
+                    text-white
+                    flex flex-col justify-center
+                    gap-6 sm:gap-7 md:gap-8
+                  "
+                >
+                  <h2
+                    className="
+                      text-2xl sm:text-3xl md:text-[2.4rem] lg:text-[2.7rem]
+                      font-heading font-extrabold
+                      tracking-[0.25em]
+                      uppercase
+                      leading-tight
+                    "
+                  >
+                    {useCase.badge}
+                  </h2>
+
+                  <ul className="space-y-3 sm:space-y-4 text-sm sm:text-lg md:text-xl text-white/90">
+                    {useCase.points.map((point, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <span className="mt-[3px] text-[#FF6B35] text-lg sm:text-xl">
+                          •
+                        </span>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div
+                className="
+                  relative
+                  w-full md:w-[32%]
+                  flex items-center justify-center md:justify-start
+                  md:-ml-10 lg:-ml-14
+                "
+              >
+                <img
+                  src={useCase.image}
+                  alt={useCase.title}
+                  className="
+                    relative
+                    w-[60%] sm:w-[70%] md:w-full
+                    max-w-sm
+                    rounded-[2.5rem]
+                    shadow-[0_25px_60px_rgba(0,0,0,0.95)]
+                    object-cover
+                  "
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</section>
+
       </div>
 
       <Footer />

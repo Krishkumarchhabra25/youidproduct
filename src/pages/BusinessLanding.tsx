@@ -227,7 +227,7 @@ const BusinessLanding = () => {
               </h1>
 
               <p className="hero-desc text-lg md:text-2xl text-white/80 max-w-2xl mx-auto leading-relaxed font-body">
-                youID helps organizations onboard verified users in seconds  without storing or handling sensitive documents.
+                youID helps organisations verify Users in seconds without storing or handling sensitive documents, avoid management Risks, Costs and yet stay compliant.
               </p>
 
               {/* GRADIENT REQUEST DEMO BUTTON */}
@@ -263,7 +263,7 @@ const BusinessLanding = () => {
               <h2 className="text-5xl md:text-6xl font-heading font-extrabold leading-[1.15]">
                 Why Businesses
                 <br /> Worry About{" "}
-                <span className="text-[#FF6B35]">Storing Customer PIDs</span>
+                <span className="text-[#FF6B35]">Storing Customer PID</span>
               </h2>
 
               <p className="mt-6 text-xl text-gray-400 max-w-sm leading-relaxed font-body">
@@ -353,7 +353,7 @@ const BusinessLanding = () => {
                       number: "03",
                       title: "Zero PII Storage",
                       description:
-                        "youID stores no customer documents — dramatically reducing data breach exposure.",
+                        "Businesses have option to not store Customer PII, no need to store Customers documents copies — dramatically reducing data breach exposure.",
                     },
                     {
                       number: "04",

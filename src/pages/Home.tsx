@@ -199,7 +199,7 @@ const Home = () => {
                   hover:brightness-110
                 "
               >
-                I'm a User — Get Started
+                I’m an User – know more
               </Button>
             </div>
           </motion.div>
@@ -268,7 +268,7 @@ const Home = () => {
                   hover:brightness-110
                 "
               >
-                I'm a Business — See Demo
+                I’m a Business – know more 
               </Button>
             </div>
           </motion.div>
@@ -290,7 +290,7 @@ const Home = () => {
                   hover:brightness-110
                 "
               >
-                I'm a User — Get Started
+               I’m an User – know more
               </Button>
             </div>
 
@@ -307,7 +307,7 @@ const Home = () => {
                   hover:brightness-110
                 "
               >
-                I'm a Business — See Demo
+                I’m a Business – know more 
               </Button>
             </div>
           </div>

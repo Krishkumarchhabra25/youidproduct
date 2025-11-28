@@ -206,35 +206,36 @@ const BusinessUseCases = () => {
 
   const useCases = [
     {
-      badge: "Anonymous Age Verification · ADULT SITES",
+      badge: "ADULT SITES can verify users Anonymously.",
       title: "Anonymous Age Verification",
       points: [
-        "Zero document uploads required",
-        "Anonymous age confirmation for users",
-        "Prevents minors from accessing adult content",
-        "Fully privacy-first & compliant",
+        "No information required to verify users to allow access.",
+        "Anonymous age confirmation for users.",
+        "Prevents minors from accessing adult content.",
+        "Provide privacy-first principle to users&also be compliant.",
       ],
       image: adultImg,
     },
     {
-      badge: "Proof of Identity Without Uploads · DATING",
+      badge: "youID eliminates Users rust concernson Dating platforms ",
       title: "Proof of Identity Without Uploads",
       points: [
-        "Instant identity verification for sign-ups",
-        "No driving license or passport required",
-        "Reduce fake profiles and catfishing",
-        "Boost trust and user safety on the platform",
+        "Instant identity verification for sign-ups.",
+        "No document uploads are required, verify data against UsersyouID digital Wallet.",
+        "Reduce fake profiles and catfishing on your platform.",
+        "Boost trust and user safety on the platform.",
       ],
       image: datingImg,
     },
     {
-      badge: "Frictionless Profile Verification · SOCIAL",
+      badge: "Verify Profile, Age and eliminate bots on social media.",
       title: "Frictionless Profile Verification",
       points: [
-        "Verify real users without storing documents",
-        "Stop impersonation and bot accounts",
-        "Improve platform trust and content quality",
-        "Works globally with privacy by design",
+        "Verify real users without asking their Identity documents.",
+        "Stop impersonation and bot accounts .",
+        "Improve platform trust and content quality.",
+        "Provide Option for Users to verify Age and Profile Anonymously .",
+        "Works globally with privacy by design."
       ],
       image: socialImg,
     },
@@ -267,7 +268,7 @@ const BusinessUseCases = () => {
                        font-heading font-extrabold leading-[1.0] tracking-[0.03em]
                        drop-shadow-[0_0_18px_rgba(0,0,0,0.35)] mb-2"
           >
-            One Identity
+            Verify Identity 
           </h1>
 
           <h2
@@ -275,12 +276,11 @@ const BusinessUseCases = () => {
                        font-heading font-extrabold leading-[1.0] tracking-[0.03em]
                        drop-shadow-[0_0_18px_rgba(0,0,0,0.35)]"
           >
-            For Every Situation
+            without the Risks & Cost
           </h2>
 
           <p className="mx-auto md:mx-0 text-base sm:text-lg md:text-xl text-white/80 max-w-full md:max-w-md mt-4 md:mt-8 font-body leading-snug">
-            Identity, Age & Address Verification built for modern, high-risk
-            and high-trust platforms.
+          Identity, Age & Address Verification built for modern, high-risk and high-trust platforms.
           </p>
         </section>
 
