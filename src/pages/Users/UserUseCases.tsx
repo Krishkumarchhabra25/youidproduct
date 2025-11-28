@@ -295,7 +295,7 @@ const UserUseCases = () => {
             flex flex-col justify-center
             items-center text-center md:items-start md:text-left
             px-6 md:px-10
-            pt-24 md:pt-0
+            pt-0 md:pt-0
             mb-10 md:mb-0
           "
         >
@@ -321,16 +321,18 @@ const UserUseCases = () => {
         </section>
 
         {/* RIGHT SCROLL PANELS */}
-        <section
-          ref={rightSectionRef}
-          className="
-            w-full md:w-[60%]
-            space-y-4 sm:space-y-6 md:space-y-24   /* small gap on mobile */
-            py-4 sm:py-8 md:py-24                  /* less padding on mobile */
-            pr-6 md:pr-20 pl-6 md:pl-14
-            font-body
-          "
-        >
+  <section
+  ref={rightSectionRef}
+  className="
+    w-full md:w-[60%]
+ space-y-20 sm:space-y-24 md:space-y-24
+
+    py-8 sm:py-12 md:py-24
+    pr-6 md:pr-20 pl-6 md:pl-14
+    font-body
+  "
+>
+
           {useCases.map((useCase, idx) => (
             <div
               key={idx}
@@ -345,8 +347,10 @@ const UserUseCases = () => {
             >
               <div className="w-full max-w-6xl mx-auto relative">
        {/* ---------- MOBILE (< md) : CARD + PHONE ATTACHED ---------- */}
-<div className="relative w-full md:hidden pb-28 sm:pb-32">
-  {/* CARD – extra padding on the right so text never hides behind phone */}
+{/* ---------- MOBILE (< md) : CARD + PHONE ATTACHED ---------- */}
+{/* ---------- MOBILE (< md) : CARD + PHONE ATTACHED ---------- */}
+<div className="relative w-full md:hidden pb-40 sm:pb-48">
+  {/* CARD */}
   <div
     className="
       relative
@@ -372,7 +376,6 @@ const UserUseCases = () => {
       {useCase.badge}
     </h2>
 
-    {/* extra right padding so text doesn't go under phone */}
     <ul className="space-y-3 text-sm sm:text-base text-white/90 pr-36 sm:pr-40">
       {useCase.points.map((point, i) => (
         <li key={i} className="flex items-start gap-3">
@@ -383,13 +386,13 @@ const UserUseCases = () => {
     </ul>
   </div>
 
-  {/* PHONE – anchored to the right, floating below card */}
+  {/* PHONE IMAGE */}
   <img
     src={useCase.image}
     alt={useCase.title}
     className="
       absolute
-      bottom-24
+      bottom-28
       right-[-10px]
       w-[40%]
       max-w-[150px]
@@ -399,6 +402,7 @@ const UserUseCases = () => {
     "
   />
 </div>
+
 
 
                 {/* ---------- TABLET / DESKTOP (md and up) : ORIGINAL LAYOUT ---------- */}

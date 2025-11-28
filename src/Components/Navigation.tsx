@@ -1,8 +1,9 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {  Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState, useMemo } from "react";
 import { Button } from "./ui/button";
-import youidLogo from "../assets/images/logo1id.png"
+import youidLogo from "../assets/images/logo1id.png";
+
 const Navigation = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -40,7 +41,6 @@ const Navigation = () => {
 
   const isActive = (path: string) => location.pathname === path;
 
-  // Desktop CTA
   const renderDesktopCTA = () => {
     if (isBusiness) {
       return (
@@ -67,45 +67,39 @@ const Navigation = () => {
     }
 
     return (
-      <>
-        <Button
-          size="sm"
-          className="bg-[#FF6B35] hover:bg-[#e85c2e] text-white"
-          onClick={() => navigate("/user")}
-        >
-          Download App
-        </Button>
-      </>
+      <Button
+        size="sm"
+        className="bg-[#FF6B35] hover:bg-[#e85c2e] text-white"
+        onClick={() => navigate("/user")}
+      >
+        Download App
+      </Button>
     );
   };
 
   return (
-<nav
-  className="
-    sticky top-0 z-50 w-full border-b border-[#1a1a1a]
-    bg-[linear-gradient(to_right,#000000_0%,#000000_25%,#FF6B00_50%,#000000_75%,#000000_100%)]
-    backdrop-blur
-  "
->
-
-
-
-
+    <nav
+      className="
+        sticky top-0 z-50 w-full border-b border-[#1a1a1a]
+        bg-[linear-gradient(to_right,#000000_0%,#000000_25%,#FF6B00_50%,#000000_75%,#000000_100%)]
+        backdrop-blur
+      "
+    >
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
-
-          {/* Logo with proper aspect ratio */}
+          {/* Logo - ORIGINAL SIZE PRESERVED */}
           <Link to="/" className="flex items-center">
             <div className="relative h-40 w-auto">
               <img
                 src={youidLogo}
                 alt="youID Logo"
                 className="h-full w-auto object-contain"
-                style={{ aspectRatio: 'auto' }}
+                style={{ aspectRatio: "auto" }}
               />
             </div>
           </Link>
-          {/* Desktop Nav */}
+
+          {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:space-x-1">
             {navLinks.map((link) => (
               <Link
@@ -125,12 +119,12 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* CTA */}
+          {/* Desktop CTA */}
           <div className="hidden md:flex md:items-center md:space-x-2">
             {renderDesktopCTA()}
           </div>
 
-          {/* Mobile Button */}
+          {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2 text-white"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -164,57 +158,56 @@ const Navigation = () => {
               </Link>
             ))}
 
-      <div className="pt-4 space-y-2">
-  {isBusiness && (
-    <Button
-      className="w-full bg-[#FF6B35] hover:bg-[#e85c2e] text-white"
-      onClick={() => {
-        navigate("/user");
-        setMobileMenuOpen(false);
-      }}
-    >
-      For Users
-    </Button>
-  )}
+            <div className="pt-4 space-y-2">
+              {isBusiness && (
+                <Button
+                  className="w-full bg-[#FF6B35] hover:bg-[#e85c2e] text-white"
+                  onClick={() => {
+                    navigate("/user");
+                    setMobileMenuOpen(false);
+                  }}
+                >
+                  For Users
+                </Button>
+              )}
 
-  {isUser && (
-    <Button
-      className="w-full bg-[#FF6B35] hover:bg-[#e85c2e] text-white"
-      onClick={() => {
-        navigate("/business");
-        setMobileMenuOpen(false);
-      }}
-    >
-      For Businesses
-    </Button>
-  )}
+              {isUser && (
+                <Button
+                  className="w-full bg-[#FF6B35] hover:bg-[#e85c2e] text-white"
+                  onClick={() => {
+                    navigate("/business");
+                    setMobileMenuOpen(false);
+                  }}
+                >
+                  For Businesses
+                </Button>
+              )}
 
-  {!isBusiness && !isUser && (
-    <>
-      <Button
-        variant="ghost"
-        className="w-full text-white"
-        onClick={() => {
-          navigate("/business");
-          setMobileMenuOpen(false);
-        }}
-      >
-        For Businesses
-      </Button>
+              {!isBusiness && !isUser && (
+                <>
+                  <Button
+                    variant="ghost"
+                    className="w-full text-white"
+                    onClick={() => {
+                      navigate("/business");
+                      setMobileMenuOpen(false);
+                    }}
+                  >
+                    For Businesses
+                  </Button>
 
-      <Button
-        className="w-full bg-[#FF6B35] hover:bg-[#e85c2e] text-white"
-        onClick={() => {
-          navigate("/user");
-          setMobileMenuOpen(false);
-        }}
-      >
-        Download App
-      </Button>
-    </>
-  )}
-</div>
-
+                    <Button
+                      className="w-full bg-[#FF6B35] hover:bg-[#e85c2e] text-white"
+                      onClick={() => {
+                        navigate("/user");
+                        setMobileMenuOpen(false);
+                      }}
+                    >
+                      Download App
+                    </Button>
+                </>
+              )}
+            </div>
           </div>
         )}
       </div>
