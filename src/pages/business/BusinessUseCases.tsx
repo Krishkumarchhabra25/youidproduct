@@ -299,53 +299,53 @@ const BusinessUseCases = () => {
             >
               <div className="w-full max-w-5xl mx-auto relative">
                 {/* ---------- MOBILE (< md): CARD + PHONE ATTACHED ON RIGHT ---------- */}
-                <div className="relative w-full md:hidden">
-                  {/* CARD */}
-                  <div
-                    className="
-                      relative
-                      w-full
-                      rounded-[2.5rem]
-                      px-6
-                      pt-8
-                      pb-16
-                      bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
-                      shadow-[0_30px_80px_rgba(0,0,0,0.85)]
-                    "
-                  >
-                    <h2 className="text-lg sm:text-xl font-heading font-extrabold tracking-wide mb-6">
-                      {useCase.badge}
-                    </h2>
+           {/* ---------- MOBILE (< md): CARD + PHONE ATTACHED ON RIGHT ---------- */}
+<div className="relative w-full md:hidden pb-28 sm:pb-32">
+  {/* CARD – extra padding so text stays clear of phone */}
+  <div
+    className="
+      relative
+      w-full
+      rounded-[2.5rem]
+      px-6
+      pt-8
+      pb-12
+      bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
+      shadow-[0_30px_80px_rgba(0,0,0,0.85)]
+    "
+  >
+    <h2 className="text-lg sm:text-xl font-heading font-extrabold tracking-wide mb-6">
+      {useCase.badge}
+    </h2>
 
-                    {/* extra right padding so text doesn't go under phone */}
-                    <ul className="space-y-3 text-sm sm:text-base text-white/90 pr-36 sm:pr-40">
-                      {useCase.points.map((point, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                          <span className="mt-[2px] text-[#FF6B35] text-lg">
-                            •
-                          </span>
-                          <span>{point}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+    {/* extra right padding so text doesn't go under phone */}
+    <ul className="space-y-3 text-sm sm:text-base text-white/90 pr-36 sm:pr-40">
+      {useCase.points.map((point, i) => (
+        <li key={i} className="flex items-start gap-3">
+          <span className="mt-[2px] text-[#FF6B35] text-lg">•</span>
+          <span>{point}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
 
-                  {/* PHONE IMAGE – attached to right side of card */}
-                  <img
-                    src={useCase.image}
-                    alt={useCase.badge}
-                    className="
-                      absolute
-                      bottom-2
-                      right-[-10px]
-                      w-[42%]
-                      max-w-[150px]
-                      translate-y-1/4
-                      rounded-[2rem]
-                      shadow-[0_20px_50px_rgba(0,0,0,0.9)]
-                    "
-                  />
-                </div>
+  {/* PHONE – anchored to the right, floating below card */}
+  <img
+    src={useCase.image}
+    alt={useCase.badge}
+    className="
+      absolute
+      bottom-24
+      right-[-10px]
+      w-[40%]
+      max-w-[150px]
+      translate-y-1/4
+      rounded-[2rem]
+      shadow-[0_20px_50px_rgba(0,0,0,0.9)]
+    "
+  />
+</div>
+
 
                 {/* ---------- TABLET / DESKTOP (md+): ORIGINAL LAYOUT ---------- */}
                 <div

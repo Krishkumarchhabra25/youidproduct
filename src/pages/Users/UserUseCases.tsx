@@ -323,7 +323,13 @@ const UserUseCases = () => {
         {/* RIGHT SCROLL PANELS */}
         <section
           ref={rightSectionRef}
-          className="w-full md:w-[60%] space-y-10 sm:space-y-16 md:space-y-24 py-8 sm:py-12 md:py-24 pr-6 md:pr-20 pl-6 md:pl-14 font-body"
+          className="
+            w-full md:w-[60%]
+            space-y-4 sm:space-y-6 md:space-y-24   /* small gap on mobile */
+            py-4 sm:py-8 md:py-24                  /* less padding on mobile */
+            pr-6 md:pr-20 pl-6 md:pl-14
+            font-body
+          "
         >
           {useCases.map((useCase, idx) => (
             <div
@@ -331,11 +337,14 @@ const UserUseCases = () => {
               ref={(el: HTMLDivElement | null) => {
                 panelsRef.current[idx] = el;
               }}
-              className="min-h-[70vh] md:min-h-screen flex items-center"
+              className="
+                md:min-h-screen       /* no min height on mobile */
+                flex
+                md:items-center       /* center only on md+ */
+              "
             >
               <div className="w-full max-w-6xl mx-auto relative">
-                {/* ---------- MOBILE (< md) : CARD + PHONE ATTACHED ---------- */}
-      <div className="relative w-full md:hidden">
+              <div className="relative w-full md:hidden pb-48 sm:pb-40">
   {/* CARD – extra padding on the right so text never hides behind phone */}
   <div
     className="
@@ -344,52 +353,54 @@ const UserUseCases = () => {
       rounded-[2.5rem]
       px-6
       pt-8
-      pb-16
+      pb-12
       bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
       shadow-[0_30px_80px_rgba(0,0,0,0.85)]
     "
   >
-    <h2
-      className="
-        text-lg sm:text-xl
-        font-heading font-extrabold
-        tracking-[0.25em]
-        uppercase
-        leading-tight
-        mb-6
-      "
-    >
-      {useCase.badge}
-    </h2>
+                    <h2
+                      className="
+                        text-lg sm:text-xl
+                        font-heading font-extrabold
+                        tracking-[0.25em]
+                        uppercase
+                        leading-tight
+                        mb-4
+                      "
+                    >
+                      {useCase.badge}
+                    </h2>
 
-    {/* NOTE: big right padding so bullets stop before phone area */}
-    <ul className="space-y-3 text-sm sm:text-base text-white/90 pr-36 sm:pr-40">
-      {useCase.points.map((point, i) => (
-        <li key={i} className="flex items-start gap-3">
-          <span className="mt-[2px] text-[#FF6B35] text-lg">•</span>
-          <span>{point}</span>
-        </li>
-      ))}
-    </ul>
-  </div>
+                    {/* NOTE: big right padding so bullets stop before phone area */}
+                    <ul className="space-y-2 text-sm sm:text-base text-white/90 pr-32 sm:pr-36">
+                      {useCase.points.map((point, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                          <span className="mt-[2px] text-[#FF6B35] text-lg">
+                            •
+                          </span>
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
-  {/* PHONE – anchored to the right, slightly outside card */}
-  <img
+                  {/* PHONE – anchored to the right, slightly outside card */}
+           <img
     src={useCase.image}
     alt={useCase.title}
     className="
       absolute
-      bottom-2
+      bottom-24
       right-[-10px]
-      w-[42%]
+      w-[40%]
       max-w-[150px]
       translate-y-1/4
       rounded-[2rem]
       shadow-[0_20px_50px_rgba(0,0,0,0.9)]
     "
   />
-</div>
 
+                </div>
 
                 {/* ---------- TABLET / DESKTOP (md and up) : ORIGINAL LAYOUT ---------- */}
                 <div
