@@ -70,6 +70,7 @@ const UserLanding = () => {
         const heroTitle = hero.querySelector(".hero-title");
         const heroDesc = hero.querySelector(".hero-desc");
       const heroBtns = hero.querySelectorAll(".hero-btn");
+        const heroNote = hero.querySelector(".hero-note"); 
 
    const elements = [
         heroTitle,
@@ -107,6 +108,21 @@ const UserLanding = () => {
             }
           );
         }
+
+          if (heroNote) {
+    gsap.fromTo(
+      heroNote,
+      { opacity: 0, y: 10 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power2.out",
+        delay: 0.9,
+      }
+    );
+  }
+
  if (heroBtns.length) {
         gsap.fromTo(
           heroBtns,
@@ -298,9 +314,10 @@ const UserLanding = () => {
               </p>
 <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-6">
   
-  <p className="text-white/80 text-sm md:text-base font-body whitespace-nowrap">
-    Download and use it – it’s free!
-  </p>
+<p className="hero-note text-white/80 text-sm md:text-base font-body whitespace-nowrap">
+  Download and use it – it’s free!
+</p>
+
 
   <div className="flex flex-col sm:flex-row items-center gap-4">
     <Button
