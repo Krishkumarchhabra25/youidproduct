@@ -296,43 +296,52 @@ const UserLanding = () => {
               <p className="hero-desc text-base md:text-2xl text-white/80 max-w-2xl mx-auto leading-relaxed font-body">
                Easily and securely verify your documents using the youID digital wallet on your smartphone. Approve requests without sharing your documents with any business  not even us. The approval process works just like your banking apps.
               </p>
-<div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-  <Button
-    size="lg"
-    variant="secondary"
-    className="
-      hero-btn
-      min-w-[180px]
-      text-lg px-10 py-6 font-semibold font-body
-      flex items-center gap-3 justify-center
-      bg-gradient-to-r from-black via-black to-[#FF6B35]
-      text-white border border-white/10
-      hover:from-black hover:via-[#1a1a1a] hover:to-[#ff824f]
-      shadow-lg shadow-black/40
-    "
-  >
-    <SiAndroid className="w-5 h-5" />
-     Android
-  </Button>
+<div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-6">
+  
+  <p className="text-white/80 text-sm md:text-base font-body whitespace-nowrap">
+    Download and use it – it’s free!
+  </p>
 
-  <Button
-    size="lg"
-    variant="secondary"
-    className="
-      hero-btn
-      min-w-[180px]
-      text-lg px-10 py-6 font-semibold font-body
-      flex items-center gap-3 justify-center
-      bg-gradient-to-r from-[#FF6B35] via-black to-black
-      text-white border border-white/10
-      hover:from-[#ff824f] hover:via-[#1a1a1a] hover:to-black
-      shadow-lg shadow-black/40
-    "
-  >
-    <SiApple className="w-5 h-5" />
-     IOS
-  </Button>
+  <div className="flex flex-col sm:flex-row items-center gap-4">
+    <Button
+      size="lg"
+      variant="secondary"
+      className="
+        hero-btn
+        min-w-[180px]
+        text-lg px-10 py-6 font-semibold font-body
+        flex items-center gap-3 justify-center
+        bg-gradient-to-r from-black via-black to-[#FF6B35]
+        text-white border border-white/10
+        hover:from-black hover:via-[#1a1a1a] hover:to-[#ff824f]
+        shadow-lg shadow-black/40
+      "
+    >
+      <SiAndroid className="w-5 h-5" />
+      Android
+    </Button>
+
+    <Button
+      size="lg"
+      variant="secondary"
+      className="
+        hero-btn
+        min-w-[180px]
+        text-lg px-10 py-6 font-semibold font-body
+        flex items-center gap-3 justify-center
+        bg-gradient-to-r from-[#FF6B35] via-black to-black
+        text-white border border-white/10
+        hover:from-[#ff824f] hover:via-[#1a1a1a] hover:to-black
+        shadow-lg shadow-black/40
+      "
+    >
+      <SiApple className="w-5 h-5" />
+      IOS
+    </Button>
+  </div>
+
 </div>
+
 
 
             </div>

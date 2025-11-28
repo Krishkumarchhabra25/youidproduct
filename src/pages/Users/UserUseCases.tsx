@@ -241,39 +241,39 @@ const UserUseCases = () => {
       ],
       image: healthcareImg,
     },
-    {
-      badge: "ANONYMOUSLY VERIFY YOUR AGE ON ADULT SITES.",
-      title: "Anonymous Age Checks for Adult Platforms",
-      points: [
-        "No ID upload required or sharing of other platform  information.",
-        "No need to uploads your live Video or Photo.",
-        "Anonymous age confirmation just with a random code",
-        "Protects user privacy",
-      ],
-      image: travelImg,
-    },
-    {
-      badge: "VERIFICATION WITHOUT THE NEED TO SHARE YOUR DOCUMENTS ON DATING SITES",
-      title: "Safer & Verified Dating Profiles",
-      points: [
-        "Instant document-free verification.",
-        "Reduce the risk of fake profiles & scams on Dating Sites providing youID.",
-        "No passport/ID uploads.",
-        "Higher trust and safety in Dating Sites providing youID.",
-      ],
-      image: bankingImg,
-    },
-    {
-      badge: "IDENTITIFY WITHOUT THE NEED TO GIVE OWNERSHIP TO SOCIAL MEDIA",
-      title: "Verified Social Accounts Without Uploading IDs",
-      points: [
-        "No document upload required.",
-        "Protects privacy from platforms.",
-        "Eliminates risk of data leaks.",
-        "Reduce impersonation & fake accounts.",
-      ],
-      image: ecommerceImg,
-    },
+{
+  badge: "Anonymously verify your age on ADULT SITES.",
+  title: "Anonymous Age Checks for Adult Platforms",
+  points: [
+    "No ID upload required or sharing of other platform  information.",
+    "No need to uploads your live Video or Photo.",
+    "Anonymous age confirmation just with a random code",
+    "Protects user privacy",
+  ],
+  image: travelImg,
+},
+{
+  badge: "Verification without the need to share your documents on DATING PLATFORMS",
+  title: "Safer & Verified Dating Profiles",
+  points: [
+    "Instant document-free verification.",
+    "Reduce the risk of fake profiles & scams on Dating Sites providing youID.",
+    "No passport/ID uploads.",
+    "Higher trust and safety in Dating Sites providing youID.",
+  ],
+  image: bankingImg,
+},
+{
+  badge: "Identitify without the need to give ownership to SOCIAL MEDIA",
+  title: "Verified Social Accounts Without Uploading IDs",
+  points: [
+    "No document upload required.",
+    "Protects privacy from platforms.",
+    "Eliminates risk of data leaks.",
+    "Reduce impersonation & fake accounts.",
+  ],
+  image: ecommerceImg,
+},
   ];
 
   return (
@@ -378,18 +378,18 @@ const UserUseCases = () => {
                   shadow-[0_30px_80px_rgba(0,0,0,0.85)]
                 "
               >
-                <h2
-                  className="
-                    text-lg sm:text-xl
-                    font-heading font-extrabold
-                    tracking-[0.25em]
-                    uppercase
-                    leading-tight
-                    mb-4
-                  "
-                >
-                  {useCase.badge}
-                </h2>
+          <h2
+  className="
+    text-lg sm:text-xl
+    font-heading font-extrabold
+    tracking-[0.25em]
+    leading-tight
+    mb-4
+  "
+>
+  {useCase.badge}
+</h2>
+
 
                 <ul className="space-y-3 text-sm sm:text-base text-white/90 pr-36 sm:pr-40">
                   {useCase.points.map((point, i) => (
@@ -453,7 +453,7 @@ const UserUseCases = () => {
                       text-2xl sm:text-3xl md:text-[2.4rem] lg:text-[2.7rem]
                       font-heading font-extrabold
                       tracking-[0.25em]
-                      uppercase
+                      
                       leading-tight
                     "
                   >
@@ -532,31 +532,33 @@ const UserUseCases = () => {
         >
           <div className="w-full max-w-6xl mx-auto relative">
             {/* MOBILE CARD + PHONE */}
-            <div className="relative w-full md:hidden pb-40 sm:pb-48">
-              <div
-                className="
-                  relative
-                  w-full
-                  rounded-[2.5rem]
-                  px-6
-                  pt-8
-                  pb-12
-                  bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
-                  shadow-[0_30px_80px_rgba(0,0,0,0.85)]
-                "
-              >
-                <h2
-                  className="
-                    text-lg sm:text-xl
-                    font-heading font-extrabold
-                    tracking-[0.25em]
-                    uppercase
-                    leading-tight
-                    mb-4
-                  "
-                >
-                  {useCase.badge}
-                </h2>
+         {/* MOBILE CARD + PHONE */}
+<div className="relative w-full md:hidden pb-40 sm:pb-48">
+  <div
+    className="
+      relative
+      w-full
+      rounded-[2.5rem]
+      px-6
+      pt-8
+      pb-12
+      bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
+      shadow-[0_30px_80px_rgba(0,0,0,0.85)]
+    "
+  >
+ <h2
+      className="
+        text-lg sm:text-xl
+        font-heading font-extrabold
+        tracking-[0.25em]
+        normal-case
+        leading-tight
+        mb-4
+      "
+    >
+      {useCase.badge}
+    </h2>
+
 
                 <ul className="space-y-3 text-sm sm:text-base text-white/90 pr-36 sm:pr-40">
                   {useCase.points.map((point, i) => (
@@ -615,17 +617,17 @@ const UserUseCases = () => {
                     gap-6 sm:gap-7 md:gap-8
                   "
                 >
-                  <h2
-                    className="
-                      text-2xl sm:text-3xl md:text-[2.4rem] lg:text-[2.7rem]
-                      font-heading font-extrabold
-                      tracking-[0.25em]
-                      uppercase
-                      leading-tight
-                    "
-                  >
-                    {useCase.badge}
-                  </h2>
+                 <h2
+  className="
+    text-2xl sm:text-3xl md:text-[2.1rem] lg:text-[2.2rem]
+    font-heading font-extrabold
+    tracking-[0.25em]
+    leading-tight
+  "
+>
+  {useCase.badge}
+</h2>
+
 
                   <ul className="space-y-3 sm:space-y-4 text-sm sm:text-lg md:text-xl text-white/90">
                     {useCase.points.map((point, i) => (

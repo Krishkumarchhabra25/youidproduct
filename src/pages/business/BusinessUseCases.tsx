@@ -217,7 +217,7 @@ const BusinessUseCases = () => {
       image: adultImg,
     },
     {
-      badge: "youID eliminates Users rust concernson Dating platforms ",
+      badge: "youID eliminates Users rust concernson DATING PLATFORMS ",
       title: "Proof of Identity Without Uploads",
       points: [
         "Instant identity verification for sign-ups.",
@@ -228,7 +228,7 @@ const BusinessUseCases = () => {
       image: datingImg,
     },
     {
-      badge: "Verify Profile, Age and eliminate bots on social media.",
+      badge: "Verify Profile, Age and eliminate bots on SOCIAL MEDIA.",
       title: "Frictionless Profile Verification",
       points: [
         "Verify real users without asking their Identity documents.",

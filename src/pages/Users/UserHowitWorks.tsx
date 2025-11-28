@@ -260,6 +260,7 @@ const UserHowitWorks = () => {
           </div>
 
 {/* MOBILE VERSION – SAME STRUCTURE AS USE CASES */}
+{/* MOBILE VERSION – SAME STRUCTURE AS USE CASES */}
 <div className="md:hidden flex flex-col space-y-16 mt-10">
   {steps.map((step, index) => (
     <motion.div
@@ -290,35 +291,33 @@ const UserHowitWorks = () => {
           {String(index + 1).padStart(2, "0")}
         </div>
 
-        {/* title only */}
+        {/* title */}
         <h3 className="text-xl font-semibold text-white font-heading">
           {step.title}
         </h3>
 
-        {/* subheading commented out */}
-        {/*
-        <p className="text-sm text-orange-200 mt-2 font-body">
+        {/* ✅ subheading / description */}
+        <p className="text-sm text-orange-200 mt-2 font-body pr-24 sm:pr-28">
           {step.desc}
         </p>
-        */}
 
-        {/* bullets – extra right padding so they don’t go under phone */}
-        <ul className="mt-4 list-disc text-white text-sm pl-5 pr-28 sm:pr-32 space-y-1 leading-relaxed font-body">
+        {/* bullets – keep extra right padding so they don’t go under phone */}
+        <ul className="mt-4 list-disc text-white text-sm pl-5 pr-24 sm:pr-28 space-y-1 leading-relaxed font-body">
           {step.points.map((p, i) => (
             <li key={i}>{p}</li>
           ))}
         </ul>
       </div>
 
-      {/* PHONE IMAGE – pushed further down & a bit smaller */}
+      {/* PHONE IMAGE */}
       <motion.img
         src={step.image}
         alt={step.title}
         className="
           absolute
-          -bottom-1     /* mostly outside card */
-          -right-6   /* moved slightly in from edge */
-          w-[60%]          /* a bit smaller so it covers less */
+          -bottom-1
+          -right-10
+          w-[60%]
           max-w-[190px]
           object-contain
           bg-transparent
@@ -333,6 +332,7 @@ const UserHowitWorks = () => {
     </motion.div>
   ))}
 </div>
+
 
 
 
