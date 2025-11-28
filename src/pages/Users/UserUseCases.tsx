@@ -258,7 +258,7 @@ const UserUseCases = () => {
   points: [
     "Instant document-free verification.",
     "Reduce the risk of fake profiles & scams on Dating Sites providing youID.",
-    "No passport/ID uploads.",
+ 
     "Higher trust and safety in Dating Sites providing youID.",
   ],
   image: bankingImg,

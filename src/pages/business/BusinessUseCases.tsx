@@ -217,12 +217,12 @@ const BusinessUseCases = () => {
       image: adultImg,
     },
     {
-      badge: "youID eliminates Users rust concernson DATING PLATFORMS ",
+      badge: "youID eliminates Users trust concerns on DATING PLATFORMS ",
       title: "Proof of Identity Without Uploads",
       points: [
         "Instant identity verification for sign-ups.",
-        "No document uploads are required, verify data against UsersyouID digital Wallet.",
-        "Reduce fake profiles and catfishing on your platform.",
+        "No document uploads are required, verify data against Users youID digital Wallet.",
+        "Reduce fake profiles and cat fishing on your platform.",
         "Boost trust and user safety on the platform.",
       ],
       image: datingImg,

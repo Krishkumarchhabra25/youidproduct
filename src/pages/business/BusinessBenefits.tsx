@@ -180,7 +180,7 @@ const BusinessBenefits = () => {
         <div className="max-w-xl space-y-6 md:space-y-8 font-body">
           <div className="space-y-3">
             <h2 className="font-heading text-xl sm:text-2xl md:text-3xl font-semibold leading-snug">
-             A youID provides Businesses and Users a Win-Win outcome 
+             YouID provides Businesses and Users a Win-Win outcome .
             </h2>
 
             <p className="text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed">

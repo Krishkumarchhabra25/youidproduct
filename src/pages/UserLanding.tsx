@@ -295,7 +295,7 @@ const UserLanding = () => {
           
 
           <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-4xl mx-auto text-center space-y-6">
+            <div className="max-w-4xl mx-auto text-center space-y-10">
               {/* <Badge
                 variant="secondary"
                 className="mb-4 font-body tracking-wide"
@@ -312,12 +312,10 @@ const UserLanding = () => {
               <p className="hero-desc text-base md:text-2xl text-white/80 max-w-2xl mx-auto leading-relaxed font-body">
                Easily and securely verify your documents using the youID digital wallet on your smartphone. Approve requests without sharing your documents with any business  not even us. The approval process works just like your banking apps.
               </p>
-<div className="mt-6 flex flex-col items-center justify-center gap-4 md:gap-6">
-  <p className="hero-note text-white/80 text-sm md:text-base font-body whitespace-nowrap">
-    Download and use it – it’s free!
-  </p>
+<div className="mt-10 md:mt-14 flex flex-col items-center justify-center gap-4 md:gap-6">
 
-  <div className="flex flex-col items-center gap-4">
+  {/* BUTTONS */}
+  <div className="flex flex-col sm:flex-row items-center gap-4">
     <Button
       size="lg"
       variant="secondary"
@@ -354,7 +352,13 @@ const UserLanding = () => {
       IOS
     </Button>
   </div>
+
+  {/* TEXT AFTER BUTTONS */}
+  <p className="hero-note text-white/80 text-sm md:text-base font-body whitespace-nowrap">
+    Download and use it – it’s free!
+  </p>
 </div>
+
 
 
 
