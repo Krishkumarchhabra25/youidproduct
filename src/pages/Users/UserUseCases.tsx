@@ -295,7 +295,7 @@ const UserUseCases = () => {
             flex flex-col justify-center
             items-center text-center md:items-start md:text-left
             px-6 md:px-10
-            pt-0 md:pt-0
+            pt-20 md:pt-0
             mb-10 md:mb-0
           "
         >
