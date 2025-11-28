@@ -312,12 +312,10 @@ const UserLanding = () => {
               <p className="hero-desc text-base md:text-2xl text-white/80 max-w-2xl mx-auto leading-relaxed font-body">
                Easily and securely verify your documents using the youID digital wallet on your smartphone. Approve requests without sharing your documents with any business  not even us. The approval process works just like your banking apps.
               </p>
-<div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-6">
-  
-<p className="hero-note text-white/80 text-sm md:text-base font-body whitespace-nowrap">
-  Download and use it – it’s free!
-</p>
-
+<div className="mt-6 flex flex-col items-center justify-center gap-4 md:gap-6">
+  <p className="hero-note text-white/80 text-sm md:text-base font-body whitespace-nowrap">
+    Download and use it – it’s free!
+  </p>
 
   <div className="flex flex-col sm:flex-row items-center gap-4">
     <Button
@@ -356,8 +354,8 @@ const UserLanding = () => {
       IOS
     </Button>
   </div>
-
 </div>
+
 
 
 
