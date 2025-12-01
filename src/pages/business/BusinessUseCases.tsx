@@ -235,14 +235,18 @@ const BusinessUseCases = () => {
         "Stop impersonation and bot accounts .",
         "Improve platform trust and content quality.",
         "Provide Option for Users to verify Age and Profile Anonymously .",
-        "Works globally with privacy by design."
+        "Works globally with privacy by design.",
       ],
       image: socialImg,
     },
   ];
 
   return (
-    <div ref={containerRef} className="min-h-screen text-white overflow-hidden">
+    // allow overflow on small screens so the floating phone mockup is visible
+    <div
+      ref={containerRef}
+      className="min-h-screen text-white overflow-visible md:overflow-hidden"
+    >
       <Navigation />
 
       <div
@@ -268,7 +272,7 @@ const BusinessUseCases = () => {
                        font-heading font-extrabold leading-[1.0] tracking-[0.03em]
                        drop-shadow-[0_0_18px_rgba(0,0,0,0.35)] mb-2"
           >
-            Verify Identity 
+            Verify Identity
           </h1>
 
           <h2
@@ -280,7 +284,8 @@ const BusinessUseCases = () => {
           </h2>
 
           <p className="mx-auto md:mx-0 text-base sm:text-lg md:text-xl text-white/80 max-w-full md:max-w-md mt-4 md:mt-8 font-body leading-snug">
-          Identity, Age & Address Verification built for modern, high-risk and high-trust platforms.
+            Identity, Age & Address Verification built for modern, high-risk and
+            high-trust platforms.
           </p>
         </section>
 
@@ -299,53 +304,56 @@ const BusinessUseCases = () => {
             >
               <div className="w-full max-w-5xl mx-auto relative">
                 {/* ---------- MOBILE (< md): CARD + PHONE ATTACHED ON RIGHT ---------- */}
-           {/* ---------- MOBILE (< md): CARD + PHONE ATTACHED ON RIGHT ---------- */}
-<div className="relative w-full md:hidden pb-28 sm:pb-32">
-  {/* CARD – extra padding so text stays clear of phone */}
-  <div
-    className="
-      relative
-      w-full
-      rounded-[2.5rem]
-      px-6
-      pt-8
-      pb-12
-      bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
-      shadow-[0_30px_80px_rgba(0,0,0,0.85)]
-    "
-  >
-    <h2 className="text-lg sm:text-xl font-heading font-extrabold tracking-wide mb-6">
-      {useCase.badge}
-    </h2>
+                <div className="relative w-full md:hidden pb-36 sm:pb-44">
+                  {/* CARD – extra padding so text stays clear of phone */}
+                  <div
+                    className="
+                      relative
+                      w-full
+                      rounded-[2.5rem]
+                      px-6
+                      pt-8
+                      pb-12
+                      bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
+                      shadow-[0_30px_80px_rgba(0,0,0,0.85)]
+                    "
+                  >
+                    <h2 className="text-lg sm:text-xl font-heading font-extrabold tracking-wide mb-6">
+                      {useCase.badge}
+                    </h2>
 
-    {/* extra right padding so text doesn't go under phone */}
-    <ul className="space-y-3 text-sm sm:text-base text-white/90 pr-36 sm:pr-40">
-      {useCase.points.map((point, i) => (
-        <li key={i} className="flex items-start gap-3">
-          <span className="mt-[2px] text-[#FF6B35] text-lg">•</span>
-          <span>{point}</span>
-        </li>
-      ))}
-    </ul>
-  </div>
+                    {/* extra right padding so text doesn't go under phone */}
+                    <ul className="space-y-3 text-sm sm:text-base text-white/90 pr-28 sm:pr-36 md:pr-0">
+                      {useCase.points.map((point, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                          <span className="mt-[2px] text-[#FF6B35] text-lg">
+                            •
+                          </span>
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
-  {/* PHONE – anchored to the right, floating below card */}
-  <img
-    src={useCase.image}
-    alt={useCase.badge}
-    className="
-      absolute
-      bottom-24
-      right-[-10px]
-      w-[40%]
-      max-w-[150px]
-      translate-y-1/4
-      rounded-[2rem]
-      shadow-[0_20px_50px_rgba(0,0,0,0.9)]
-    "
-  />
-</div>
-
+                  {/* PHONE – anchored to the right, floating below card */}
+                  <img
+                    src={useCase.image}
+                    alt={useCase.badge}
+                    className="
+                      absolute
+                      bottom-6
+                      right-4 sm:right-6
+                      z-40
+                      rounded-[1.5rem]
+                      shadow-[0_20px_50px_rgba(0,0,0,0.9)]
+                      object-contain
+                      w-40
+                      sm:w-44
+                      max-w-none
+                      md:w-[32%]
+                    "
+                  />
+                </div>
 
                 {/* ---------- TABLET / DESKTOP (md+): ORIGINAL LAYOUT ---------- */}
                 <div
@@ -399,11 +407,17 @@ const BusinessUseCases = () => {
                       alt={useCase.badge}
                       className="
                         relative
-                        w-[60%] sm:w-[70%] md:w-full 
-                        max-w-xs
-                        rounded-[2rem]
+                        object-contain
+                        w-2/3
+                        sm:w-3/4
+                        md:w-full
+                        lg:w-[95%]
+                        xl:w-[90%]
+                        2xl:w-[80%]
+                        max-w-[420px]
+                        md:max-w-[420px]
+                        rounded-[1.75rem]
                         shadow-[0_25px_60px_rgba(0,0,0,0.95)]
-                        object-cover
                       "
                     />
                   </div>
