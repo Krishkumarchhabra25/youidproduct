@@ -10,7 +10,7 @@ import UserHowitWorks from "./pages/Users/UserHowitWorks";
 import BusinessUseCases from "./pages/business/BusinessUseCases";
 import BusinessBenefits from "./pages/business/BusinessBenefits";
 import BusinessAbout from "./pages/business/BusinessAbout";
-import HowItWorksPage from "./pages/business/BusinessHowItWorks";
+import BusinessHowItWoks from "./pages/business/BusinessHowItWorks";
 
 
 
@@ -34,7 +34,7 @@ const App = () => (
        <Route path="/business/usecases" element={<BusinessUseCases />} />
       <Route path="/business/benefits" element={<BusinessBenefits />} /> 
        <Route path="/business/about" element={<BusinessAbout />} /> 
-  <Route path="/business/how-it-works" element={<HowItWorksPage />} /> 
+  <Route path="/business/how-it-works" element={<BusinessHowItWoks />} /> 
     </Routes>
   </BrowserRouter>
 );
