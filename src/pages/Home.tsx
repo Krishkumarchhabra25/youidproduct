@@ -2,8 +2,8 @@ import { motion, useMotionValue, type Variants } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-import userMockup from "@/assets/images/underverification-Photoroom.png";
-import userMockup2 from "@/assets/images/verifiedones-Photoroom.png";
+import userMockup from "@/assets/images/homeherohone1.png";
+import userMockup2 from "@/assets/images/homeheromobile2.png"
 import businessMockup from "@/assets/images/finalonedash.png";
 import youidLogo from "@/assets/images/logo1id.png";
 
@@ -166,8 +166,8 @@ const Home = () => {
                   src={userMockup2}
                   alt="User Mockup Left"
                   className="
-                    w-[210px] sm:w-[230px] 
-                    md:w-[260px] lg:w-[260px] 
+                    w-[160px] sm:w-[160px] 
+                    md:w-[170px] lg:w-[170px] 
                     drop-shadow-2xl
                   "
                 />
@@ -178,8 +178,8 @@ const Home = () => {
                   src={userMockup}
                   alt="User Mockup Right"
                   className="
-                    w-[200px] sm:w-[230px] 
-                    md:w-[220px] lg:w-[220px] 
+                    w-[160px] sm:w-[160px] 
+                    md:w-[170px] lg:w-[170px] 
                     drop-shadow-2xl
                   "
                 />

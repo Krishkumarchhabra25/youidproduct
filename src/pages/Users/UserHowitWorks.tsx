@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import step1Img from "../../assets/images/signsigupyuid.png";
-import step2Img from "../../assets/images/doumentselect-Photoroom.png";
-import step3Img from "../../assets/images/underverification-Photoroom.png";
-import step6Img from "../../assets/images/verifiedones-Photoroom.png";
+import step1Img from "../../assets/images/signupmobile.png";
+import step2Img from "../../assets/images/documentuploadmobile.png";
+import step3Img from "../../assets/images/homeherohone1.png";
+import step6Img from "../../assets/images/homeheromobile2.png";
 
 import Footer from "@/Components/Footer";
 import Navigation from "@/Components/Navigation";
@@ -242,7 +242,7 @@ const UserHowitWorks = () => {
 
             {/* RIGHT SIDE — BIG, FULLY VISIBLE IMAGE */}
             <div className="hidden md:flex justify-center">
-              <div className="sticky top-24 w-[300px] lg:w-[330px] xl:w-[350px]">
+              <div className="sticky top-24 w-[300px] lg:w-[300px] xl:w-[300px]">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={steps[activeStep].id}
@@ -310,20 +310,20 @@ const UserHowitWorks = () => {
       </div>
 
       {/* PHONE IMAGE */}
-      <motion.img
-        src={step.image}
-        alt={step.title}
-        className="
-          absolute
-          -bottom-1
-          -right-10
-          w-[60%]
-          max-w-[190px]
-          object-contain
-          bg-transparent
-          drop-shadow-2xl
-          pointer-events-none
-        "
+  <motion.img
+  src={step.image}
+  alt={step.title}
+  className="
+    absolute
+    -bottom-2
+    -right-4
+    w-[40%]            /* smaller */
+    max-w-[140px]      /* smaller max size */
+    object-contain
+    drop-shadow-xl
+    pointer-events-none
+  "
+
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}

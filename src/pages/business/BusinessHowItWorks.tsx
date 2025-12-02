@@ -7,11 +7,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import Footer from "@/Components/Footer";
 import Navigation from "@/Components/Navigation";
 
-import chooseImg from "../../assets/images/choose.png";
-import selectDocumentsImg from "../../assets/images/verifyidenityprocess.png";
-import processingImg from "../../assets/images/processing.png";
-import resuestverification from "../../assets/images/verificationresuets (1).png";
-import verificationSuccessImg2 from "../../assets/images/verificationSuccesfully.png";
+import chooseImg from "../../assets/images/laptop1.png";
+import selectDocumentsImg from "../../assets/images/laptop6.png";
+import processingImg from "../../assets/images/laptop2.png";
+import requestVerificationImg from "../../assets/images/notificationrequestuser.png";
+import verificationSuccessImg2 from "../../assets/images/laptop5.png";
 
 type Step = {
   id: number;
@@ -25,62 +25,62 @@ type Step = {
 const stepsData: Step[] = [
   {
     id: 1,
-    badge: "Step 1 — User starts verification with youID",
-    title: "Start Verification",
-    desc: "User clicks the verify button & website prepares a verification request.",
+    badge: "Step 1 — Customer starts verification from your site",
+    title: "Initiate Verification",
+    desc: "Customer clicks 'Verify with youID' and your site creates a verification request.",
     image: chooseImg,
     points: [
-      "User clicks the 'Verify with youID' button on the organization's website.",
-      "A brief instruction screen appears before the verification begins.",
-      "The website prepares a verification request to send to the user's youID app.",
+      "Click a 'Verify with youID' button on your checkout / onboarding flow.",
+      "A short context (purpose + org name) is attached to the request for transparency.",
+      "Request is delivered to the user via QR, deep-link or push depending on device.",
     ],
   },
   {
     id: 2,
-    badge: "Step 2 — Website sends verification request to the youID app",
+    badge: "Step 2 — Request delivered to end-user identity wallet",
     title: "Request Sent",
-    desc: "Website sends a verification request (QR, deep-link, or push).",
+    desc: "Your site sends a signed verification request containing the scope of data required.",
     image: selectDocumentsImg,
     points: [
-      "The organization's website sends a verification request to the user's youID app (push, QR, or deep-link).",
-      "The youID app prompts the user to open or unlock their identity wallet.",
-      "The request includes context such as organization name, purpose, and timestamp.",
+      "The request communicates which attributes or documents you need (KYC, age, entitlement).",
+      "youID displays the request details so the user can make an informed decision.",
+      "The request contains a timestamp and request nonce to protect against replay attacks.",
     ],
   },
   {
     id: 3,
-    badge: "Step 3 — User enters the authentication code on the website",
-    title: "Authenticate",
-    desc: "The user approves/enters the short auth code to link sessions.",
+    badge: "Step 3 — User authenticates & confirms on their device",
+    title: "Authenticate & Approve",
+    desc: "User authenticates in youID and approves sending the requested attestations.",
     image: processingImg,
     points: [
-      "youID generates a short authentication code or token for the user.",
-      "User enters this authentication code on the organization's website (or it is auto-verified).",
-      "This securely links the youID session with the website's verification request.",
+      "youID prompts the user to authenticate (PIN/biometrics) before sharing data.",
+      "User confirms exactly which claims are shared — minimal disclosure by default.",
+      "A short auth code or session token links the browser session to the wallet for secure exchange.",
     ],
   },
   {
     id: 4,
-    badge: "Step 4 — Website sends approval request back to the youID app",
-    title: "Approve Request",
-    desc: "User reviews the request and approves in their youID app.",
-    image: resuestverification,
+    badge: "Step 4 — Signed response returned to your backend",
+    title: "Receive Signed Response",
+    desc: "youID returns a cryptographically signed verifiable response you can validate.",
+    image: requestVerificationImg,
     points: [
-      "After confirming the session, the website sends an approval request to the user's youID app.",
-      "The user reviews what the organization is asking to verify.",
-      "The user approves the request, and youID sends a signed, verifiable response back.",
+      "Your backend verifies cryptographic signature and payload integrity.",
+      "Verification response contains the minimal asserted claims required to grant access.",
+      "The response can be checked against your business rules (age checks, entitlement, etc.).",
     ],
   },
   {
     id: 5,
-    badge: "Step 5 — Verification completed successfully",
-    title: "Verified",
-    desc: "Organization validates response and grants access.",
+    badge: "Step 5 — Access granted, logs & compliance recorded",
+    title: "Verified & Logged",
+    desc: "After validation, the user receives access and a minimal compliance record is stored.",
     image: verificationSuccessImg2,
     points: [
-      "The organization validates the signed verification response from youID.",
-      "Once all checks pass, the user is marked as verified and granted access.",
-      "A minimal compliance log is stored while maintaining full user privacy.",
+      "Once validated, grant access or complete the transaction flow.",
+      "Store a minimal audit record (hash + timestamp) preserving user privacy.",
+      "Provide a refresh/renew path for expiring attestations and maintain compliance readiness.",
     ],
   },
 ];
@@ -92,7 +92,7 @@ const BusinessHowItWorks: React.FC = () => {
   const totalSteps = stepsData.length;
 
   // dynamic height (detect tallest step so scroll container size is stable)
-  const [dynamicHeight, setDynamicHeight] = useState<number>(720);
+  const [dynamicHeight, setDynamicHeight] = useState<number>(600);
 
   // compute tallest card height once after mount and whenever window resizes or images load
   const recomputeHeights = () => {
@@ -103,8 +103,8 @@ const BusinessHowItWorks: React.FC = () => {
       const h = el.clientHeight;
       if (h > max) max = h;
     });
-    // add some breathing room for image + spacing
-    if (max > 0) setDynamicHeight(Math.max(720, max + 140));
+    // add breathing room for image + spacing
+    if (max > 0) setDynamicHeight(Math.max(600, max + 120));
   };
 
   useEffect(() => {
@@ -131,7 +131,7 @@ const BusinessHowItWorks: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Auto-advance on desktop/tablet
+  // Auto-advance on desktop/tablet (desktop threshold matches user layout: >= 768)
   useEffect(() => {
     if (window.innerWidth < 768) return;
     const interval = window.setInterval(() => {
@@ -174,7 +174,7 @@ const BusinessHowItWorks: React.FC = () => {
     requestAnimationFrame(animate);
   };
 
-  // on scroll: set active step to nearest to center (desktop only)
+  // on scroll: set active step to nearest to center (desktop/tablet only)
   useEffect(() => {
     if (window.innerWidth < 768) return;
     const container = containerRef.current;
@@ -203,6 +203,9 @@ const BusinessHowItWorks: React.FC = () => {
     return () => container.removeEventListener("scroll", onScroll);
   }, []);
 
+  const activeImage = stepsData[activeStep]?.image;
+  const isRequestVerification = activeImage === requestVerificationImg;
+
   return (
     <>
       <Navigation />
@@ -213,32 +216,28 @@ const BusinessHowItWorks: React.FC = () => {
           background: "linear-gradient(180deg,#2c0d00 0%, #2a1200 30%, #000 100%)",
         }}
       >
-        <section className="relative w-full px-4 sm:px-6 md:px-10 pt-20 pb-28">
+        <section className="relative w-full px-6 md:px-10 pt-20 pb-28">
           <div className="text-center mb-10">
             <h2 className="text-white text-4xl md:text-5xl font-heading">How it works</h2>
             <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto mt-3">
-              See the flow from user identity to verified business confidence
+              From user identity to business verification — secure, private, auditable.
             </p>
           </div>
 
-          {/* DESKTOP / TABLET LAYOUT */}
+          {/* DESKTOP / TABLET LAYOUT (matches user component breakpoints) */}
           <div
-            className="relative max-w-7xl mx-auto hidden md:grid gap-16 items-start"
-            style={{
-              gridTemplateColumns: "minmax(320px,520px) 1fr",
-            }}
+            className="relative max-w-7xl mx-auto hidden md:grid grid-cols-2 gap-16 items-center"
           >
             {/* LEFT: step cards in a centered vertical scroll container */}
             <div
               ref={containerRef}
               style={{ height: dynamicHeight }}
-              className="w-full rounded-2xl p-6 md:p-8 flex flex-col gap-6 overflow-y-auto snap-y snap-mandatory pr-8 min-w-0"
+              className="w-full md:w-[85%] md:mx-auto rounded-2xl p-8 flex flex-col space-y-8 overflow-y-auto"
             >
               {stepsData.map((step, idx) => (
                 <motion.div
                   key={step.id}
                   ref={(el) => {
-                    // assign to array ref — use block so function returns void (fixes TS ref type)
                     stepRefs.current[idx] = el;
                   }}
                   initial={{ opacity: 0, y: 20 }}
@@ -248,45 +247,28 @@ const BusinessHowItWorks: React.FC = () => {
                     scale: activeStep === idx ? 1 : 0.995,
                   }}
                   transition={{ duration: 0.35 }}
-                  className="w-full rounded-2xl p-6 md:p-8 border border-transparent min-h-[360px] flex flex-col justify-center bg-[rgba(0,0,0,0.15)]"
-                  style={{
-                    scrollSnapAlign: "center",
-                    zIndex: activeStep === idx ? 20 : 1,
-                    boxShadow: activeStep === idx ? "0 30px 60px rgba(0,0,0,0.7)" : "none",
-                  }}
+                  className="w-full p-6 rounded-2xl border-l-4 border-orange-500"
+                  style={{ background: "rgba(20,20,20,0.7)" }}
                 >
-                  {/* Header row: icon + text */}
-                  <div className="flex items-start gap-4 min-w-0">
-                    <div
-                      className={`w-12 h-12 rounded-full flex items-center justify-center font-semibold text-lg ${
-                        activeStep === idx ? "bg-orange-500 text-black" : "bg-gray-800 text-white"
-                      } shrink-0`}
-                    >
-                      {String(idx + 1)}
-                    </div>
-
-                    <div className="min-w-0">
-                      <div className="text-sm text-orange-300 font-semibold break-words whitespace-normal">
-                        {step.badge}
-                      </div>
-                      {step.title && (
-                        <h3 className="text-white text-xl md:text-2xl font-heading mt-1 break-words whitespace-normal">
-                          {step.title}
-                        </h3>
-                      )}
-                      {step.desc && (
-                        <p className="text-white/70 text-sm md:text-base mt-2 break-words whitespace-normal">
-                          {step.desc}
-                        </p>
-                      )}
-                    </div>
+                  <div
+                    className={`w-12 h-12 mb-4 rounded-full flex items-center justify-center text-lg font-semibold ${
+                      activeStep === idx ? "bg-orange-500 text-black" : "bg-gray-800 text-white"
+                    }`}
+                  >
+                    {String(idx + 1).padStart(2, "0")}
                   </div>
 
-                  <ul className="mt-4 list-disc text-white text-sm md:text-base pl-5 space-y-2 break-words">
+                  <div className="text-sm text-orange-300 mb-1">{step.badge}</div>
+
+                  {step.title && (
+                    <h3 className="text-xl font-semibold text-white font-heading">{step.title}</h3>
+                  )}
+
+                  {step.desc && <p className="text-sm text-white/70 mt-2">{step.desc}</p>}
+
+                  <ul className="mt-4 list-disc text-white text-sm pl-5 space-y-1">
                     {step.points.map((p, i) => (
-                      <li key={i} className="leading-relaxed break-words whitespace-normal">
-                        {p}
-                      </li>
+                      <li key={i}>{p}</li>
                     ))}
                   </ul>
                 </motion.div>
@@ -295,17 +277,23 @@ const BusinessHowItWorks: React.FC = () => {
 
             {/* RIGHT: sticky image that updates with active step */}
             <div className="hidden md:flex justify-center">
-              <div className="sticky top-20 w-[420px] lg:w-[520px] xl:w-[620px]">
+              {/* <-- INCREASED WIDTHS HERE TO ALLOW LARGER LAPTOP IMAGE --> */}
+              <div className="sticky top-24 w-[420px] lg:w-[520px] xl:w-[620px]">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={stepsData[activeStep].id}
                     src={stepsData[activeStep].image}
                     alt={stepsData[activeStep].badge}
-                    initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                    initial={{ opacity: 0, y: 10, scale: 0.96 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -10, scale: 0.98 }}
                     transition={{ duration: 0.3 }}
-                    className="w-full h-auto max-h-[720px] rounded-3xl object-contain shadow-2xl"
+                    className={`w-full h-auto rounded-3xl object-contain shadow-2xl transform-gpu ${
+                      isRequestVerification
+                        ? "max-h-[600px] scale-[1.20]"
+                        : "max-h-[900px] scale-[1.15]"
+                    }`}
+                    style={{ transformOrigin: "center right" }}
                   />
                 </AnimatePresence>
               </div>
@@ -313,7 +301,7 @@ const BusinessHowItWorks: React.FC = () => {
           </div>
 
           {/* MOBILE LAYOUT — image INSIDE the card (image top, content below) */}
-          <div className="md:hidden flex flex-col space-y-6 mt-8">
+          <div className="xl:hidden flex flex-col items-center space-y-8 mt-8 w-full px-4">
             {stepsData.map((step, index) => (
               <motion.div
                 key={step.id}
@@ -321,47 +309,77 @@ const BusinessHowItWorks: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, ease: "easeOut" }}
                 viewport={{ once: true }}
-                className="relative flex flex-col items-center w-full"
+                className="w-full max-w-md"
               >
                 <div
-                  className="relative w-full max-w-[520px] rounded-3xl px-5 pt-5 pb-6
-                    bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
-                    shadow-[0_30px_80px_rgba(0,0,0,0.85)]
-                    border border-white/5"
+                  className="relative w-full rounded-lg overflow-hidden
+                    bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#3d1800]
+                    shadow-[0_20px_60px_rgba(0,0,0,0.7)]
+                    border border-orange-500/20"
                 >
-                  <motion.img
-                    src={step.image}
-                    alt={step.badge}
-                    initial={{ opacity: 0, y: 8 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.45 }}
-                    viewport={{ once: true }}
-                    className="w-full object-contain max-h-[200px] rounded-xl mb-4"
-                  />
-
-                  <div className="flex items-start gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-full bg-orange-500 text-black flex items-center justify-center font-bold shrink-0 text-base">
-                      {String(index + 1)}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-xs text-orange-200 font-semibold break-words leading-tight">
-                        {step.badge}
-                      </div>
-                      {step.title && (
-                        <h3 className="text-white text-base font-heading break-words mt-1">{step.title}</h3>
-                      )}
+                  {/* Image section — smaller on mobile */}
+                  <div className="relative w-full p-0">
+                    <div
+                      className="
+                        relative w-full
+                        h-[180px]
+                        sm:h-[200px]
+                        md:h-[220px]
+                        overflow-hidden
+                        rounded-md
+                      "
+                    >
+                      <motion.img
+                        src={step.image}
+                        alt={step.badge}
+                        initial={{ opacity: 0, scale: 1 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.45 }}
+                        viewport={{ once: true }}
+                        className="
+                          absolute inset-0
+                          w-full h-full
+                          object-contain
+                          rounded-md
+                        "
+                        style={{ objectPosition: "center center" }}
+                      />
                     </div>
                   </div>
 
-                  {step.desc && <p className="text-xs text-orange-200 mt-2 break-words leading-relaxed">{step.desc}</p>}
+                  {/* Content section */}
+                  <div className="px-5 pb-6 pt-2">
+                    <div className="flex items-start gap-3 mb-4">
+                      <div className="w-11 h-11 rounded-full bg-orange-500 text-black flex items-center justify-center font-bold shrink-0 text-lg shadow-lg">
+                        {String(index + 1)}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-[11px] text-orange-300 font-semibold leading-tight mb-1 break-words">
+                          {step.badge}
+                        </div>
+                        {step.title && (
+                          <h3 className="text-white text-lg font-heading font-semibold break-words">
+                            {step.title}
+                          </h3>
+                        )}
+                      </div>
+                    </div>
 
-                  <ul className="mt-4 list-disc text-white text-xs pl-4 space-y-2">
-                    {step.points.map((p, i) => (
-                      <li key={i} className="leading-relaxed break-words">
-                        {p}
-                      </li>
-                    ))}
-                  </ul>
+                    {step.desc && (
+                      <p className="text-orange-100/80 text-sm mb-4 leading-relaxed break-words">
+                        {step.desc}
+                      </p>
+                    )}
+
+                    <ul className="space-y-2.5 text-white/90 text-[13px] leading-relaxed">
+                      {step.points.map((p, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <span className="text-orange-400 mt-1 shrink-0">•</span>
+                          <span className="break-words flex-1">{p}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </motion.div>
             ))}
