@@ -156,20 +156,21 @@ const Home = () => {
             </div>
 
             {/* Heading */}
-            <h1
-              className="
-                mt-8 md:mt-10
-                font-heading font-extrabold text-white 
-                leading-tight
-                max-w-[320px] md:max-w-[606px]
-                text-[26px] sm:text-[30px] md:text-[40px]
-                tracking-[0.54px]
-              "
-            >
-              Verify Your <span className="text-[#FF6B35]">Identity</span> <br />
-              Without Surrendering{" "}
-              <span className="text-[#FF6B35]">Control.</span>
-            </h1>
+<h1
+  className="
+    mt-8 md:mt-10
+    font-heading font-extrabold text-white 
+    leading-tight
+    max-w-[310px] sm:max-w-[360px] md:max-w-full
+    text-[26px] sm:text-[30px] md:text-[40px]
+    tracking-[0.54px]
+  "
+>
+  Verify Your <span className="text-[#FF6B35]">Identity</span>{" "}
+  Without Surrendering{" "}
+  <span className="text-[#FF6B35]">Control.</span>
+</h1>
+
 
             {/* Subheading */}
             <p
@@ -240,12 +241,12 @@ const Home = () => {
                 mt-8 md:mt-10
                 font-heading font-extrabold text-white 
                 leading-tight 
-                max-w-[320px] md:max-w-[606px]
+                max-w-[320px] md:max-w-full
                 text-[26px] sm:text-[30px] md:text-[40px]
                 tracking-[0.54px]
               "
             >
-              Identity Verification without <br />
+              Identity Verification without 
               the <span className="text-[#FF6B35]">risks</span> and
               <span className="text-[#FF6B35]"> overheads.</span>
             </h1>
