@@ -61,18 +61,27 @@ const Home = () => {
       {/* subtle dark overlay */}
       <div className="pointer-events-none absolute inset-0 bg-black/40" />
 
-      {/* YOUiD LOGO – same on desktop, smaller on mobile */}
-      <div className="absolute left-1/2 -translate-x-1/2 z-40">
-        <img
-          src={youidLogo}
-          alt="youID Logo"
-          className="
-            w-[150px] h-[120px]
-            md:w-[198px] md:h-[170px]
-            object-contain
-          "
-        />
-      </div>
+     {/* YOUiD LOGO – static on mobile, absolute on desktop */}
+<div
+  className="
+    z-40
+    flex justify-center
+    relative
+    md:absolute md:left-1/2 md:-translate-x-1/2
+  "
+>
+  <img
+    src={youidLogo}
+    alt="youID Logo"
+    className="
+      w-[150px] h-[120px]
+      md:w-[198px] md:h-[170px]
+      object-contain
+      mt-1 md:mt-0
+    "
+  />
+</div>
+
 
       {/* CENTER DIVIDER (DESKTOP) */}
       <div
@@ -89,16 +98,18 @@ const Home = () => {
       />
 
       {/* MAIN CONTENT */}
-      <div
-        className="
-          relative
-          pt-24 md:pt-32
-          px-5 md:px-0
-          w-full 
-          pb-10
-          z-30
-        "
-      >
+   {/* MAIN CONTENT */}
+<div
+  className="
+    relative
+    pt-14 md:pt-32        // ⬅️ was pt-24, now smaller on mobile
+    px-5 md:px-0
+    w-full 
+    pb-10
+    z-30
+  "
+>
+
         <div
           className="
             grid grid-cols-1 md:grid-cols-2 
@@ -121,12 +132,14 @@ const Home = () => {
             "
           >
             {/* Phones on top */}
-            <div
-              className="
-                relative w-full flex items-center justify-center 
-                mt-4 md:mt-0
-              "
-            >
+       {/* Phones on top */}
+<div
+  className="
+    relative w-full flex items-center justify-center 
+    mt-1 md:mt-0          // ⬅️ was mt-4
+  "
+>
+
               <div
                 className="
                   absolute bottom-0 left-1/2 -translate-x-1/2 
