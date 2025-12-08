@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 import userMockup from "@/assets/images/homeherohone1.png";
-import userMockup2 from "@/assets/images/homeheromobile2.png"
+import userMockup2 from "@/assets/images/homeheromobile2.png";
 import businessMockup from "@/assets/images/finalonedash.png";
 import youidLogo from "@/assets/images/logo1id.png";
+
+// background image from your design
+import heroBg from "@/assets/images/YouID 3.png";
 
 import { Button } from "@/Components/ui/button";
 
@@ -45,10 +48,32 @@ const Home = () => {
         relative 
         min-h-screen 
         flex flex-col 
-        overflow-visible
-        bg-[linear-gradient(90deg,#7a2e00_0%,#000000_50%,#7a2e00_100%)]
+        overflow-hidden
+        bg-black
       "
+      style={{
+        backgroundImage: `url(${heroBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
     >
+      {/* subtle dark overlay */}
+      <div className="pointer-events-none absolute inset-0 bg-black/40" />
+
+      {/* YOUiD LOGO – same on desktop, smaller on mobile */}
+      <div className="absolute left-1/2 -translate-x-1/2 z-40">
+        <img
+          src={youidLogo}
+          alt="youID Logo"
+          className="
+            w-[150px] h-[120px]
+            md:w-[198px] md:h-[170px]
+            object-contain
+          "
+        />
+      </div>
+
       {/* CENTER DIVIDER (DESKTOP) */}
       <div
         className="
@@ -63,46 +88,23 @@ const Home = () => {
         "
       />
 
-      {/* TOP BAR WITH LOGO (CUSTOM NAV) */}
-      <div
-        style={{
-          background:
-            "linear-gradient(90deg, #7a2e00 0%, #000000 50%, #7a2e00 100%)",
-        }}
-        className="
-          fixed top-0 left-0 w-full h-[60px]
-          border-b border-white/10 
-          backdrop-blur-md shadow-sm 
-          z-40 
-          flex justify-center items-center
-        "
-      >
-        <div className="flex items-center gap-2 text-white">
-          <div className="relative h-40 md:h-40 w-auto">
-            <img
-              src={youidLogo}
-              alt="youID Logo"
-              className="h-full w-auto object-contain"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* CONTENT */}
+      {/* MAIN CONTENT */}
       <div
         className="
-          mt-24 md:mt-14
-          px-6 md:px-0
+          relative
+          pt-24 md:pt-32
+          px-5 md:px-0
           w-full 
           pb-10
+          z-30
         "
       >
         <div
           className="
             grid grid-cols-1 md:grid-cols-2 
-            gap-24 md:gap-8 lg:gap-12 xl:gap-16 
+            gap-14 md:gap-8 lg:gap-10 xl:gap-12 
             w-full
-            md:min-h-[calc(100vh-220px)]
+            md:min-h-[calc(100vh-200px)]
           "
         >
           {/* USER SECTION */}
@@ -112,94 +114,97 @@ const Home = () => {
             animate="visible"
             className="
               flex flex-col 
-              justify-center
-              items-center md:items-start
-              text-center md:text-left
-              md:pl-8 lg:pl-16 xl:pl-24 2xl:pl-32
+              justify-start md:justify-center
+              items-center
+              text-center
               h-full
             "
           >
-            <h1
-              className="
-                text-4xl font-extrabold text-white leading-tight
-                w-full md:pl-0 md:self-start 
-                md:max-w-[500px] xl:max-w-[550px] 2xl:max-w-[600px]
-                font-heading
-              "
-            >
-              <span className="text-[#FF6B35]">Verify Your Identity</span> <br />
-              Without Surrendering
-              <span className="text-[#FF6B35]"> Control.</span>
-            </h1>
-
-            <p
-              className="
-                text-lg text-gray-300 mt-4 
-                md:pl-0 md:self-start 
-                md:max-w-[450px] xl:max-w-[480px] 2xl:max-w-[500px]
-                font-body
-              "
-            >
-              Empowering users to verify their identity without uploading or
-              sharing their identity documents.
-            </p>
-
+            {/* Phones on top */}
             <div
               className="
                 relative w-full flex items-center justify-center 
-                mt-12 md:mt-10 
-                md:-translate-x-6 lg:-translate-x-8
+                mt-4 md:mt-0
               "
             >
               <div
                 className="
                   absolute bottom-0 left-1/2 -translate-x-1/2 
-                  w-[75%] h-[70px]
+                  w-[220px] h-[50px]
+                  md:w-[260px] md:h-[60px]
                   rounded-full 
                   bg-[radial-gradient(circle,rgba(0,0,0,0.25),rgba(0,0,0,0))]
                   blur-xl z-0
                 "
               />
 
-              <div className="relative z-10 -rotate-[15deg] -translate-y-4 md:-translate-y-6 -mr-10 scale-[1.05]">
+              <div className="relative z-10 -rotate-[15deg] -mr-4 md:-mr-6">
                 <img
                   src={userMockup2}
                   alt="User Mockup Left"
-                  className="
-                    w-[160px] sm:w-[160px] 
-                    md:w-[170px] lg:w-[170px] 
-                    drop-shadow-2xl
-                  "
+                  className="w-[130px] md:w-[150px] drop-shadow-2xl"
                 />
               </div>
 
-              <div className="relative z-20 rotate-[15deg] -translate-y-4 md:-translate-y-8 scale-[1.05]">
+              <div className="relative z-20 rotate-[15deg]">
                 <img
                   src={userMockup}
                   alt="User Mockup Right"
-                  className="
-                    w-[160px] sm:w-[160px] 
-                    md:w-[170px] lg:w-[170px] 
-                    drop-shadow-2xl
-                  "
+                  className="w-[130px] md:w-[150px] drop-shadow-2xl"
                 />
               </div>
             </div>
 
-            {/* MOBILE BUTTON – UNDER IMAGE (USER) */}
-            <div className="mt-8 md:hidden flex justify-center">
+            {/* Heading */}
+            <h1
+              className="
+                mt-8 md:mt-10
+                font-heading font-extrabold text-white 
+                leading-tight
+                max-w-[320px] md:max-w-[606px]
+                text-[26px] sm:text-[30px] md:text-[40px]
+                tracking-[0.54px]
+              "
+            >
+              Verify Your <span className="text-[#FF6B35]">Identity</span> <br />
+              Without Surrendering{" "}
+              <span className="text-[#FF6B35]">Control.</span>
+            </h1>
+
+            {/* Subheading */}
+            <p
+              className="
+                mt-6 md:mt-8
+                font-body text-gray-300 
+                max-w-[330px] md:max-w-[565px]
+                text-[15px] sm:text-[16px] md:text-[20px]
+                leading-snug
+              "
+            >
+              Empowering users to verify their identity without <br />
+              uploading or sharing their identity documents.
+            </p>
+
+            {/* Label + Button – centered under paragraph */}
+            <div className="mt-8 md:mt-10 flex flex-col items-center gap-3">
+              <p className="text-sm sm:text-base md:text-lg text-white font-body">
+                I&apos;m a user
+              </p>
+
               <Button
                 onClick={() => navigate("/user")}
                 size="lg"
                 className="
-                  rounded-full px-8 py-3 text-lg shadow-lg 
+                  rounded-md 
+                  px-6 py-2.5 text-sm
+                  md:px-8 md:py-3 md:text-base
+                  shadow-lg 
                   text-white font-body
-                  border border-white/20
-                  bg-[linear-gradient(to_right,#b45309_0%,#b45309_40%,#000000_70%)]
-                  hover:brightness-110
+                  bg-[#FF6B35]
+                  hover:bg-[#ff824d]
                 "
               >
-                I’m an User – know more
+                Know more
               </Button>
             </div>
           </motion.div>
@@ -211,106 +216,78 @@ const Home = () => {
             animate="visible"
             className="
               flex flex-col 
-              justify-center
-              items-center md:items-end 
-              text-center md:text-right 
-              md:pr-8 lg:pr-16 xl:pr-24 2xl:pr-32
+              justify-start md:justify-center
+              items-center
+              text-center
               h-full
             "
           >
-            <h1
-              className="
-                text-4xl font-extrabold text-white leading-tight 
-                md:max-w-[500px] xl:max-w-[550px] 2xl:max-w-[600px]
-                font-heading mt-8
-              "
-            >
-              <span className="text-[#FF6B35]">Identity Verification </span>
-              without the
-              <span className="text-[#FF6B35]"> risks </span>
-              and
-              <span className="text-[#FF6B35]"> overheads.</span>
-            </h1>
-
-            <p
-              className="
-                text-lg text-gray-300 mt-4 
-                md:max-w-[450px] xl:max-w-[480px] 2xl:max-w-[500px]
-                font-body
-              "
-            >
-              Empowering businesses to verify users securely without storing
-              personal data, reducing risk and ensuring compliance.
-            </p>
-
+            {/* Laptop on top */}
             <motion.img
               variants={popupUp(0.8)}
               src={businessMockup}
               alt="Business Dashboard"
               className="
-                mt-10
-                w-full 
-                max-w-[460px] md:max-w-[520px] lg:max-w-[580px] md:ml-20
+                mt-6 md:mt-0
+                w-[230px] sm:w-[260px] md:w-[430px] lg:w-[493px]
                 mx-auto
               "
             />
 
-            {/* MOBILE BUTTON – UNDER IMAGE (BUSINESS) */}
-            <div className="mt-8 md:hidden flex justify-center">
+            {/* Heading */}
+            <h1
+              className="
+                mt-8 md:mt-10
+                font-heading font-extrabold text-white 
+                leading-tight 
+                max-w-[320px] md:max-w-[606px]
+                text-[26px] sm:text-[30px] md:text-[40px]
+                tracking-[0.54px]
+              "
+            >
+              Identity Verification without <br />
+              the <span className="text-[#FF6B35]">risks</span> and
+              <span className="text-[#FF6B35]"> overheads.</span>
+            </h1>
+
+            {/* Subheading */}
+            <p
+              className="
+                mt-6 md:mt-8
+                font-body text-gray-300 
+                max-w-[340px] md:max-w-[640px]
+                text-[15px] sm:text-[16px] md:text-[20px]
+                leading-snug
+              "
+            >
+              Empowering businesses to verify users securely <br />
+              without storing personal data, reducing risk and ensuring
+              compliance.
+            </p>
+
+            {/* Label + Button – centered */}
+            <div className="mt-8 md:mt-6 flex flex-col items-center gap-3">
+              <p className="text-sm sm:text-base md:text-lg text-white font-body">
+                I&apos;m a business
+              </p>
+
               <Button
                 onClick={() => navigate("/business")}
                 size="lg"
                 className="
-                  rounded-full px-8 py-3 text-lg shadow-lg 
+                  rounded-md 
+                  px-6 py-2.5 text-sm
+                  md:px-8 md:py-3 md:text-base
+                  shadow-lg 
                   text-white font-body
-                  border border-white/20
-                  bg-[linear-gradient(to_right,#000000_0%,#000000_60%,#b45309_100%)]
-                  hover:brightness-110
+                  bg-[#FF6B35]
+                  hover:bg-[#ff824d]
                 "
               >
-                I’m a Business – know more 
+                Know more
               </Button>
             </div>
           </motion.div>
-        </div>
-
-        {/* DESKTOP BUTTONS - SEPARATE & CENTERED IN EACH SIDE */}
-        <div className="hidden md:block absolute bottom-8 left-0 w-full z-40">
-          <div className="grid grid-cols-2 w-full">
-            {/* LEFT SIDE BUTTON - USER */}
-            <div className="flex justify-center">
-              <Button
-                onClick={() => navigate("/user")}
-                size="lg"
-                className="
-                  rounded-full px-8 py-3 text-lg shadow-lg 
-                  text-white font-body
-                  border border-white/20
-                  bg-[linear-gradient(to_right,#b45309_0%,#b45309_40%,#000000_70%)]
-                  hover:brightness-110
-                "
-              >
-               I’m an User – know more
-              </Button>
-            </div>
-
-            {/* RIGHT SIDE BUTTON - BUSINESS */}
-            <div className="flex justify-center">
-              <Button
-                onClick={() => navigate("/business")}
-                size="lg"
-                className="
-                  rounded-full px-8 py-3 text-lg shadow-lg 
-                  text-white font-body
-                  border border-white/20
-                  bg-[linear-gradient(to_right,#000000_0%,#000000_60%,#b45309_100%)]
-                  hover:brightness-110
-                "
-              >
-                I’m a Business – know more 
-              </Button>
-            </div>
-          </div>
         </div>
       </div>
     </section>

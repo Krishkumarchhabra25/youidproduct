@@ -247,6 +247,17 @@ body {
   font-style: normal;
 }
 
+
+@font-face {
+  font-family: "Autobus";
+  src: url("./AutoBusBold/Autobus-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+
+
 /* ---------- LAYOUT HELPERS ---------- */
 
 /* make pinned sections full width and remove unexpected left offsets */

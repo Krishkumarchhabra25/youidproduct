@@ -260,7 +260,6 @@ const UserHowitWorks = () => {
           </div>
 
 {/* MOBILE VERSION – SAME STRUCTURE AS USE CASES */}
-{/* MOBILE VERSION – SAME STRUCTURE AS USE CASES */}
 <div className="md:hidden flex flex-col space-y-16 mt-10">
   {steps.map((step, index) => (
     <motion.div
