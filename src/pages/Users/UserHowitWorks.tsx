@@ -271,20 +271,21 @@ const UserHowitWorks = () => {
       className="relative flex justify-center"
     >
       {/* CARD */}
-      <div
-        className="
-          relative
-          w-[92%]
-          max-w-[380px]
-          rounded-[2.5rem]
-          px-6
-          pt-8
-          pb-10
-          bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
-          shadow-[0_30px_80px_rgba(0,0,0,0.85)]
-          border border-white/5
-        "
-      >
+     <div
+  className="
+    relative
+    w-[92%]
+    max-w-[380px]
+    rounded-[2.5rem]
+    px-6
+    pt-8
+    pb-10
+    shadow-[0_30px_80px_rgba(0,0,0,0.85)]
+    border border-white/5
+    bg-[rgba(30,30,30,0.85)]
+  "
+>
+
         {/* step number circle */}
         <div className="w-12 h-12 mb-4 rounded-full bg-orange-500 text-black flex items-center justify-center text-lg font-bold">
           {String(index + 1).padStart(2, "0")}
