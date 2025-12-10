@@ -210,12 +210,10 @@ const BusinessHowItWorks: React.FC = () => {
     <>
       <Navigation />
 
-      <div
-        className="min-h-screen w-full"
-        style={{
-          background: "linear-gradient(180deg,#2c0d00 0%, #2a1200 30%, #000 100%)",
-        }}
-      >
+  <div
+  className="min-h-screen w-full bg-[#131019] text-white"
+>
+
         <section className="relative w-full px-6 md:px-10 pt-20 pb-28">
           <div className="text-center mb-10">
             <h2 className="text-white text-4xl md:text-5xl font-heading">How it works</h2>

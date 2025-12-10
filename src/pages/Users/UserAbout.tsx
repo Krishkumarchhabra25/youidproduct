@@ -10,6 +10,9 @@ import { Shield, Eye, Zap, UserCheck, Lock } from "lucide-react";
 import zkImage from "../../assets/images/zeroknowldge.png";
 import valuesImage from "../../assets/images/ourvalues.jpg";
 
+// 🔹 shared hero background image
+import heroBg from "@/assets/images/YouID 3.png";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const UserAbout = () => {
@@ -27,15 +30,10 @@ const UserAbout = () => {
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    // same darker orange → black as BusinessAbout
-    const initialBg =
-      "radial-gradient(circle at 10% 0%, rgba(255,106,0,1) 0%, rgba(122,44,0,1) 22%, rgba(18,6,0,1) 55%, rgba(0,0,0,1) 100%)";
-
+    // solid dark background instead of gradients
     if (containerRef.current) {
       gsap.set(containerRef.current, {
-        background: initialBg,
-        backgroundSize: "cover",
-        backgroundPosition: "top left",
+        background: "#131019",
       });
     }
 
@@ -46,7 +44,7 @@ const UserAbout = () => {
       if (!cards.length) return;
 
       if (prefersReduced) {
-        gsap.set(cards, { opacity: 1, x: 0, y: 0 });
+        gsap.set(cards, { opacity: 1, x: 0, y: 0, scale: 1 });
       } else {
         gsap.fromTo(
           cards,
@@ -71,105 +69,25 @@ const UserAbout = () => {
 
     if (prefersReduced) return;
 
-    // use gsap.matchMedia (same as BusinessAbout)
-    const mm = gsap.matchMedia();
-
-    // Desktop
-    mm.add("(min-width: 1024px)", () => {
-      const endBg =
-        "radial-gradient(circle at 30% 0%, rgba(170,58,0,1) 0%, rgba(20,8,0,1) 40%, rgba(0,0,0,1) 100%)";
-
-      const tween = gsap.to(containerRef.current, {
-        background: endBg,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 0.8,
-        },
-      });
-
-      return () => {
-        try {
-          tween.scrollTrigger && tween.scrollTrigger.kill();
-          tween.kill();
-        } catch (e) {}
-      };
-    });
-
-    // Tablet
-    mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
-      const endBg =
-        "radial-gradient(circle at 20% 0%, rgba(170,58,0,0.9) 0%, rgba(26,10,0,1) 45%, rgba(0,0,0,1) 100%)";
-
-      const tween = gsap.to(containerRef.current, {
-        background: endBg,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 0.6,
-        },
-      });
-
-      return () => {
-        try {
-          tween.scrollTrigger && tween.scrollTrigger.kill();
-          tween.kill();
-        } catch (e) {}
-      };
-    });
-
-    // Mobile
-    mm.add("(max-width: 767px)", () => {
-      const endBg =
-        "radial-gradient(circle at 25% 5%, rgba(255,106,0,0.8) 0%, rgba(26,10,0,1) 40%, rgba(0,0,0,1) 100%)";
-
-      const tween = gsap.to(containerRef.current, {
-        background: endBg,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 0.5,
-        },
-      });
-
-      return () => {
-        try {
-          tween.scrollTrigger && tween.scrollTrigger.kill();
-          tween.kill();
-        } catch (e) {}
-      };
-    });
-
     return () => {
       try {
-        mm.revert();
         ScrollTrigger.getAll().forEach((t) => t.kill());
       } catch (e) {}
     };
   }, []);
 
-  // same themed card style as BusinessAbout
-  const themedCardStyle = {
-    background: "linear-gradient(180deg, rgba(255,106,0,0.06), rgba(0,0,0,0.6))",
-    border: "1px solid rgba(255,106,0,0.10)",
-    color: "white",
-  };
-
   return (
     <div
       ref={containerRef}
-      className="min-h-screen flex flex-col text-white overflow-hidden"
+      className="min-h-screen flex flex-col text-white overflow-hidden bg-[#131019]"
     >
       <Navigation />
 
       {/* HERO */}
-      <section ref={addToRefs} className="relative text-center py-20 md:py-24 px-6 ">
+      <section
+        ref={addToRefs}
+        className="relative text-center py-20 md:py-24 px-6 "
+      >
         <Badge className="mb-6 px-4 py-1 text-sm font-medium bg-white/10 text-white rounded-full border-none animate-card font-body">
           About youID for Users
         </Badge>
@@ -189,13 +107,25 @@ const UserAbout = () => {
         </button>
       </section>
 
-      {/* MISSION / VISION / PROBLEM – same layout as BusinessAbout */}
-      <section ref={addToRefs} className="py-14 md:py-16 px-6 md:px-14 lg:px-20">
+      {/* MISSION / VISION / PROBLEM */}
+      <section
+        ref={addToRefs}
+        className="py-14 md:py-16 px-6 md:px-14 lg:px-20"
+      >
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 text-center">
           {/* Our Mission */}
-          <Card className="relative shadow-md border-none rounded-3xl bg-black animate-card overflow-hidden">
-            <div className="absolute right-0 top-4 bottom-4 w-[3px] bg-orange-500 rounded-full" />
-            <CardContent className="p-6">
+          <Card
+            className="relative shadow-md border border-white/10 rounded-3xl animate-card overflow-hidden"
+            style={{
+              backgroundImage: `url(${heroBg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            <div className="absolute inset-0 bg-black/70 z-0" />
+            <div className="absolute right-0 top-4 bottom-4 w-[3px] bg-orange-500 rounded-full z-10" />
+            <CardContent className="p-6 relative z-20">
               <h3 className="text-xl font-heading font-semibold mb-3 text-white flex items-center justify-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-orange-400" />
                 Our Mission
@@ -208,9 +138,18 @@ const UserAbout = () => {
           </Card>
 
           {/* Our Vision */}
-          <Card className="relative shadow-md border-none rounded-3xl bg-black animate-card overflow-hidden">
-            <div className="absolute right-0 top-4 bottom-4 w-[3px] bg-orange-500 rounded-full" />
-            <CardContent className="p-6">
+          <Card
+            className="relative shadow-md border border-white/10 rounded-3xl animate-card overflow-hidden"
+            style={{
+              backgroundImage: `url(${heroBg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            <div className="absolute inset-0 bg-black/70 z-0" />
+            <div className="absolute right-0 top-4 bottom-4 w-[3px] bg-orange-500 rounded-full z-10" />
+            <CardContent className="p-6 relative z-20">
               <h3 className="text-xl font-heading font-semibold mb-3 text-white flex items-center justify-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-orange-400" />
                 Our Vision
@@ -223,9 +162,18 @@ const UserAbout = () => {
           </Card>
 
           {/* The Problem */}
-          <Card className="relative shadow-md border-none rounded-3xl bg-black animate-card overflow-hidden">
-            <div className="absolute right-0 top-4 bottom-4 w-[3px] bg-orange-500 rounded-full" />
-            <CardContent className="p-6">
+          <Card
+            className="relative shadow-md border border-white/10 rounded-3xl animate-card overflow-hidden"
+            style={{
+              backgroundImage: `url(${heroBg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            <div className="absolute inset-0 bg-black/70 z-0" />
+            <div className="absolute right-0 top-4 bottom-4 w-[3px] bg-orange-500 rounded-full z-10" />
+            <CardContent className="p-6 relative z-20">
               <h3 className="text-xl font-heading font-semibold mb-3 text-white flex items-center justify-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-orange-400" />
                 The Problem
@@ -241,7 +189,10 @@ const UserAbout = () => {
       </section>
 
       {/* ZERO KNOWLEDGE */}
-      <section ref={addToRefs} className="py-20 md:py-24 px-6 md:px-14 lg:px-20">
+      <section
+        ref={addToRefs}
+        className="py-20 md:py-24 px-6 md:px-14 lg:px-20"
+      >
         <div className="text-center mb-14 animate-card">
           <Badge className="mb-4 px-4 py-1 text-sm bg-white/10 text-white rounded-full border-none">
             Our Solution
@@ -259,11 +210,22 @@ const UserAbout = () => {
         </div>
 
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          {/* Image card */}
           <div
-            className="rounded-3xl overflow-hidden shadow-xl border-none animate-card"
-            style={themedCardStyle}
+            className="rounded-3xl overflow-hidden shadow-xl border border-white/10 animate-card relative"
+            style={{
+              backgroundImage: `url(${heroBg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
           >
-            <img src={zkImage} alt="Zero Knowledge Security" className="w-full block" />
+            <div className="absolute inset-0 bg-black/60 z-0" />
+            <img
+              src={zkImage}
+              alt="Zero Knowledge Security"
+              className="w-full block relative z-10"
+            />
           </div>
 
           <div className="animate-card text-white">
@@ -305,8 +267,8 @@ const UserAbout = () => {
               <li className="flex gap-3">
                 <span className="w-3 h-3 bg-orange-400 rounded-full mt-2"></span>
                 <p>
-                  <strong>End-to-end encryption:</strong> Your data is encrypted
-                  at rest and in transit.
+                  <strong>End-to-end encryption:</strong> Your data is
+                  encrypted at rest and in transit.
                 </p>
               </li>
             </ul>
@@ -315,7 +277,10 @@ const UserAbout = () => {
       </section>
 
       {/* VALUES */}
-      <section ref={addToRefs} className="py-20 md:py-24 px-6 md:px-14 lg:px-20">
+      <section
+        ref={addToRefs}
+        className="py-20 md:py-24 px-6 md:px-14 lg:px-20"
+      >
         <div className="text-center mb-16 animate-card">
           <Badge className="mb-4 px-4 py-1 text-sm bg-white/10 text-white rounded-full border-none">
             Our Values
@@ -332,13 +297,25 @@ const UserAbout = () => {
         </div>
 
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-center">
+          {/* Image card */}
           <div
-            className="rounded-3xl overflow-hidden shadow-xl border-none animate-card"
-            style={themedCardStyle}
+            className="rounded-3xl overflow-hidden shadow-xl border border-white/10 animate-card relative"
+            style={{
+              backgroundImage: `url(${heroBg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
           >
-            <img src={valuesImage} alt="Our Values" className="w-full block" />
+            <div className="absolute inset-0 bg-black/60 z-0" />
+            <img
+              src={valuesImage}
+              alt="Our Values"
+              className="w-full block relative z-10"
+            />
           </div>
 
+          {/* Value cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 text-white">
             {[
               {
@@ -364,33 +341,49 @@ const UserAbout = () => {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl shadow-md animate-card text-white"
-                style={themedCardStyle}
+                className="p-6 rounded-2xl shadow-md animate-card text-white relative overflow-hidden border border-white/10"
+                style={{
+                  backgroundImage: `url(${heroBg})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                }}
               >
-                <div className="p-3 bg-white/10 text-white rounded-full w-fit mb-4">
-                  <item.icon className="w-6 h-6 text-white" />
+                <div className="absolute inset-0 bg-black/70 z-0" />
+                <div className="relative z-10">
+                  <div className="p-3 bg-white/10 text-white rounded-full w-fit mb-4">
+                    <item.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="font-heading font-semibold text-lg text-white mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-white text-sm">{item.desc}</p>
                 </div>
-                <h3 className="font-heading font-semibold text-lg text-white mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-white text-sm">{item.desc}</p>
               </div>
             ))}
 
             <div
-              className="p-6 rounded-2xl shadow-md sm:col-span-2 animate-card text-white"
-              style={themedCardStyle}
+              className="p-6 rounded-2xl shadow-md sm:col-span-2 animate-card text-white relative overflow-hidden border border-white/10"
+              style={{
+                backgroundImage: `url(${heroBg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
             >
-              <div className="p-3 bg-white/10 text-white rounded-full w-fit mb-4">
-                <Zap className="w-6 h-6 text-white" />
+              <div className="absolute inset-0 bg-black/70 z-0" />
+              <div className="relative z-10">
+                <div className="p-3 bg_WHITE/10 text-white rounded-full w-fit mb-4">
+                  <Zap className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="font-heading font-semibold text-lg text-white mb-2">
+                  Simplicity
+                </h3>
+                <p className="text-white text-sm">
+                  One tap to approve. No forms, no PDFs, no repeated uploads —
+                  just fast, private verification.
+                </p>
               </div>
-              <h3 className="font-heading font-semibold text-lg text-white mb-2">
-                Simplicity
-              </h3>
-              <p className="text-white text-sm">
-                One tap to approve. No forms, no PDFs, no repeated uploads — just
-                fast, private verification.
-              </p>
             </div>
           </div>
         </div>

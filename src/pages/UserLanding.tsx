@@ -7,6 +7,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLayoutEffect, useRef } from "react";
 import { SiAndroid, SiApple } from "react-icons/si"; // npm i react-icons if you don't have it
 
+// 👇 add this
+import heroBg from "@/assets/images/YouID 3.png";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const userProblems = [
@@ -69,14 +72,14 @@ const UserLanding = () => {
       if (hero) {
         const heroTitle = hero.querySelector(".hero-title");
         const heroDesc = hero.querySelector(".hero-desc");
-      const heroBtns = hero.querySelectorAll(".hero-btn");
-        const heroNote = hero.querySelector(".hero-note"); 
+        const heroBtns = hero.querySelectorAll(".hero-btn");
+        const heroNote = hero.querySelector(".hero-note");
 
-   const elements = [
-        heroTitle,
-        heroDesc,
-        ...Array.from(heroBtns),
-      ].filter(Boolean) as Element[];
+        const elements = [
+          heroTitle,
+          heroDesc,
+          ...Array.from(heroBtns),
+        ].filter(Boolean) as Element[];
 
         gsap.set(elements, { opacity: 0 });
 
@@ -109,34 +112,34 @@ const UserLanding = () => {
           );
         }
 
-          if (heroNote) {
-    gsap.fromTo(
-      heroNote,
-      { opacity: 0, y: 10 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power2.out",
-        delay: 0.9,
-      }
-    );
-  }
+        if (heroNote) {
+          gsap.fromTo(
+            heroNote,
+            { opacity: 0, y: 10 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 1,
+              ease: "power2.out",
+              delay: 0.9,
+            }
+          );
+        }
 
- if (heroBtns.length) {
-        gsap.fromTo(
-          heroBtns,
-          { opacity: 0, scale: 0.8 },
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.8,
-            ease: "back.out(1.7)",
-            delay: 0.8,
-            stagger: 0.1, // nice little offset between Android & iOS
-          }
-        );
-      }
+        if (heroBtns.length) {
+          gsap.fromTo(
+            heroBtns,
+            { opacity: 0, scale: 0.8 },
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 0.8,
+              ease: "back.out(1.7)",
+              delay: 0.8,
+              stagger: 0.1,
+            }
+          );
+        }
       }
 
       // ANIMATIONS
@@ -283,86 +286,92 @@ const UserLanding = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col font-body">
+    <div className="min-h-screen flex flex-col font-body bg-[#131019]">
       <Navigation />
 
-      <main className="flex-1 bg-black">
+      <main className="flex-1 bg-[#131019]">
         {/* HERO */}
-        <section
-          ref={heroRef}
-          className="hero-section relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-black to-[#1a0f00]"
-        >
-          
+   <section
+  ref={heroRef}
+  className="
+    hero-section 
+    relative 
+    min-h-screen 
+    flex items-center justify-center 
+    overflow-hidden
+  "
+  style={{
+    backgroundImage: `url(${heroBg})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+  }}
+>
+  {/* Dark overlay for readability */}
+  <div className="absolute inset-0 bg-black/55 pointer-events-none" />
 
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-4xl mx-auto text-center space-y-10">
-              {/* <Badge
-                variant="secondary"
-                className="mb-4 font-body tracking-wide"
-              >
-                For Individuals & Everyday Users
-              </Badge> */}
+  <div className="container mx-auto px-4 relative z-10">
+    <div className="max-w-4xl mx-auto text-center space-y-10">
+      <h1 className="hero-title text-4xl md:text-6xl font-heading font-extrabold text-white leading-[1.1] tracking-tight">
+        Verify Your Identity Once.
+        <br />
+        Use It Anywhere, Anytime.
+      </h1>
 
-              <h1 className="hero-title text-4xl md:text-6xl font-heading font-extrabold text-white leading-[1.1] tracking-tight">
-                Verify Your Identity Once.
-                <br />
-                Use It Anywhere, Anytime.
-              </h1>
+      <p className="hero-desc text-base md:text-2xl text-white/80 max-w-2xl mx-auto leading-relaxed font-body">
+        Easily and securely verify your documents using the youID
+        digital wallet on your smartphone. Approve requests without
+        sharing your documents with any business not even us. The
+        approval process works just like your banking apps.
+      </p>
 
-              <p className="hero-desc text-base md:text-2xl text-white/80 max-w-2xl mx-auto leading-relaxed font-body">
-               Easily and securely verify your documents using the youID digital wallet on your smartphone. Approve requests without sharing your documents with any business  not even us. The approval process works just like your banking apps.
-              </p>
-<div className="mt-10 md:mt-14 flex flex-col items-center justify-center gap-4 md:gap-6">
+              <div className="mt-10 md:mt-14 flex flex-col items-center justify-center gap-4 md:gap-6">
+                {/* BUTTONS */}
+                <div className="flex flex-col sm:flex-row items-center gap-4">
+                  {/* Primary: Android */}
+                  <Button
+                    size="lg"
+                    variant="secondary"
+                    className="
+                      hero-btn
+                      min-w-[180px]
+                      text-lg px-10 py-6 font-semibold font-body
+                      flex items-center gap-3 justify-center
+                      bg-[#FF6B35]
+                      text-white border border-white/10
+                      hover:bg-[#ff824f]
+                      shadow-lg shadow-black/40
+                    "
+                  >
+                    <SiAndroid className="w-5 h-5" />
+                    Android
+                  </Button>
 
-  {/* BUTTONS */}
-  <div className="flex flex-col sm:flex-row items-center gap-4">
-    <Button
-      size="lg"
-      variant="secondary"
-      className="
-        hero-btn
-        min-w-[180px]
-        text-lg px-10 py-6 font-semibold font-body
-        flex items-center gap-3 justify-center
-        bg-gradient-to-r from-black via-black to-[#FF6B35]
-        text-white border border-white/10
-        hover:from-black hover:via-[#1a1a1a] hover:to-[#ff824f]
-        shadow-lg shadow-black/40
-      "
-    >
-      <SiAndroid className="w-5 h-5" />
-      Android
-    </Button>
+                  {/* Secondary: iOS */}
+                  <Button
+                    size="lg"
+                    variant="secondary"
+                    className="
+                      hero-btn
+                      min-w-[180px]
+                      text-lg px-10 py-6 font-semibold font-body
+                      flex items-center gap-3 justify-center
+                      bg-transparent
+                      text-white border border-white/40
+                      hover:bg-white/10
+                      shadow-lg shadow-black/20
+                    "
+                  >
+                    <SiApple className="w-5 h-5" />
+                    IOS
+                  </Button>
+                </div>
 
-    <Button
-      size="lg"
-      variant="secondary"
-      className="
-        hero-btn
-        min-w-[180px]
-        text-lg px-10 py-6 font-semibold font-body
-        flex items-center gap-3 justify-center
-        bg-gradient-to-r from-[#FF6B35] via-black to-black
-        text-white border border-white/10
-        hover:from-[#ff824f] hover:via-[#1a1a1a] hover:to-black
-        shadow-lg shadow-black/40
-      "
-    >
-      <SiApple className="w-5 h-5" />
-      IOS
-    </Button>
-  </div>
-
-  {/* TEXT AFTER BUTTONS */}
-  <p className="hero-note text-white/80 text-sm md:text-base font-body whitespace-nowrap">
-    Download and use it – it’s free!
-  </p>
-</div>
-
-
-
-
-
+                {/* TEXT AFTER BUTTONS */}
+                <p className="hero-note text-white/80 text-sm md:text-base font-body whitespace-nowrap">
+                  Download and use it – it’s free!
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -370,20 +379,22 @@ const UserLanding = () => {
         {/* PROBLEM SECTION */}
         <section
           ref={problemRef}
-          className="py-20 md:py-28 px-4 md:px-12 lg:px-20 bg-black text-white relative overflow-visible"
+          className="py-20 md:py-28 px-4 md:px-12 lg:px-20 bg-[#131019] text-white relative overflow-visible"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
             <div>
               <h2 className="text-3xl sm:text-4xl md:text-6xl font-heading font-extrabold leading-[1.15]">
                 Why Users
-                <br /> worry about {" "}
+                <br /> worry about{" "}
                 <span className="text-[#FF6B35]">
                   Sharing their documents Online
                 </span>
               </h2>
 
               <p className="mt-6 text-base md:text-xl text-gray-400 max-w-sm leading-relaxed font-body">
-               Current verification process asks you to hand over too much sensitive information and trust that nothing bad happens with your data but it does
+                Current verification process asks you to hand over too much
+                sensitive information and trust that nothing bad happens with
+                your data but it does
               </p>
             </div>
 
@@ -412,56 +423,62 @@ const UserLanding = () => {
         {/* WHY USERS CHOOSE YOU-ID */}
         <section
           ref={chooseRef}
-          className="py-20 md:py-28 bg-black text-white relative overflow-visible"
+          className="py-20 md:py-28 bg-[#131019] text-white relative overflow-visible"
         >
           <div className="max-w-7xl mx-auto px-4">
-<div
-  ref={chooseBoxRef}
-  className="
-    rounded-3xl 
-    p-[2px] sm:p-[3px] md:p-[4px]
-    bg-gradient-to-br from-black via-[#1f0a00] to-[#FF6B35]
-    shadow-2xl
-    min-h-[480px] md:min-h-[620px]
-  "
->
-  <div
-    className="
-      h-full w-full
-      rounded-3xl
-      bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
-      px-6 sm:px-8 md:px-16
-      py-6 sm:py-8 md:py-16
-      text-white
-    "
-  >
-    <h2 className="text-3xl sm:text-4xl md:text-6xl font-heading font-extrabold leading-[1.15] mb-10 md:mb-14 tracking-tight">
-      Why can Users trust youID?
-    </h2>
+            <div
+              ref={chooseBoxRef}
+              className="
+                rounded-3xl 
+                p-[2px] sm:p-[3px] md:p-[4px]
+                bg-gradient-to-br from-[#131019] via-[#1f0a00] to-[#FF6B35]
+                shadow-2xl
+                min-h-[480px] md:min-h-[620px]
+              "
+            >
+              {/* 🔁 Card now uses heroBg instead of gradient */}
+              <div
+                className="
+                  h-full w-full
+                  rounded-3xl
+                  relative overflow-hidden
+                  bg-cover bg-center bg-no-repeat
+                  px-6 sm:px-8 md:px-16
+                  py-6 sm:py-8 md:py-16
+                  text-white
+                "
+                style={{ backgroundImage: `url(${heroBg})` }}
+              >
+                {/* Dark overlay for readability */}
+                <div className="absolute inset-0 bg-black/60 pointer-events-none" />
 
-    <div className="space-y-10 md:space-y-14 text-lg">
-      {userReasons.map((item, i) => (
-        <div
-          key={i}
-          className="choose-item border-t border-white/10 pt-6 first:pt-0 first:border-t-0"
-        >
-          <h3 className="text-2xl sm:text-3xl font-heading font-bold mb-2 tracking-tight flex items-center gap-4">
-            <span className="text-3xl sm:text-4xl font-extrabold px-3 py-1 rounded-full bg-black/60 text-[#FFCF9A]">
-              {item.number}
-            </span>
-            <span className="text-white">{item.title}</span>
-          </h3>
-          <p className="text-white/80 text-sm sm:text-base md:text-lg leading-relaxed font-body max-w-xl">
-            {item.description}
-          </p>
-        </div>
-      ))}
-    </div>
-  </div>
-</div>
+                <div className="relative z-10">
+                  <h2 className="text-3xl sm:text-4xl md:text-6xl font-heading font-extrabold leading-[1.15] mb-10 md:mb-14 tracking-tight">
+                    Why can Users trust youID?
+                  </h2>
 
-
-
+                  <div className="space-y-10 md:space-y-14 text-lg">
+                    {userReasons.map((item, i) => (
+                      <div
+                        key={i}
+                        className="choose-item border-t border-white/10 pt-6 first:pt-0 first:border-t-0"
+                      >
+                        <h3 className="text-2xl sm:text-3xl font-heading font-bold mb-2 tracking-tight flex items-center gap-4">
+                          <span className="text-3xl sm:text-4xl font-extrabold px-3 py-1 rounded-full bg-[#131019]/60 text-[#FFCF9A]">
+                            {item.number}
+                          </span>
+                          <span className="text-white">{item.title}</span>
+                        </h3>
+                        <p className="text-white/80 text-sm sm:text-base md:text-lg leading-relaxed font-body max-w-xl">
+                          {item.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              {/* end inner bg-image card */}
+            </div>
           </div>
         </section>
       </main>

@@ -183,7 +183,7 @@ body {
 
 @font-face {
   font-family: "Arimo";
-  src: url("/src/assets/fonts/Arimo/Arimo-Bold.ttf") format("truetype");
+  src: url("./assets/fonts/Arimo/Arimo-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
 }
@@ -248,14 +248,14 @@ body {
 }
 
 
+/* ----------------- AUTOBUS (HEADINGS) ----------------- */
 @font-face {
   font-family: "Autobus";
-  src: url("./AutoBusBold/Autobus-Bold.ttf") format("truetype");
-  font-weight: 700;
+  src: url("./assets/fonts/AutoBusBold/Autobus-Bold.ttf") format("truetype");
   font-style: normal;
+  font-weight: normal;
+  font-display: swap;
 }
-
-
 
 
 /* ---------- LAYOUT HELPERS ---------- */

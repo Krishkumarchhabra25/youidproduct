@@ -79,13 +79,14 @@ const Navigation = () => {
 
   return (
     <>
-      <nav
-        className="
-          fixed top-0 left-0 right-0 z-50 w-full border-b border-[#1a1a1a]
-          bg-[linear-gradient(to_right,#000000_0%,#000000_25%,#FF6B00_50%,#000000_75%,#000000_100%)]
-          backdrop-blur
-        "
-      >
+   <nav
+  className="
+    fixed top-0 left-0 right-0 z-50 w-full border-b border-[#1a1a1a]
+    bg-[#131019]
+    backdrop-blur
+  "
+>
+
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
             {/* Logo - ORIGINAL SIZE PRESERVED */}

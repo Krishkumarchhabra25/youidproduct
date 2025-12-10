@@ -5,6 +5,9 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLayoutEffect, useRef } from "react";
 
+// 🔹 shared hero/card background image
+import heroBg from "@/assets/images/YouID 3.png";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const BusinessLanding = () => {
@@ -210,53 +213,63 @@ const BusinessLanding = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col font-body">
+    <div className="min-h-screen flex flex-col font-body bg-[#131019]">
       <Navigation />
 
-      <main className="flex-1 bg-black">
+      <main className="flex-1 bg-[#131019]">
         {/* ---------------- HERO ---------------- */}
-        <section
-          ref={heroRef}
-          className="hero-section relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-black to-[#1a0f00]"
-        >
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-4xl mx-auto text-center space-y-6">
-              <h1 className="hero-title text-5xl md:text-6xl font-heading font-extrabold text-white leading-[1.1] tracking-tight">
-                Verify Customers Instantly.<br />
-                Stay Compliant Effortlessly.
-              </h1>
-
-              <p className="hero-desc text-lg md:text-2xl text-white/80 max-w-2xl mx-auto leading-relaxed font-body">
-                youID helps organisations verify Users in seconds without storing or handling sensitive documents, avoid management Risks, Costs and yet stay compliant.
-              </p>
-
-              {/* GRADIENT REQUEST DEMO BUTTON */}
-<Button
-  size="lg"
-  variant="secondary"
-  className="
-    hero-btn
-    mt-6 mx-auto
-    text-lg px-10 py-6 font-semibold font-body
-    flex items-center justify-center
-    bg-gradient-to-r from-black via-black to-[#FF6B35]
-    text-white border border-white/10
-    hover:from-black hover:via-[#1a1a1a] hover:to-[#ff824f]
-    shadow-lg shadow-black/40
-    rounded-xl
-  "
+ <section
+  ref={heroRef}
+  className="hero-section relative min-h-screen flex items-center justify-center overflow-hidden"
+  style={{
+    backgroundImage: `url(${heroBg})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+  }}
 >
-  Request Demo
-</Button>
+  {/* overlay */}
+  <div className="absolute inset-0 bg-black/60 pointer-events-none" />
 
-            </div>
-          </div>
-        </section>
+  <div className="container mx-auto px-4 relative z-10">
+    <div className="max-w-4xl mx-auto text-center space-y-6">
+      <h1 className="hero-title text-5xl md:text-6xl font-heading font-extrabold text-white leading-[1.1] tracking-tight">
+        Verify Customers Instantly.<br />
+        Stay Compliant Effortlessly.
+      </h1>
+
+      <p className="hero-desc text-lg md:text-2xl text-white/80 max-w-2xl mx-auto leading-relaxed font-body">
+        youID helps organisations verify Users in seconds without
+        storing or handling sensitive documents, avoid management Risks,
+        Costs and yet stay compliant.
+      </p>
+
+      <Button
+        size="lg"
+        variant="secondary"
+        className="
+          hero-btn
+          mt-6 mx-auto
+          text-lg px-10 py-6 font-semibold font-body
+          flex items-center justify-center
+          bg-[#FF6B35]
+          text-white border border-white/10
+          hover:bg-[#ff824f]
+          shadow-lg shadow-black/40
+          rounded-xl
+        "
+      >
+        Request Demo
+      </Button>
+    </div>
+  </div>
+</section>
+
 
         {/* ------------- PROBLEM SECTION ------------- */}
         <section
           ref={problemRef}
-          className="py-28 px-6 md:px-12 lg:px-20 bg-black text-white relative overflow-visible"
+          className="py-28 px-6 md:px-12 lg:px-20 bg-[#131019] text-white relative overflow-visible"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
             <div>
@@ -308,7 +321,7 @@ const BusinessLanding = () => {
         {/* ------------- WHY BUSINESSES CHOOSE YOU-ID ------------- */}
         <section
           ref={chooseRef}
-          className="py-28 bg-black text-white relative overflow-visible"
+          className="py-28 bg-[#131019] text-white relative overflow-visible"
         >
           <div className="max-w-7xl mx-auto px-4">
             <div
@@ -321,64 +334,77 @@ const BusinessLanding = () => {
                 min-h-[480px] md:min-h-[620px]
               "
             >
+              {/* Card with background image */}
               <div
                 className="
                   h-full w-full
                   rounded-3xl
-                  bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
+                  relative overflow-hidden
                   px-6 sm:px-8 md:px-16
                   py-6 sm:py-8 md:py-16
                   text-white
                 "
+                style={{
+                  backgroundImage: `url(${heroBg})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                }}
               >
-                <h2 className="text-3xl sm:text-4xl md:text-6xl font-heading font-extrabold leading-[1.15] mb-10 md:mb-14 tracking-tight">
-                  Why Businesses Choose youID
-                </h2>
+                {/* dark overlay */}
+                <div className="absolute inset-0 bg-black/65 pointer-events-none" />
 
-                <div className="space-y-10 md:space-y-14 text-lg">
-                  {[
-                    {
-                      number: "01",
-                      title: "Instant Verification",
-                      description:
-                        "Skip document uploads — verify customers instantly with zero-document checks.",
-                    },
-                    {
-                      number: "02",
-                      title: "Reduce Fraud",
-                      description:
-                        "Stop fraudulent sign-ups using decentralized, cryptographic identity proofs.",
-                    },
-                    {
-                      number: "03",
-                      title: "Zero PII Storage",
-                      description:
-                        "Businesses have option to not store Customer PII, no need to store Customers documents copies — dramatically reducing data breach exposure.",
-                    },
-                    {
-                      number: "04",
-                      title: "Faster Onboarding",
-                      description:
-                        "Cut friction at signup and increase conversion while staying fully compliant.",
-                    },
-                  ].map((item, i) => (
-                    <div
-                      key={i}
-                      className="choose-item border-t border-white/10 pt-6 first:pt-0 first:border-t-0"
-                    >
-                      <h3 className="text-2xl sm:text-3xl font-heading font-bold mb-2 tracking-tight flex items-center gap-4">
-                        <span className="text-3xl sm:text-4xl font-extrabold px-3 py-1 rounded-full bg-black/60 text-[#FFCF9A]">
-                          {item.number}
-                        </span>
-                        <span className="text-white">{item.title}</span>
-                      </h3>
-                      <p className="text-white/80 text-sm sm:text-base md:text-lg leading-relaxed font-body max-w-xl">
-                        {item.description}
-                      </p>
-                    </div>
-                  ))}
+                <div className="relative z-10">
+                  <h2 className="text-3xl sm:text-4xl md:text-6xl font-heading font-extrabold leading-[1.15] mb-10 md:mb-14 tracking-tight">
+                    Why Businesses Choose youID
+                  </h2>
+
+                  <div className="space-y-10 md:space-y-14 text-lg">
+                    {[
+                      {
+                        number: "01",
+                        title: "Instant Verification",
+                        description:
+                          "Skip document uploads — verify customers instantly with zero-document checks.",
+                      },
+                      {
+                        number: "02",
+                        title: "Reduce Fraud",
+                        description:
+                          "Stop fraudulent sign-ups using decentralized, cryptographic identity proofs.",
+                      },
+                      {
+                        number: "03",
+                        title: "Zero PII Storage",
+                        description:
+                          "Businesses have option to not store Customer PII, no need to store Customers documents copies — dramatically reducing data breach exposure.",
+                      },
+                      {
+                        number: "04",
+                        title: "Faster Onboarding",
+                        description:
+                          "Cut friction at signup and increase conversion while staying fully compliant.",
+                      },
+                    ].map((item, i) => (
+                      <div
+                        key={i}
+                        className="choose-item border-t border-white/10 pt-6 first:pt-0 first:border-t-0"
+                      >
+                        <h3 className="text-2xl sm:text-3xl font-heading font-bold mb-2 tracking-tight flex items-center gap-4">
+                          <span className="text-3xl sm:text-4xl font-extrabold px-3 py-1 rounded-full bg-black/60 text-[#FFCF9A]">
+                            {item.number}
+                          </span>
+                          <span className="text-white">{item.title}</span>
+                        </h3>
+                        <p className="text-white/80 text-sm sm:text-base md:text-lg leading-relaxed font-body max-w-xl">
+                          {item.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
+              {/* end inner card */}
             </div>
           </div>
         </section>

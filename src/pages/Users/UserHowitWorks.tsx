@@ -179,7 +179,7 @@ const UserHowitWorks = () => {
     <div>
       <Navigation />
 
-      <div className="min-h-screen w-full bg-[linear-gradient(135deg,#000000_0%,#000000_40%,#b45309_100%)]">
+<div className="min-h-screen w-full bg-[#131019]">
         <section className="relative w-full px-6 md:px-10 pt-20 pb-20">
           <div className="text-center mb-10">
             <h2 className="text-white text-5xl md:text-4xl font-heading">

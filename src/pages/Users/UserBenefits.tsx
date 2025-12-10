@@ -13,10 +13,13 @@ import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+// 🔹 same background image as other sections
+import heroBg from "@/assets/images/YouID 3.png";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const UserBenefits = () => {
-   const sectionRef = useRef<HTMLDivElement | null>(null);
+  const sectionRef = useRef<HTMLDivElement | null>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   cardsRef.current = [];
 
@@ -24,7 +27,9 @@ const UserBenefits = () => {
     const el = sectionRef.current;
     if (!el) return;
 
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
     if (prefersReduced) {
       cardsRef.current.forEach((c) => {
         if (c) gsap.set(c, { x: 0, opacity: 1, y: 0 });
@@ -33,7 +38,7 @@ const UserBenefits = () => {
     }
 
     const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia(); // ✅ FIXED
+      const mm = gsap.matchMedia();
 
       // ---------------- DESKTOP ----------------
       mm.add("(min-width: 1024px)", () => {
@@ -61,13 +66,11 @@ const UserBenefits = () => {
         });
 
         gsap.set(el, {
-          background:
-            "radial-gradient(circle at top left, #ff6a00 0%, #1a0a00 25%, #000000 70%, #000000 100%)",
+          background: "#131019",
         });
 
         gsap.to(el, {
-          background:
-            "radial-gradient(circle at top left, #ff6a00 0%, #e05f00 22%, #2a1200 55%, #050100 100%)",
+          background: "#131019",
           ease: "none",
           scrollTrigger: {
             trigger: el,
@@ -77,7 +80,7 @@ const UserBenefits = () => {
           },
         });
 
-        return () => ScrollTrigger.getAll().forEach(t => t.kill());
+        return () => ScrollTrigger.getAll().forEach((t) => t.kill());
       });
 
       // ---------------- TABLET ----------------
@@ -106,8 +109,7 @@ const UserBenefits = () => {
         });
 
         gsap.to(el, {
-          background:
-            "radial-gradient(circle at top left, #6a2200 0%, #160702 35%, #000000 75%)",
+          background: "#131019",
           ease: "none",
           scrollTrigger: {
             trigger: el,
@@ -117,7 +119,7 @@ const UserBenefits = () => {
           },
         });
 
-        return () => ScrollTrigger.getAll().forEach(t => t.kill());
+        return () => ScrollTrigger.getAll().forEach((t) => t.kill());
       });
 
       // ---------------- MOBILE ----------------
@@ -145,11 +147,10 @@ const UserBenefits = () => {
         });
 
         gsap.set(el, {
-          background:
-            "radial-gradient(circle at top left, #7a2a00 0%, #180a02 25%, #000000 70%)",
+          background: "#131019",
         });
 
-        return () => ScrollTrigger.getAll().forEach(t => t.kill());
+        return () => ScrollTrigger.getAll().forEach((t) => t.kill());
       });
 
       return () => mm.revert();
@@ -157,10 +158,11 @@ const UserBenefits = () => {
 
     return () => ctx.revert();
   }, []);
+
   return (
     <div
-     ref={sectionRef}
-      className="min-h-screen flex flex-col text-white bg-black overflow-hidden"
+      ref={sectionRef}
+      className="min-h-screen flex flex-col text-white bg-[#131019] overflow-hidden"
     >
       <Navigation />
 
@@ -180,17 +182,15 @@ const UserBenefits = () => {
         <div className="max-w-xl space-y-6 md:space-y-8 font-mono">
           <div className="space-y-3">
             <h2 className="font-heading text-xl sm:text-2xl md:text-3xl font-semibold leading-snug">
-             YouID provides Businesses and Users a Win-Win outcome .
+              YouID provides Businesses and Users a Win-Win outcome.
             </h2>
 
             <p className="text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed font-body">
-             youID isn't just about faster verification — it's about empowering
-            you with ownership, safety, and simplicity in every digital
-            interaction.
+              youID isn't just about faster verification — it's about empowering
+              you with ownership, safety, and simplicity in every digital
+              interaction.
             </p>
           </div>
-
-         
         </div>
       </section>
 
@@ -204,109 +204,205 @@ const UserBenefits = () => {
               cardsRef.current[0] = el;
             }}
           >
-            <Card className="h-full rounded-3xl bg-[#0f0b07] border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white">
-              <CardContent className="p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
+            <Card
+              className="h-full rounded-3xl border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white relative overflow-hidden"
+              style={{
+                backgroundImage: `url(${heroBg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
+              <div className="absolute inset-0 bg-black/70 pointer-events-none" />
+              <CardContent className="relative z-10 p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
                 <ShieldCheck className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400" />
                 <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">
                   Privacy Protection
                 </h3>
                 <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-body">
-                  Users never have to upload or share sensitive identity documents, reducing the risk of data 
-          breaches or misuse.
+                  Users never have to upload or share sensitive identity
+                  documents, reducing the risk of data breaches or misuse.
                 </p>
               </CardContent>
             </Card>
           </div>
 
           {/* 2 */}
-          <div className="lg:col-span-8" ref={(el) => {
+          <div
+            className="lg:col-span-8"
+            ref={(el) => {
               cardsRef.current[1] = el;
-            }}>
-            <Card className="rounded-3xl bg-[#0f0b07] border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white">
-              <CardContent className="p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
+            }}
+          >
+            <Card
+              className="rounded-3xl border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white relative overflow-hidden"
+              style={{
+                backgroundImage: `url(${heroBg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
+              <div className="absolute inset-0 bg-black/70 pointer-events-none" />
+              <CardContent className="relative z-10 p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
                 <TrendingUp className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400" />
-                <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">Faster Verification</h3>
+                <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">
+                  Faster Verification
+                </h3>
                 <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-body">
-                   Instant identity checks without lengthy document submission processes, making onboarding 
-          quick and hassle-free.
+                  Instant identity checks without lengthy document submission
+                  processes, making onboarding quick and hassle-free.
                 </p>
               </CardContent>
             </Card>
           </div>
 
           {/* 3 */}
-          <div className="lg:col-span-4" ref={(el) => {
+          <div
+            className="lg:col-span-4"
+            ref={(el) => {
               cardsRef.current[2] = el;
-            }}>
-            <Card className="rounded-3xl bg-[#0f0b07] border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white">
-              <CardContent className="p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
+            }}
+          >
+            <Card
+              className="rounded-3xl border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white relative overflow-hidden"
+              style={{
+                backgroundImage: `url(${heroBg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
+              <div className="absolute inset-0 bg-black/70 pointer-events-none" />
+              <CardContent className="relative z-10 p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
                 <Clock className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400" />
-                <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">Convenience</h3>
+                <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">
+                  Convenience
+                </h3>
                 <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-body">
-                   No need to scan, upload, or email documents — verification happens seamlessly in the 
-          background.
+                  No need to scan, upload, or email documents — verification
+                  happens seamlessly in the background.
                 </p>
               </CardContent>
             </Card>
           </div>
 
           {/* 4 */}
-          <div className="lg:col-span-4" ref={(el) => {
+          <div
+            className="lg:col-span-4"
+            ref={(el) => {
               cardsRef.current[3] = el;
-            }}>
-            <Card className="rounded-3xl bg-[#0f0b07] border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white">
-              <CardContent className="p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
+            }}
+          >
+            <Card
+              className="rounded-3xl border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white relative overflow-hidden"
+              style={{
+                backgroundImage: `url(${heroBg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
+              <div className="absolute inset-0 bg-black/70 pointer-events-none" />
+              <CardContent className="relative z-10 p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
                 <FileCheck className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400" />
-                <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">Greater Security</h3>
+                <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">
+                  Greater Security
+                </h3>
                 <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-body">
-                            Eliminates exposure of personal documents to multiple businesses minimizing identity theft 
-          risks.
-
+                  Eliminates exposure of personal documents to multiple
+                  businesses, minimizing identity theft risks.
                 </p>
               </CardContent>
             </Card>
           </div>
 
           {/* 5 */}
-          <div className="lg:col-span-8" ref={(el) => {
+          <div
+            className="lg:col-span-8"
+            ref={(el) => {
               cardsRef.current[4] = el;
-            }}>
-            <Card className="rounded-3xl bg-[#0f0b07] border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white">
-              <CardContent className="p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
+            }}
+          >
+            <Card
+              className="rounded-3xl border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white relative overflow-hidden"
+              style={{
+                backgroundImage: `url(${heroBg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
+              <div className="absolute inset-0 bg-black/70 pointer-events-none" />
+              <CardContent className="relative z-10 p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
                 <ScanLine className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400" />
-                <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">No More Document Handling</h3>
+                <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">
+                  No More Document Handling
+                </h3>
                 <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-body">
-                  Businesses no longer need to collect, store, or process sensitive ID files — reducing legal and security risks.
+                  Businesses no longer need to collect, store, or process
+                  sensitive ID files — reducing legal and security risks.
                 </p>
               </CardContent>
             </Card>
           </div>
 
           {/* 6 */}
-          <div className="lg:col-span-4" ref={(el) => {
+          <div
+            className="lg:col-span-4"
+            ref={(el) => {
               cardsRef.current[5] = el;
-            }}>
-            <Card className="rounded-3xl bg-[#0f0b07] border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white">
-              <CardContent className="p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
+            }}
+          >
+            <Card
+              className="rounded-3xl border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white relative overflow-hidden"
+              style={{
+                backgroundImage: `url(${heroBg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
+              <div className="absolute inset-0 bg-black/70 pointer-events-none" />
+              <CardContent className="relative z-10 p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
                 <Handshake className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400" />
-                <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">Control Over Personal Data</h3>
+                <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">
+                  Control Over Personal Data
+                </h3>
                 <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-body">
-    Users retain ownership of their identity information, ensuring compliance with privacy 
-          standards like GDPR.                </p>
+                  Users retain ownership of their identity information,
+                  supporting compliance with privacy standards like GDPR.
+                </p>
               </CardContent>
             </Card>
           </div>
 
-                {/* 7 */}
-          <div className="lg:col-span-4" ref={(el) => {
+          {/* 7 */}
+          <div
+            className="lg:col-span-4"
+            ref={(el) => {
               cardsRef.current[6] = el;
-            }}>
-            <Card className="rounded-3xl bg-[#0f0b07] border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white">
-              <CardContent className="p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
+            }}
+          >
+            <Card
+              className="rounded-3xl border border-yellow-600/20 shadow-[0_0_25px_rgba(255,215,0,0.12)] text-white relative overflow-hidden"
+              style={{
+                backgroundImage: `url(${heroBg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
+              <div className="absolute inset-0 bg-black/70 pointer-events-none" />
+              <CardContent className="relative z-10 p-6 sm:p-8 space-y-3 sm:space-y-4 text-left">
                 <Handshake className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400" />
-                <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">Improved User Experience</h3>
+                <h3 className="text-lg sm:text-2xl text-yellow-300 font-heading">
+                  Improved User Experience
+                </h3>
                 <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-body">
-A frictionless process that avoids delays and enhances trust in the service.    </p>
+                  A frictionless process that avoids delays and enhances trust
+                  in the service.
+                </p>
               </CardContent>
             </Card>
           </div>

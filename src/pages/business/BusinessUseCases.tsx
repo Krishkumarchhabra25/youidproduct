@@ -1,436 +1,453 @@
-// BusinessUseCases.tsx
-import Footer from "@/Components/Footer";
-import Navigation from "@/Components/Navigation";
-import { useLayoutEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+  // BusinessUseCases.tsx
+  import Footer from "@/Components/Footer";
+  import Navigation from "@/Components/Navigation";
+  import { useLayoutEffect, useRef } from "react";
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import adultImg from "../../assets/images/Image (1).jpg";
-import datingImg from "../../assets/images/Image (2).jpg";
-import socialImg from "../../assets/images/Image (3).jpg";
+  import adultImg from "../../assets/images/Image (1).jpg";
+  import datingImg from "../../assets/images/Image (2).jpg";
+  import socialImg from "../../assets/images/Image (3).jpg";
 
-gsap.registerPlugin(ScrollTrigger);
+  // 🔹 shared hero/card background image
+  import heroBg from "@/assets/images/YouID 3.png";
 
-const BusinessUseCases = () => {
-  const panelsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const leftTextRef = useRef<HTMLElement | null>(null);
-  const containerWrapperRef = useRef<HTMLDivElement | null>(null);
-  const rightSectionRef = useRef<HTMLElement | null>(null);
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  gsap.registerPlugin(ScrollTrigger);
 
-  // reset refs each render
-  panelsRef.current = [];
+  const BusinessUseCases = () => {
+    const panelsRef = useRef<(HTMLDivElement | null)[]>([]);
+    const leftTextRef = useRef<HTMLElement | null>(null);
+    const containerWrapperRef = useRef<HTMLDivElement | null>(null);
+    const rightSectionRef = useRef<HTMLElement | null>(null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
 
-  useLayoutEffect(() => {
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    // reset refs each render
+    panelsRef.current = [];
 
-    const initialBg =
-      "radial-gradient(circle at top left, #ff6a00 0%, #1a0a00 25%, #000000 70%, #000000 100%)";
+    useLayoutEffect(() => {
+      const prefersReduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
 
-    if (containerRef.current) {
-      gsap.set(containerRef.current, {
-        background: initialBg,
-        backgroundSize: "cover",
-        backgroundPosition: "top left",
-      });
-    }
+      // 🔹 flat dark background color
+      const initialBg = "#131019";
 
-    if (prefersReduced) {
-      panelsRef.current.forEach((p) => {
-        if (p) gsap.set(p, { opacity: 1, y: 0 });
-      });
-      return;
-    }
+      if (containerRef.current) {
+        gsap.set(containerRef.current, {
+          background: initialBg,
+          backgroundSize: "cover",
+          backgroundPosition: "top left",
+        });
+      }
 
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
+      if (prefersReduced) {
+        panelsRef.current.forEach((p) => {
+          if (p) gsap.set(p, { opacity: 1, y: 0 });
+        });
+        return;
+      }
 
-      // --------- BACKGROUND GRADIENT SCROLL EFFECT ----------
-      mm.add("(min-width: 0px)", () => {
-        const endBg =
-          "radial-gradient(circle at top left, #ff6a00 0%, #e05f00 20%, #2a1200 55%, #050100 100%)";
+      const ctx = gsap.context(() => {
+        const mm = gsap.matchMedia();
 
-        if (!containerRef.current) return;
+        // --------- BACKGROUND SCROLL EFFECT (kept, but same color) ----------
+        mm.add("(min-width: 0px)", () => {
+          const endBg = "#131019";
 
-        const tween = gsap.to(containerRef.current, {
-          background: endBg,
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerWrapperRef.current || containerRef.current,
+          if (!containerRef.current) return;
+
+          const tween = gsap.to(containerRef.current, {
+            background: endBg,
+            ease: "none",
+            scrollTrigger: {
+              trigger: containerWrapperRef.current || containerRef.current,
+              start: "top top",
+              end: "bottom center",
+              scrub: 0.7,
+            },
+          });
+
+          return () => {
+            tween.scrollTrigger && tween.scrollTrigger.kill();
+            tween.kill();
+          };
+        });
+
+        // ------------------ DESKTOP / LAPTOP ------------------
+        mm.add("(min-width: 1024px)", () => {
+          const left = leftTextRef.current;
+          const right = rightSectionRef.current;
+          const panels = panelsRef.current.filter(Boolean);
+          if (!left || !right || !panels.length) return;
+
+          gsap.set(panels, { opacity: 0, y: 120 });
+
+          const totalScrollHeight = right.scrollHeight - window.innerHeight;
+          ScrollTrigger.create({
+            trigger: containerWrapperRef.current,
             start: "top top",
-            end: "bottom center",
-            scrub: 0.7,
-          },
+            end: () => `+=${Math.max(totalScrollHeight, window.innerHeight)}`,
+            pin: left,
+            pinSpacing: true,
+            anticipatePin: 1,
+          });
+
+          panels.forEach((panel) => {
+            gsap.fromTo(
+              panel,
+              { opacity: 0, y: 120 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: panel,
+                  start: "top 75%",
+                  end: "top 30%",
+                  scrub: true,
+                },
+              }
+            );
+          });
+
+          gsap.set(panels[0], { opacity: 1, y: 0 });
+
+          return () => {
+            ScrollTrigger.getAll().forEach((t) => t.kill());
+          };
         });
 
-        return () => {
-          tween.scrollTrigger && tween.scrollTrigger.kill();
-          tween.kill();
-        };
-      });
+        // ------------------ TABLET ------------------
+        mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
+          const left = leftTextRef.current;
+          const right = rightSectionRef.current;
+          const panels = panelsRef.current.filter(Boolean);
+          if (!left || !right || !panels.length) return;
 
-      // ------------------ DESKTOP / LAPTOP ------------------
-      mm.add("(min-width: 1024px)", () => {
-        const left = leftTextRef.current;
-        const right = rightSectionRef.current;
-        const panels = panelsRef.current.filter(Boolean);
-        if (!left || !right || !panels.length) return;
+          gsap.set(panels, { opacity: 0, y: 90 });
 
-        gsap.set(panels, { opacity: 0, y: 120 });
+          const totalScrollHeight = right.scrollHeight - window.innerHeight;
+          ScrollTrigger.create({
+            trigger: containerWrapperRef.current,
+            start: "top top",
+            end: () =>
+              `+=${Math.max(totalScrollHeight * 0.9, window.innerHeight)}`,
+            pin: left,
+            pinSpacing: false,
+            anticipatePin: 0.5,
+          });
 
-        const totalScrollHeight = right.scrollHeight - window.innerHeight;
-        ScrollTrigger.create({
-          trigger: containerWrapperRef.current,
-          start: "top top",
-          end: () => `+=${Math.max(totalScrollHeight, window.innerHeight)}`,
-          pin: left,
-          pinSpacing: true,
-          anticipatePin: 1,
+          panels.forEach((panel) => {
+            gsap.fromTo(
+              panel,
+              { opacity: 0, y: 90 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: panel,
+                  start: "top 78%",
+                  end: "top 35%",
+                  scrub: true,
+                },
+              }
+            );
+          });
+
+          gsap.set(panels[0], { opacity: 1, y: 0 });
+
+          return () => {
+            ScrollTrigger.getAll().forEach((t) => t.kill());
+          };
         });
 
-        panels.forEach((panel) => {
-          gsap.fromTo(
-            panel,
-            { opacity: 0, y: 120 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 1.2,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: panel,
-                start: "top 75%",
-                end: "top 30%",
-                scrub: true,
-              },
-            }
-          );
+        // ------------------ MOBILE ------------------
+        mm.add("(max-width: 767px)", () => {
+          const panels = panelsRef.current.filter(Boolean);
+
+          panels.forEach((panel) => {
+            gsap.fromTo(
+              panel,
+              { opacity: 0, y: 40, scale: 0.995 },
+              {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.8,
+                ease: "power2.out",
+                scrollTrigger: {
+                  trigger: panel,
+                  start: "top 85%",
+                  end: "top 60%",
+                  toggleActions: "play none none reverse",
+                },
+              }
+            );
+          });
+
+          if (panels[0]) gsap.set(panels[0], { opacity: 1, y: 0, scale: 1 });
+
+          return () => {
+            ScrollTrigger.getAll().forEach((t) => t.kill());
+          };
         });
 
-        gsap.set(panels[0], { opacity: 1, y: 0 });
+        return () => mm.revert();
+      }, containerWrapperRef);
 
-        return () => {
+      return () => {
+        try {
+          ctx.revert();
           ScrollTrigger.getAll().forEach((t) => t.kill());
-        };
-      });
+        } catch (e) {}
+      };
+    }, []);
 
-      // ------------------ TABLET ------------------
-      mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
-        const left = leftTextRef.current;
-        const right = rightSectionRef.current;
-        const panels = panelsRef.current.filter(Boolean);
-        if (!left || !right || !panels.length) return;
+    const useCases = [
+      {
+        badge: "ADULT SITES can verify users Anonymously.",
+        title: "Anonymous Age Verification",
+        points: [
+          "No information required to verify users to allow access.",
+          "Anonymous age confirmation for users.",
+          "Prevents minors from accessing adult content.",
+          "Provide privacy-first principle to users&also be compliant.",
+        ],
+        image: adultImg,
+      },
+      {
+        badge: "youID eliminates Users trust concerns on DATING PLATFORMS ",
+        title: "Proof of Identity Without Uploads",
+        points: [
+          "Instant identity verification for sign-ups.",
+          "No document uploads are required, verify data against Users youID digital Wallet.",
+          "Reduce fake profiles and cat fishing on your platform.",
+          "Boost trust and user safety on the platform.",
+        ],
+        image: datingImg,
+      },
+      {
+        badge: "Verify Profile, Age and eliminate bots on SOCIAL MEDIA.",
+        title: "Frictionless Profile Verification",
+        points: [
+          "Verify real users without asking their Identity documents.",
+          "Stop impersonation and bot accounts .",
+          "Improve platform trust and content quality.",
+          "Provide Option for Users to verify Age and Profile Anonymously .",
+          "Works globally with privacy by design.",
+        ],
+        image: socialImg,
+      },
+    ];
 
-        gsap.set(panels, { opacity: 0, y: 90 });
-
-        const totalScrollHeight = right.scrollHeight - window.innerHeight;
-        ScrollTrigger.create({
-          trigger: containerWrapperRef.current,
-          start: "top top",
-          end: () =>
-            `+=${Math.max(totalScrollHeight * 0.9, window.innerHeight)}`,
-          pin: left,
-          pinSpacing: false,
-          anticipatePin: 0.5,
-        });
-
-        panels.forEach((panel) => {
-          gsap.fromTo(
-            panel,
-            { opacity: 0, y: 90 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 1,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: panel,
-                start: "top 78%",
-                end: "top 35%",
-                scrub: true,
-              },
-            }
-          );
-        });
-
-        gsap.set(panels[0], { opacity: 1, y: 0 });
-
-        return () => {
-          ScrollTrigger.getAll().forEach((t) => t.kill());
-        };
-      });
-
-      // ------------------ MOBILE ------------------
-      mm.add("(max-width: 767px)", () => {
-        const panels = panelsRef.current.filter(Boolean);
-
-        panels.forEach((panel) => {
-          gsap.fromTo(
-            panel,
-            { opacity: 0, y: 40, scale: 0.995 },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 0.8,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: panel,
-                start: "top 85%",
-                end: "top 60%",
-                toggleActions: "play none none reverse",
-              },
-            }
-          );
-        });
-
-        if (panels[0]) gsap.set(panels[0], { opacity: 1, y: 0, scale: 1 });
-
-        return () => {
-          ScrollTrigger.getAll().forEach((t) => t.kill());
-        };
-      });
-
-      return () => mm.revert();
-    }, containerWrapperRef);
-
-    return () => {
-      try {
-        ctx.revert();
-        ScrollTrigger.getAll().forEach((t) => t.kill());
-      } catch (e) {}
-    };
-  }, []);
-
-  const useCases = [
-    {
-      badge: "ADULT SITES can verify users Anonymously.",
-      title: "Anonymous Age Verification",
-      points: [
-        "No information required to verify users to allow access.",
-        "Anonymous age confirmation for users.",
-        "Prevents minors from accessing adult content.",
-        "Provide privacy-first principle to users&also be compliant.",
-      ],
-      image: adultImg,
-    },
-    {
-      badge: "youID eliminates Users trust concerns on DATING PLATFORMS ",
-      title: "Proof of Identity Without Uploads",
-      points: [
-        "Instant identity verification for sign-ups.",
-        "No document uploads are required, verify data against Users youID digital Wallet.",
-        "Reduce fake profiles and cat fishing on your platform.",
-        "Boost trust and user safety on the platform.",
-      ],
-      image: datingImg,
-    },
-    {
-      badge: "Verify Profile, Age and eliminate bots on SOCIAL MEDIA.",
-      title: "Frictionless Profile Verification",
-      points: [
-        "Verify real users without asking their Identity documents.",
-        "Stop impersonation and bot accounts .",
-        "Improve platform trust and content quality.",
-        "Provide Option for Users to verify Age and Profile Anonymously .",
-        "Works globally with privacy by design.",
-      ],
-      image: socialImg,
-    },
-  ];
-
-  return (
-    // allow overflow on small screens so the floating phone mockup is visible
-    <div
-      ref={containerRef}
-      className="min-h-screen text-white overflow-visible md:overflow-hidden"
-    >
-      <Navigation />
-
+    return (
+      // allow overflow on small screens so the floating phone mockup is visible
       <div
-        ref={containerWrapperRef}
-        className="flex flex-col md:flex-row relative min-h-screen"
+        ref={containerRef}
+        className="min-h-screen text-white overflow-visible md:overflow-hidden"
       >
-        {/* LEFT STICKY TEXT HERO */}
-        <section
-          ref={leftTextRef}
-          className="
-            w-full md:w-[40%]
-            h-auto md:h-screen
-            md:sticky top-0 
-            flex flex-col justify-center
-            items-center text-center md:items-start md:text-left
-            px-6 md:px-10
-            pt-24 md:pt-0
-            mb-10 md:mb-0
-          "
+        <Navigation />
+
+        <div
+          ref={containerWrapperRef}
+          className="flex flex-col md:flex-row relative min-h-screen"
         >
-          <h1
-            className="mx-auto md:mx-0 text-4xl sm:text-5xl md:text-5xl lg:text-[4rem]
-                       font-heading font-extrabold leading-[1.0] tracking-[0.03em]
-                       drop-shadow-[0_0_18px_rgba(0,0,0,0.35)] mb-2"
+          {/* LEFT STICKY TEXT HERO */}
+          <section
+            ref={leftTextRef}
+            className="
+              w-full md:w-[40%]
+              h-auto md:h-screen
+              md:sticky top-0 
+              flex flex-col justify-center
+              items-center text-center md:items-start md:text-left
+              px-6 md:px-10
+              pt-24 md:pt-0
+              mb-10 md:mb-0
+            "
           >
-            Verify Identity
-          </h1>
-
-          <h2
-            className="mx-auto md:mx-0 text-4xl sm:text-5xl md:text-5xl lg:text-[4rem]
-                       font-heading font-extrabold leading-[1.0] tracking-[0.03em]
-                       drop-shadow-[0_0_18px_rgba(0,0,0,0.35)]"
-          >
-            without the Risks & Cost
-          </h2>
-
-          <p className="mx-auto md:mx-0 text-base sm:text-lg md:text-xl text-white/80 max-w-full md:max-w-md mt-4 md:mt-8 font-body leading-snug">
-            Identity, Age & Address Verification built for modern, high-risk and
-            high-trust platforms.
-          </p>
-        </section>
-
-        {/* RIGHT SCROLL PANELS */}
-        <section
-          ref={rightSectionRef}
-          className="w-full md:w-[60%] space-y-10 sm:space-y-16 md:space-y-24 py-8 sm:py-12 md:py-24 pr-6 md:pr-20 pl-6 md:pl-14 font-body"
-        >
-          {useCases.map((useCase, idx) => (
-            <div
-              key={idx}
-              ref={(el: HTMLDivElement | null) => {
-                panelsRef.current[idx] = el;
-              }}
-              className="min-h-[70vh] md:min-h-screen flex items-center"
+            <h1
+              className="mx-auto md:mx-0 text-4xl sm:text-5xl md:text-5xl lg:text-[4rem]
+                        font-heading font-extrabold leading-[1.0] tracking-[0.03em]
+                        drop-shadow-[0_0_18px_rgba(0,0,0,0.35)] mb-2"
             >
-              <div className="w-full max-w-5xl mx-auto relative">
-                {/* ---------- MOBILE (< md): CARD + PHONE ATTACHED ON RIGHT ---------- */}
-                <div className="relative w-full md:hidden pb-36 sm:pb-44">
-                  {/* CARD – extra padding so text stays clear of phone */}
-                  <div
-                    className="
-                      relative
-                      w-full
-                      rounded-[2.5rem]
-                      px-6
-                      pt-8
-                      pb-12
-                      bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
-                      shadow-[0_30px_80px_rgba(0,0,0,0.85)]
-                    "
-                  >
-                    <h2 className="text-lg sm:text-xl font-heading font-extrabold tracking-wide mb-6">
-                      {useCase.badge}
-                    </h2>
+              Verify Identity
+            </h1>
 
-                    {/* extra right padding so text doesn't go under phone */}
-                    <ul className="space-y-3 text-sm sm:text-base text-white/90 pr-28 sm:pr-36 md:pr-0">
-                      {useCase.points.map((point, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                          <span className="mt-[2px] text-[#FF6B35] text-lg">
-                            •
-                          </span>
-                          <span>{point}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+            <h2
+              className="mx-auto md:mx-0 text-4xl sm:text-5xl md:text-5xl lg:text-[4rem]
+                        font-heading font-extrabold leading-[1.0] tracking-[0.03em]
+                        drop-shadow-[0_0_18px_rgba(0,0,0,0.35)]"
+            >
+              without the Risks & Cost
+            </h2>
 
-                  {/* PHONE – anchored to the right, floating below card */}
-                  <img
-                    src={useCase.image}
-                    alt={useCase.badge}
-                    className="
-                      absolute
-                      bottom-6
-                      right-4 sm:right-6
-                      z-40
-                      rounded-[1.5rem]
-                      shadow-[0_20px_50px_rgba(0,0,0,0.9)]
-                      object-contain
-                      w-40
-                      sm:w-44
-                      max-w-none
-                      md:w-[32%]
-                    "
-                  />
-                </div>
+            <p className="mx-auto md:mx-0 text-base sm:text-lg md:text-xl text-white/80 max-w-full md:max-w-md mt-4 md:mt-8 font-body leading-snug">
+              Identity, Age & Address Verification built for modern, high-risk and
+              high-trust platforms.
+            </p>
+          </section>
 
-                {/* ---------- TABLET / DESKTOP (md+): ORIGINAL LAYOUT ---------- */}
-                <div
-                  className="
-                    hidden md:flex
-                    relative
-                    flex-col md:flex-row items-center md:items-stretch gap-8
-                    pt-14 md:pt-16
-                  "
-                >
-                  {/* CONTENT CARD */}
-                  <div
-                    className="
-                      flex-1
-                      rounded-3xl 
-                      p-[2px] sm:p-[3px] md:p-[4px]
-                      bg-gradient-to-br from-black via-[#1f0a00] to-[#FF6B35]
-                      shadow-2xl
-                    "
-                  >
+          {/* RIGHT SCROLL PANELS */}
+          <section
+            ref={rightSectionRef}
+            className="w-full md:w-[60%] space-y-10 sm:space-y-16 md:space-y-24 py-8 sm:py-12 md:py-24 pr-6 md:pr-20 pl-6 md:pl-14 font-body"
+          >
+            {useCases.map((useCase, idx) => (
+              <div
+                key={idx}
+                ref={(el: HTMLDivElement | null) => {
+                  panelsRef.current[idx] = el;
+                }}
+                className="min-h-[70vh] md:min-h-screen flex items-center"
+              >
+                <div className="w-full max-w-5xl mx-auto relative">
+                  {/* ---------- MOBILE (< md): CARD + PHONE ATTACHED ON RIGHT ---------- */}
+                  <div className="relative w-full md:hidden pb-36 sm:pb-44">
+                    {/* CARD – extra padding so text stays clear of phone */}
                     <div
                       className="
-                        h-full w-full
-                        rounded-3xl
+                        relative
+                        w-full
+                        rounded-[2.5rem]
+                        px-6
+                        pt-8
+                        pb-12
                         bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
-                        px-6 sm:px-8 md:px-12
-                        py-8 sm:py-10 md:py-14
-                        text-white
-                        flex flex-col gap-6
+                        shadow-[0_30px_80px_rgba(0,0,0,0.85)]
                       "
+                      // 🔹 background image inside MOBILE card
+                      style={{
+                        backgroundImage: `url(${heroBg})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                      }}
                     >
-                      <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-extrabold tracking-wide">
+                      <h2 className="text-lg sm:text-xl font-heading font-extrabold tracking-wide mb-6">
                         {useCase.badge}
                       </h2>
 
-                      <ul className="space-y-3 text-white/85 text-sm sm:text-base md:text-[17px]">
+                      {/* extra right padding so text doesn't go under phone */}
+                      <ul className="space-y-3 text-sm sm:text-base text-white/90 pr-28 sm:pr-36 md:pr-0">
                         {useCase.points.map((point, i) => (
                           <li key={i} className="flex items-start gap-3">
-                            <span className="text-[#FF6B35] text-lg">•</span>
+                            <span className="mt-[2px] text-[#FF6B35] text-lg">
+                              •
+                            </span>
                             <span>{point}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
+
+                    {/* PHONE – anchored to the right, floating below card */}
+                  {/* PHONE – smaller + pushed to the right on mobile */}
+  <img
+    src={useCase.image}
+    alt={useCase.badge}
+    className="
+      absolute
+      bottom-4
+      right-[-22px] sm:right-[-30px]
+      z-40
+      rounded-[1.25rem]
+      shadow-[0_20px_50px_rgba(0,0,0,0.9)]
+      object-contain
+      w-32 sm:w-36
+      max-w-none
+      md:w-[32%]
+    "
+  />
+
                   </div>
 
-                  {/* MOBILE SCREEN IMAGE */}
-                  <div className="relative w-full md:w-[32%] flex items-center justify-center md:justify-start md:-ml-12">
-                    <img
-                      src={useCase.image}
-                      alt={useCase.badge}
+                  {/* ---------- TABLET / DESKTOP (md+): ORIGINAL LAYOUT ---------- */}
+                  <div
+                    className="
+                      hidden md:flex
+                      relative
+                      flex-col md:flex-row items-center md:items-stretch gap-8
+                      pt-14 md:pt-16
+                    "
+                  >
+                    {/* CONTENT CARD */}
+                    <div
                       className="
-                        relative
-                        object-contain
-                        w-2/3
-                        sm:w-3/4
-                        md:w-full
-                        lg:w-[95%]
-                        xl:w-[90%]
-                        2xl:w-[80%]
-                        max-w-[420px]
-                        md:max-w-[420px]
-                        rounded-[1.75rem]
-                        shadow-[0_25px_60px_rgba(0,0,0,0.95)]
+                        flex-1
+                        rounded-3xl 
+                        p-[2px] sm:p-[3px] md:p-[4px]
+                        bg-gradient-to-br from-black via-[#1f0a00] to-[#FF6B35]
+                        shadow-2xl
                       "
-                    />
+                    >
+                      <div
+                        className="
+                          h-full w-full
+                          rounded-3xl
+                          bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#ff7a3f]
+                          px-6 sm:px-8 md:px-12
+                          py-8 sm:py-10 md:py-14
+                          text-white
+                          flex flex-col gap-6
+                        "
+                        // 🔹 background image inside DESKTOP content card
+                        style={{
+                          backgroundImage: `url(${heroBg})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                          backgroundRepeat: "no-repeat",
+                        }}
+                      >
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-extrabold tracking-wide">
+                          {useCase.badge}
+                        </h2>
+
+                        <ul className="space-y-3 text-white/85 text-sm sm:text-base md:text-[17px]">
+                          {useCase.points.map((point, i) => (
+                            <li key={i} className="flex items-start gap-3">
+                              <span className="text-[#FF6B35] text-lg">•</span>
+                              <span>{point}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    {/* MOBILE SCREEN IMAGE */}
+                    <div className="relative w-full md:w-[32%] flex items-center justify-center md:justify-start md:-ml-12">
+                      <img
+                        src={useCase.image}
+                        alt={useCase.badge}
+                        className="
+                          relative
+                          object-contain
+                          w-2/3
+                          sm:w-3/4
+                          md:w-full
+                          lg:w-[95%]
+                          xl:w-[90%]
+                          2xl:w-[80%]
+                          max-w-[420px]
+                          md:max-w-[420px]
+                          rounded-[1.75rem]
+                          shadow-[0_25px_60px_rgba(0,0,0,0.95)]
+                        "
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </section>
+            ))}
+          </section>
+        </div>
+
+        <Footer />
       </div>
+    );
+  };
 
-      <Footer />
-    </div>
-  );
-};
-
-export default BusinessUseCases;
+  export default BusinessUseCases;

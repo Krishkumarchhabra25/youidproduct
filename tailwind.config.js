@@ -48,7 +48,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
 fontFamily: {
-   heading: ["Autobus", "sans-serif"],
+  heading: ["Autobus", "system-ui", "sans-serif"],
   headings: ["Gruppo", "sans-serif"],
   body: ["Arimo", "sans-serif"],
   mono: ["UbuntuMono", "monospace"],
