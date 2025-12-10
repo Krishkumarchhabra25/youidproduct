@@ -91,10 +91,8 @@ const BusinessHowItWorks: React.FC = () => {
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
   const totalSteps = stepsData.length;
 
-  // dynamic height (detect tallest step so scroll container size is stable)
   const [dynamicHeight, setDynamicHeight] = useState<number>(600);
 
-  // compute tallest card height once after mount and whenever window resizes or images load
   const recomputeHeights = () => {
     if (!stepRefs.current.length) return;
     let max = 0;
@@ -103,21 +101,18 @@ const BusinessHowItWorks: React.FC = () => {
       const h = el.clientHeight;
       if (h > max) max = h;
     });
-    // add breathing room for image + spacing
     if (max > 0) setDynamicHeight(Math.max(600, max + 120));
   };
 
   useEffect(() => {
     recomputeHeights();
 
-    // Recompute after a small delay in case fonts/images finished loading
     const t = window.setTimeout(recomputeHeights, 300);
     const t2 = window.setTimeout(recomputeHeights, 900);
 
     const onResize = () => recomputeHeights();
     window.addEventListener("resize", onResize);
 
-    // Also observe images inside the page (if they change size)
     const imgs = Array.from(document.images);
     const onLoad = () => recomputeHeights();
     imgs.forEach((img) => img.addEventListener("load", onLoad));
@@ -128,10 +123,8 @@ const BusinessHowItWorks: React.FC = () => {
       window.removeEventListener("resize", onResize);
       imgs.forEach((img) => img.removeEventListener("load", onLoad));
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Auto-advance on desktop/tablet (desktop threshold matches user layout: >= 768)
   useEffect(() => {
     if (window.innerWidth < 768) return;
     const interval = window.setInterval(() => {
@@ -139,10 +132,8 @@ const BusinessHowItWorks: React.FC = () => {
       scrollToStep(next);
     }, 3000);
     return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeStep, totalSteps]);
 
-  // scroll helper: center a step inside the scroll container
   const scrollToStep = (i: number) => {
     if (window.innerWidth < 768) return;
     const container = containerRef.current;
@@ -161,10 +152,10 @@ const BusinessHowItWorks: React.FC = () => {
     const animate = (time: number) => {
       if (!startTime) startTime = time;
       const progress = Math.min((time - startTime) / duration, 1);
-
-      // easeInOutQuad
       const eased =
-        progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
+        progress < 0.5
+          ? 2 * progress * progress
+          : -1 + (4 - 2 * progress) * progress;
 
       container.scrollTop = start + distance * eased;
 
@@ -174,14 +165,14 @@ const BusinessHowItWorks: React.FC = () => {
     requestAnimationFrame(animate);
   };
 
-  // on scroll: set active step to nearest to center (desktop/tablet only)
   useEffect(() => {
     if (window.innerWidth < 768) return;
     const container = containerRef.current;
     if (!container) return;
 
     const onScroll = () => {
-      const mid = container.getBoundingClientRect().top + container.clientHeight / 2;
+      const mid =
+        container.getBoundingClientRect().top + container.clientHeight / 2;
       let nearest = 0;
       let minDist = Infinity;
 
@@ -210,23 +201,21 @@ const BusinessHowItWorks: React.FC = () => {
     <>
       <Navigation />
 
-  <div
-  className="min-h-screen w-full bg-[#131019] text-white"
->
-
+      <div className="min-h-screen w-full bg-[#131019] text-white">
         <section className="relative w-full px-6 md:px-10 pt-20 pb-28">
           <div className="text-center mb-10">
-            <h2 className="text-white text-4xl md:text-5xl font-heading">How it works</h2>
+            <h2 className="text-white text-4xl md:text-5xl font-heading">
+              How it works
+            </h2>
             <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto mt-3">
-              From user identity to business verification — secure, private, auditable.
+              From user identity to business verification — secure, private,
+              auditable.
             </p>
           </div>
 
-          {/* DESKTOP / TABLET LAYOUT (matches user component breakpoints) */}
-          <div
-            className="relative max-w-7xl mx-auto hidden md:grid grid-cols-2 gap-16 items-center"
-          >
-            {/* LEFT: step cards in a centered vertical scroll container */}
+          {/* DESKTOP / TABLET LAYOUT */}
+          <div className="relative max-w-7xl mx-auto hidden md:grid grid-cols-2 gap-16 items-center">
+            {/* LEFT: step cards */}
             <div
               ref={containerRef}
               style={{ height: dynamicHeight }}
@@ -250,19 +239,27 @@ const BusinessHowItWorks: React.FC = () => {
                 >
                   <div
                     className={`w-12 h-12 mb-4 rounded-full flex items-center justify-center text-lg font-semibold ${
-                      activeStep === idx ? "bg-orange-500 text-black" : "bg-gray-800 text-white"
+                      activeStep === idx
+                        ? "bg-orange-500 text-black"
+                        : "bg-gray-800 text-white"
                     }`}
                   >
                     {String(idx + 1).padStart(2, "0")}
                   </div>
 
-                  <div className="text-sm text-orange-300 mb-1">{step.badge}</div>
+                  <div className="text-sm text-orange-300 mb-1">
+                    {step.badge}
+                  </div>
 
                   {step.title && (
-                    <h3 className="text-xl font-semibold text-white font-heading">{step.title}</h3>
+                    <h3 className="text-xl font-semibold text-white font-heading">
+                      {step.title}
+                    </h3>
                   )}
 
-                  {step.desc && <p className="text-sm text-white/70 mt-2">{step.desc}</p>}
+                  {step.desc && (
+                    <p className="text-sm text-white/70 mt-2">{step.desc}</p>
+                  )}
 
                   <ul className="mt-4 list-disc text-white text-sm pl-5 space-y-1">
                     {step.points.map((p, i) => (
@@ -273,9 +270,8 @@ const BusinessHowItWorks: React.FC = () => {
               ))}
             </div>
 
-            {/* RIGHT: sticky image that updates with active step */}
+            {/* RIGHT: sticky image */}
             <div className="hidden md:flex justify-center">
-              {/* <-- INCREASED WIDTHS HERE TO ALLOW LARGER LAPTOP IMAGE --> */}
               <div className="sticky top-24 w-[420px] lg:w-[520px] xl:w-[620px]">
                 <AnimatePresence mode="wait">
                   <motion.img
@@ -298,7 +294,7 @@ const BusinessHowItWorks: React.FC = () => {
             </div>
           </div>
 
-          {/* MOBILE LAYOUT — image INSIDE the card (image top, content below) */}
+          {/* MOBILE LAYOUT – SAME DARK CARD BG COLOR AS DESKTOP */}
           <div className="xl:hidden flex flex-col items-center space-y-8 mt-8 w-full px-4">
             {stepsData.map((step, index) => (
               <motion.div
@@ -310,12 +306,14 @@ const BusinessHowItWorks: React.FC = () => {
                 className="w-full max-w-md"
               >
                 <div
-                  className="relative w-full rounded-lg overflow-hidden
-                    bg-gradient-to-br from-[#1a0f00] via-[#2b1200] to-[#3d1800]
+                  className="
+                    relative w-full rounded-2xl overflow-hidden
                     shadow-[0_20px_60px_rgba(0,0,0,0.7)]
-                    border border-orange-500/20"
+                    border-l-4 border-orange-500
+                  "
+                  style={{ background: "rgba(20,20,20,0.7)" }}  
                 >
-                  {/* Image section — smaller on mobile */}
+                  {/* Image section */}
                   <div className="relative w-full p-0">
                     <div
                       className="
@@ -372,7 +370,9 @@ const BusinessHowItWorks: React.FC = () => {
                     <ul className="space-y-2.5 text-white/90 text-[13px] leading-relaxed">
                       {step.points.map((p, i) => (
                         <li key={i} className="flex items-start gap-2">
-                          <span className="text-orange-400 mt-1 shrink-0">•</span>
+                          <span className="text-orange-400 mt-1 shrink-0">
+                            •
+                          </span>
                           <span className="break-words flex-1">{p}</span>
                         </li>
                       ))}
